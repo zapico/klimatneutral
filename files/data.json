@@ -1,0 +1,17 @@
+{
+  "name" : "totalc02",
+  "children":[
+        {
+          "name":"transport",
+          "children" : [
+            {"name":"personbilar", "value" : 81003},
+            {"name":"lastbilar", "value" : 11259},
+            {"name":"flygg", "value" : 8527},
+            {"name":"bussar", "value" : 29833},
+            {"name":"annat transport", "value" : 1328},
+            {"name":"arbetsmaskiner", "value" : 19411}]},
+        {"name": "bostad", "value": 13879},
+        {"name": "industri", "value" : 5796},
+        {"name": "offentlig", "value" : 10185},
+        {"name": "sparat", "value" : 0}]
+}

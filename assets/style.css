@@ -1,0 +1,87 @@
+/* Structure */
+body{
+  padding:25px;
+  background-color: #eee;
+}
+#general{
+  float:left;
+  width:40%;
+  height:auto;
+  background-color: #fff;
+  padding:25px;
+  margin-bottom:25px;
+}
+#energi{
+  float:left;
+  width:40%;
+  height:auto;
+  background-color: #fff;
+  padding:25px;
+  margin-bottom:25px;
+}
+#transport{
+  float:right;
+  width:50%;
+  height:auto;
+  background-color: #fff;
+    padding:25px;
+  margin-bottom:25px;
+}
+#transport_energy{
+  float:left;
+  width:45%;
+  height:auto;
+  background-color: #fff;
+    padding:15px;
+    margin-bottom:25px;
+}
+#transport_behavior{
+  float:left;
+  width:45%;
+  height:auto;
+  background-color: #fff;
+    padding:15px;
+    margin-bottom:25px;
+}
+#jordbruk, #konsumtion, #el, #offentlig {
+  float:right;
+  width:50%;
+  height:auto;
+  background-color: #fff;
+    padding:25px;
+  margin-bottom:25px;
+}
+
+/* Type */
+h1,h2,h3 {
+    color: black;
+    font-family: 'Alata', sans-serif;
+
+}
+
+h1 {
+
+}
+p {
+  color: black;
+  font-family: 'Alata', sans-serif;
+
+}
+nr{
+  font-size: 2.4em;
+}
+.node {
+}
+
+.label {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.icicle-viz text {
+    font-family: 'Alata', sans-serif;
+    font-size: 16px;
+    padding-left: 20px;
+    text-transform: uppercase;
+    color: #fff;
+}
