@@ -6,29 +6,29 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata&display=swap">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="assets/style.css">
 
 	<script src="https://d3js.org/d3.v5.min.js"></script>
-
-	<script src="//unpkg.com/icicle-chart"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-	<script src="	https://www.chartjs.org/samples/latest/utils.js"></script>
-
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="js/icicle-chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <link rel="stylesheet" href="assets/style.css">
- 	<title>Klimatneutral Växjö 2030</title>
 
+	<!-- Always the last one to be imported: -->
+	<script src="js/index.js"></script>
+
+	<title>Klimatneutral Växjö 2030</title>
 </head>
 
 <body>
-
 	<header>
-    <div id="logo">
-      <img src="assets/logo.svg" alt="VXJ" width='100px'/>
+		<div id="logo">
+			<img src="assets/logo.svg" alt="VXJ" width='100px' />
 			<h1>Klimatneutral Växjö 2030</h1>
-    </logo>
-		<nav>
+			</logo>
+			<nav>
 			</nav>
 	</header>
 	<div id="general">
@@ -42,7 +42,7 @@
 		<canvas id="energy-chart-area"></canvas>
 	</div>
 	<div id="transport">
-			<h2>TRANSPORT</h2>
+		<h2>TRANSPORT</h2>
 
 		<div id="transport_energy">
 			<canvas id="chart-area"></canvas>
@@ -62,241 +62,20 @@
 		</div>
 	</div>
 	<div id="el">
-			<h2>EL OCH VARME</h2>
+		<h2>EL OCH VARME</h2>
 	</div>
-		<div id="jordbruk">
-				<h2>JORDBRUK</h2>
-
+	<div id="jordbruk">
+		<h2>JORDBRUK</h2>
 	</div>
 	<div id="konsumtion">
-			<h2>KONSUMTION</h2>
-</div>
-<div id="offentlig">
+		<h2>KONSUMTION</h2>
+	</div>
+	<div id="offentlig">
 		<h2>OFFENTLIG</h2>
-</div>
-
-
+	</div>
 	<footer>
 		<p></p>
 	</footer>
-
 </body>
-<script>
-const data = {
-	name : "total",
-	color : '333333',
-	children:[
-				{
-					name:"transport",
-					color: '58ad9b',
-					children : [
-						{name:"personbilar", value : 81003, color: '3d7c6e',},
-						{name:"lastbilar", value : 11259,  color: '458d7e',},
-						{name:"flygg", value : 8527,  color: '58ad9b',},
-						{name:"bussar", value : 29833,  color: '69b5a5',},
-						{name:"annat_transport", value : 1328,  color: '7abeaf',},
-						{name:"arbetsmaskiner", value : 19411,  color: '8bc6ba',}]},
-				{name: "bostad", value: 13879,  color: 'D25D44',},
-				{name: "industri", value : 5796,  color: 'F9BD47',},
-				{name: "offentlig", value : 10185,  color: 'F7972B',},
-				{name: "sparat", value : 0,  color: '333333',}]
-}
 
-Icicle()
-	.orientation('lr')
-	.data(data)
-	.width(580)
-	.height(800)
-	.color('color')
-	(document.getElementById('chart'));
-
-	var config = {
-		type: 'doughnut',
-		data: {
-			datasets: [{
-				data: [
-					223.391+282.607,
-				  32.817,
-					4.635,
-					13.670+122.020+22.110+22.027+2.222
-				],
-				backgroundColor: [
-					"#4C4744",
-					window.chartColors.orange,
-					window.chartColors.yellow,
-				 "#91BB11"
-				],
-				label: 'Dataset 1'
-			}],
-			labels: [
-				'Fossil',
-				'Flygg',
-				'El',
-				'Bio'
-			]
-		},
-		options: {
-			responsive: true,
-			legend: {
-				position: 'top',
-			},
-			title: {
-				display: false,
-				text: 'Chart.js Doughnut Chart'
-			},
-			animation: {
-				animateScale: true,
-				animateRotate: true
-			}
-		}
-	};
-
-	var config2 = {
-		type: 'doughnut',
-		data: {
-			datasets: [{
-				data: [
-					223.391+282.607,
-				  32.817,
-					4.635,
-					13.670+122.020+22.110+22.027+2.222
-				],
-				backgroundColor: [
-					window.chartColors.red,
-					window.chartColors.orange,
-					window.chartColors.yellow,
-					window.chartColors.green
-				],
-				label: 'Dataset 1'
-			}],
-			labels: [
-				'Fossil',
-				'Flygg',
-				'El',
-				'Bio'
-			]
-		},
-		options: {
-			responsive: true,
-			legend: {
-				position: 'top',
-			},
-			title: {
-				display: false,
-				text: 'Chart.js Doughnut Chart'
-			},
-			animation: {
-				animateScale: true,
-				animateRotate: true
-			}
-		}
-	};
-
-	var config_energy = {
-		type: 'doughnut',
-		data: {
-			datasets: [{
-				data: [ 607.0728044, 184.6099599, 1036.931, 387.1508401, 72.29361334 ],
-				backgroundColor: [
-					"#4C4744",
-					"#595945",
-					"#007730",
-					"#CEEA6A",
-					"#91BB11"
-				],
-				label: 'Energi'
-			}],
-			labels: [
-				'Fossil',
-				'Ej förnybar el',
-				'Trädbränslen',
-				'Förnybar el',
-				'Biobränsle'
-			]
-		},
-		options: {
-			responsive: true,
-			legend: {
-				position: 'top',
-			},
-			title: {
-				display: false,
-				text: 'Chart.js Doughnut Chart'
-			},
-			animation: {
-				animateScale: true,
-				animateRotate: true
-			}
-		}
-	};
-
-
-
-	window.onload = function() {
-		var ctx = document.getElementById('chart-area').getContext('2d');
-		window.myDoughnut = new Chart(ctx, config);
-		var ctx2 = document.getElementById('chart-area2').getContext('2d');
-		window.myDoughnut2 = new Chart(ctx2, config2);
-		var ctx_energy = document.getElementById('energy-chart-area').getContext('2d');
-		window.myDoughnut3 = new Chart(ctx_energy, config_energy);
-	};
-
-
-	var colorNames = Object.keys(window.chartColors);
-
-	function refreshElBilar() {
-       var antalElBilar = $( "#slider_el" ).slider( "value" );
-			 window.myDoughnut.data.datasets[0].data[2] = (4.635)*antalElBilar;
-			 window.myDoughnut.data.datasets[0].data[0] = (((223.391+282.607)/70)*100)-antalElBilar;
-			 data.children[0].children[0] = data.children[0].children[0]/antalElBilar
-
-			 window.myDoughnut.update();
-     };
-
-		function refreshBussar() {
-			 var antalBusresor = $( "#slider_bus" ).slider( "value" );
-			window.myDoughnut.data.datasets[0].data[0] = (223.391+282.607)/70*100-antalBusresor;
-			window.myDoughnut.update();
-		};
-
-
-    $( "#slider_el" ).slider({
-			orientation: "horizontal",
-			range: "min",
-			max: 100,
-			value: 2,
-			slide: refreshElBilar,
-			change: refreshElBilar
-  	} );
-
-	    $( "#slider_bus" ).slider({
-			orientation: "horizontal",
-			range: "min",
-			max: 100,
-			value: 2,
-			slide: refreshBussar,
-			change: refreshBussar
-	  } );
-
-		$( "#slider_bio" ).slider({
-		orientation: "horizontal",
-		range: "min",
-		max: 100,
-		value: 2,
-		slide: refreshBussar,
-		change: refreshBussar
-	} );
-
-	$( "#slider_cykel" ).slider({
-	orientation: "horizontal",
-	range: "min",
-	max: 100,
-	value: 2,
-	slide: refreshBussar,
-	change: refreshBussar
-} );
-
-
-
-</script>
 </html>
