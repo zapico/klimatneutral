@@ -20,7 +20,7 @@ const dataKlimatutslapp = {
         {name: "bostad", value: 13879,  color: 'D25D44',},
         {name: "industri", value : 5796,  color: 'F9BD47',},
         {name: "offentlig", value : 10185,  color: 'F7972B',},
-        {name: "sparat", value : 0,  color: '333333',}
+        {name: "sparat", value : 0,  color: 'eeeeee',}
     ]
 }
 
@@ -34,12 +34,17 @@ const dataTransport = [
     13.670+122.020+22.110+22.027+2.222
 ];
 
-const dataEnergi = [ 
-    607.0728044, 
-    184.6099599, 
-    1036.931, 
-    387.1508401, 
-    72.29361334 
+const dataTransportBehavior = [
+    570000,
+		133443
+];
+
+const dataEnergi = [
+    607.0728044,
+    184.6099599,
+    1036.931,
+    387.1508401,
+    72.29361334
 ]
 
 // Views
@@ -54,7 +59,7 @@ function makeIcicleChart() {
         (document.getElementById('chart'));
 }
 
-var config = {  
+var config = {
     type: 'doughnut',
     data: {
         datasets: [{
@@ -77,7 +82,7 @@ var config = {
     options: {
         responsive: true,
         legend: {
-            position: 'top',
+            position: 'bottom',
         },
         title: {
             display: false,
@@ -94,26 +99,22 @@ var config2 = {
     type: 'doughnut',
     data: {
         datasets: [{
-            data: dataTransport,
+            data: dataTransportBehavior,
             backgroundColor: [
                 window.chartColors.red,
-                window.chartColors.orange,
-                window.chartColors.yellow,
                 window.chartColors.green
             ],
             label: 'Dataset 1'
         }],
         labels: [
-            'Fossil',
-            'Flygg',
-            'El',
-            'Bio'
+            'Privat',
+            'Kollektiv',
         ]
     },
     options: {
         responsive: true,
         legend: {
-            position: 'top',
+            position: 'bottom',
         },
         // title: {
         //     display: false,
@@ -175,14 +176,14 @@ window.onload = function() {
 
     var ctx2 = document.getElementById('chart-area2').getContext('2d');
     window.myDoughnut2 = new Chart(ctx2, config2);
-    
+
     var ctx_energy = document.getElementById('energy-chart-area').getContext('2d');
     window.myDoughnut3 = new Chart(ctx_energy, config_energy);
 
     const icicleChart = this.makeIcicleChart();
-  
+
     // Create controls
-    
+
     $( "#slider_el" ).slider({
         orientation: "horizontal",
         min: 1,
@@ -196,7 +197,7 @@ window.onload = function() {
         orientation: "horizontal",
         min: 1,
         max: 100,
-        value: 2,
+        value: 50,
         slide: refreshBussar,
         change: refreshBussar
     } );
@@ -210,29 +211,70 @@ window.onload = function() {
         change: refreshBussar
     } );
 
-    $( "#slider_cykel" ).slider({
+    $( "#slider_kollektiv1" ).slider({
         orientation: "horizontal",
         range: "min",
         max: 100,
-        value: 2,
+        value: 42,
         slide: refreshBussar,
         change: refreshBussar
     } );
+		$( "#slider_kollektiv2" ).slider({
+        orientation: "horizontal",
+        range: "min",
+        max: 100,
+        value: 26,
+        slide: refreshBussar,
+        change: refreshBussar
+    } );
+		$( "#slider_kollektiv3" ).slider({
+				orientation: "horizontal",
+				range: "min",
+				max: 100,
+				value: 5,
+				slide: refreshBussar,
+				change: refreshBussar
+		} );
+
+
+		$( "#slider_befolkning" ).slider({
+				orientation: "horizontal",
+				range: "min",
+				max: 1500004,
+				value: 91060,
+				slide: refreshBussar,
+				change: refreshBussar
+		} );
+
 
     // Setup events
 
     function refreshElBilar() {
-        var antalElBilar = $( "#slider_el" ).slider( "value" );       
+        var antalElBilar = $( "#slider_el" ).slider( "value" );
 
         // Update donuts
         dataTransport[2] = (4.635)*antalElBilar;
         dataTransport[0] = (((223.391+282.607)/70)*100)-antalElBilar;
         myDoughnut.update();
-        
-        // Update icicle        
-        dataKlimatutslappClone.children[0].children[0].value = 
-            antalElBilar == 0 ? 0 : dataKlimatutslapp.children[0].children[0].value / antalElBilar;
+
+        // Update icicle
+				current = dataKlimatutslapp.children[0].children[0].value;
+				//provisional calculation!
+				saved = (dataKlimatutslapp.children[0].children[0].value /100)*antalElBilar;
+
+        dataKlimatutslappClone.children[0].children[0].value =
+            antalElBilar == 0 ? 0 : current-saved;
+						dataKlimatutslappClone.children[4].value =
+								antalElBilar == 0 ? 0 : saved;
         icicleChart.data(dataKlimatutslappClone);
+
+				// Recalculate total
+				total = 173476 - dataKlimatutslappClone.children[4].value;
+				percentage_change = (saved*100)/173476;
+				//update
+				$("total2030" ).text(Math.round(total));
+				$("change" ).text(Math.round(percentage_change));
+
     };
 
     function refreshBussar() {
@@ -243,9 +285,9 @@ window.onload = function() {
         myDoughnut.update();
 
         // Update icicle
-        dataKlimatutslappClone.children[0].children[3].value = 
+        dataKlimatutslappClone.children[0].children[3].value =
             antalBusresor == 0 ? 0 : dataKlimatutslapp.children[0].children[3].value / antalBusresor;
         icicleChart.data(dataKlimatutslappClone);
     };
-    
+
 };
