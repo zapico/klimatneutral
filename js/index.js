@@ -210,6 +210,15 @@ window.onload = function() {
         slide: refreshBussar,
         change: refreshBussar
     } );
+		$( "#slider_hydrogen" ).slider({
+				orientation: "horizontal",
+				range: "min",
+				max: 100,
+				value: 2,
+				slide: refreshBussar,
+				change: refreshBussar
+		} );
+
 
     $( "#slider_kollektiv1" ).slider({
         orientation: "horizontal",
