@@ -24,48 +24,43 @@
 
 <body>
 	<header>
-		<div id="logo">
-			<img src="assets/logo.svg" alt="VXJ" width='100px' />
-			<h1>Klimatneutral Växjö 2030</h1>
-			</logo>
+		<div id="title">
+			<h2>KLIMATNEUTRAL VÄXJÖ 2030</h2>
+		</div>
+		<logo>
+				<img src="assets/logo.svg" alt="VXJ" width='100px' />
+		</logo>
 			<nav>
 			</nav>
 	</header>
+
 	<div id="general">
-		<h1>KLIMATUTSLÄPP</h1>
-		<h2>2020: <total2020>173 476</total2020> ton CO2</h2>
-		<h2>2030: <total2030>173 476</total2030> ton CO2 -<change>0</change>%</h2>
-		<div id="chart"></div>
-		<h1>ENERGIBEHOV</h1>
-		<h2>2020: 2288 GWh</h2>
-		<h2>2030: 2288 GWh +0%</h2>
-		<canvas id="energy-chart-area"></canvas>
-	</div>
-	<div id="konsumtion">
-		<span class="dot"></span>
-		<span class="dot"></span>
-		<span class="dot"></span>
-		<span class="dot"></span>
-		<h2>BEFOLKNING</h2>
-		<div id="slider_befolkning"></div>
+		<div id="general_klimat">
+			<h3>KLIMATUTSLÄPP</h3>
+			<h2>2020: <total2020>173 476</total2020> ton CO2</h2>
+			<h2>2030: <total2030>173 476</total2030> ton CO2 -<change>0</change>%</h2>
+			<div id="chart"></div>
+		</div>
+		<div id="general_energi">
+			<h3>ENERGIBEHOV</h3>
+			<h2>2020: 2288 GWh</h2>
+			<h2>2030: 2288 GWh +0%</h2>
+			<canvas id="energy-chart-area"></canvas>
+		</div>
 	</div>
 
-	<div id="transport">
-		<h2>TRANSPORT</h2>
-
-		<div id="transport_energy">
+	<div id="transport_energy">
 			<canvas id="chart-area"></canvas>
-			<h3>ENERGI</h3>
+			<h3>BRÄNSLEMIX</h3>
 			<p>Andel privata elbilar</p>
 			<div id="slider_el"></div>
-			<p>Andel biodiesel tunga fordon</p>
-			<div id="slider_bio"></div>
-			<p>Andel vätegas tunga fordon</p>
-			<div id="slider_hydrogen"></div>
-		</div>
-		<div id="transport_behavior">
+	</div>
+
+	<div id="transport_behavior">
 			<canvas id="chart-area2"></canvas>
 			<h3>BETEENDE</h3>
+			<p>Befolkning i Kronoberg</p>
+			<div id="slider_befolkning"></div>
 			<p>Antal mil per person i veckan</p>
 			<div id="slider_bus"></div>
 			<p>Andel kollektivtrafik/cykel/gå korta resor</p>
@@ -75,22 +70,21 @@
 			<p>Andel kollektivtrafik långa resor</p>
 			<div id="slider_kollektiv3"></div>
 		</div>
-	</div>
-	<div id="el">
-		<h2>EL OCH VÄRME</h2>
-		<p>Energiffektivisering av värmesystem i villor</p>
-		<p>Andel import elektricitet</p>
-	</div>
-	<div id="jordbruk">
-		<h2>JORDBRUK</h2>
-		<p>Antal boskap i länet</p>
-		<p>Gödselhantering</p>
-	</div>
-	<div id="offentlig">
-		<h2>OFFENTLIG</h2>
-		<p>Energieffektivisering offentliga byggnader</p>
-		<p>N2O hantering sjukhus</p>
-		<p>Bränsle park och trädgårdsmaskiner</p>
+
+		<div id="transport_heavy">
+			<canvas id="chart-area"></canvas>
+			<h3>LASTBILAR</h3>
+			<p>Andel biodiesel tunga fordon</p>
+			<div id="slider_bio"></div>
+			<p>Andel vätegas tunga fordon</p>
+			<div id="slider_hydrogen"></div>
+		</div>
+
+	<div id="electricity">
+			<canvas id="chart-area"></canvas>
+			<h3>ELECTRICITET</h3>
+			<p>Andel privata elbilar</p>
+			<div id="slider_el"></div>
 	</div>
 	<footer>
 		<p></p>

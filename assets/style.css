@@ -1,55 +1,71 @@
 /* Structure */
 body{
-  padding:25px;
+  padding:20px;
   background-color: #eee;
 }
 #general{
   float:left;
-  width:40%;
+  width:96%;
   height:auto;
   background-color: #fff;
   padding:25px;
   margin-bottom:25px;
 }
-#energi{
+#general_klimat{
   float:left;
   width:40%;
   height:auto;
   background-color: #fff;
   padding:25px;
   margin-bottom:25px;
+  margin-right: 10px;
 }
-#transport{
+#general_energi{
   float:right;
-  width:50%;
+  width:40%;
   height:auto;
   background-color: #fff;
-    padding:25px;
+  padding:25px;
   margin-bottom:25px;
+  margin-right: 10px;
 }
+
 #transport_energy{
   float:left;
-  width:45%;
+  width:20%;
   height:auto;
   background-color: #fff;
     padding:15px;
     margin-bottom:25px;
+    margin-right: 10px;
 }
 #transport_behavior{
   float:left;
-  width:45%;
+  width:20%;
   height:auto;
   background-color: #fff;
-    padding:15px;
-    margin-bottom:25px;
-}
-#jordbruk, #konsumtion, #el, #offentlig {
-  float:right;
-  width:50%;
-  height:auto;
-  background-color: #fff;
-    padding:25px;
+  padding:15px;
   margin-bottom:25px;
+  margin-right: 10px;
+}
+#transport_heavy{
+  float:left;
+  width:20%;
+  height:auto;
+  background-color: #fff;
+  padding:15px;
+  margin-bottom:25px;
+  margin-right: 10px;
+}
+
+#electricity {
+  float:left;
+  width:20%;
+  height:auto;
+  background-color: #fff;
+  padding:25px;
+  margin-bottom:25px;
+  margin-right: 10px;
 }
 
 .dot {
@@ -59,12 +75,17 @@ body{
   border-radius: 50%;
   display: inline-block;
 }
+#title{
+  float:left;
+}
+logo{
+  float:right;
+}
 
 /* Type */
 h1,h2,h3 {
     color: black;
     font-family: 'Alata', sans-serif;
-
 }
 
 h1 {
