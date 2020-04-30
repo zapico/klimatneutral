@@ -51,9 +51,13 @@ function makeDonutTransport(id, data) {
 
 function makeDonutTransportBehavior(id, data) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     var ctx = document.getElementById(id).getContext('2d');
 =======
-    var ctx = document.getElementById(id).getContext('2d');    
+    var ctx = document.getElementById(id).getContext('2d');
+>>>>>>> e14560fe2a2e28934b2f7f805c3d9eba4daa6ea4
+=======
+    var ctx = document.getElementById(id).getContext('2d');
 >>>>>>> e14560fe2a2e28934b2f7f805c3d9eba4daa6ea4
     const config = {
         type: 'doughnut',
@@ -136,10 +140,9 @@ window.onload = async function() {
     // var colorNames = Object.keys(window.chartColors);
 
     // Load the data from the server, assynchronously
-<<<<<<< HEAD
     const dataKlimatutslapp = await d3.json("/data/klimat_utslapp.json");
 =======
-    const dataKlimatutslapp = await d3.json("/data/klimat_utslapp.json");    
+    const dataKlimatutslapp = await d3.json("/data/klimat_utslapp.json");
 >>>>>>> e14560fe2a2e28934b2f7f805c3d9eba4daa6ea4
     // This a clone for presentation; it will change often based on the reference above
     const dataKlimatutslappClone = JSON.parse(JSON.stringify(dataKlimatutslapp));
@@ -151,10 +154,9 @@ window.onload = async function() {
         32.817,
         4.635,
         13.670+122.020+22.110+22.027+2.222
-<<<<<<< HEAD
     ];
 =======
-    ];    
+    ];
 >>>>>>> e14560fe2a2e28934b2f7f805c3d9eba4daa6ea4
     const myDoughnut = makeDonutTransport('chart-area', dataTransport);
 
@@ -163,10 +165,9 @@ window.onload = async function() {
     const myDoughnut2 = this.makeDonutTransportBehavior('chart-area2', dataTransportBehavior);
 
     // Load the data from the server, assynchronously
-<<<<<<< HEAD
     const dataEnergi = await d3.json("/data/energi.json");
 =======
-    const dataEnergi = await d3.json("/data/energi.json");    
+    const dataEnergi = await d3.json("/data/energi.json");
 >>>>>>> e14560fe2a2e28934b2f7f805c3d9eba4daa6ea4
     const myDoughnut3 = this.makeDonutEnergi('energy-chart-area', dataEnergi);
 
@@ -197,17 +198,7 @@ window.onload = async function() {
         value: 2,
         slide: refreshBussar,
         change: refreshBussar
-<<<<<<< HEAD
-    } );
-		$( "#slider_hydrogen" ).slider({
-				orientation: "horizontal",
-				range: "min",
-				max: 100,
-				value: 2,
-				slide: refreshBussar,
-				change: refreshBussar
-		} );
-
+    });
 =======
     });
 >>>>>>> e14560fe2a2e28934b2f7f805c3d9eba4daa6ea4
