@@ -1,5 +1,38 @@
 
+// TODO Put the Icicle in a class, too.
+
+function getIcicleData(model) {
+
+    return {
+        "name": "totalc02",
+        "color": "333333",
+        "children": [
+            {
+                "name": "transport",
+                "color": "58ad9b",
+                "children": [
+                    { 
+                        "name": "personbilar",
+                        "color": "3d7c6e", 
+                        "value": model.personal_car_co2
+                    },
+                    { "name": "lastbilar", "value": model.trucks_co2 },
+                    { "name": "flygg", "value": model.airplanes },
+                    { "name": "bussar", "value": model.bus_co2 },
+                    { "name": "annat transport", "value": model.other_vehicles },
+                    { "name": "arbetsmaskiner", "value": model.industrial_vehicles }]
+            },
+            { "name": "bostad", "value": model.housing },
+            { "name": "industri", "value": model.industry },
+            { "name": "offentlig", "value": model.publicservices },
+            { "name": "sparat", "value": model.saved }
+        ]
+    }
+
+}
+
 function makeIcicleChart(data) {
+
     return Icicle()
         .orientation('lr')
         .data(data)
@@ -50,7 +83,7 @@ function makeDonutTransport(id, data) {
 }
 
 function makeDonutTransportBehavior(id, data) {
-    var ctx = document.getElementById(id).getContext('2d');    
+    var ctx = document.getElementById(id).getContext('2d');
     const config = {
         type: 'doughnut',
         data: {
@@ -128,22 +161,20 @@ function makeDonutEnergi(id, data) {
 }
 
 
-window.onload = async function() {
+window.onload = async function () {
     // var colorNames = Object.keys(window.chartColors);
 
-    // Load the data from the server, assynchronously
-    const dataKlimatutslapp = await d3.json("/data/klimat_utslapp.json");    
-    // This a clone for presentation; it will change often based on the reference above
-    const dataKlimatutslappClone = JSON.parse(JSON.stringify(dataKlimatutslapp));
-    const icicleChart = this.makeIcicleChart(dataKlimatutslappClone);
+    const model = new Model();
+    
+    const icicleChart = this.makeIcicleChart(this.getIcicleData(model));
 
     // I left this here (instead of moving to server) because there are math operations in it
     const dataTransport = [
-        223.391+282.607,
+        223.391 + 282.607,
         32.817,
         4.635,
-        13.670+122.020+22.110+22.027+2.222
-    ];    
+        13.670 + 122.020 + 22.110 + 22.027 + 2.222
+    ];
     const myDoughnut = makeDonutTransport('chart-area', dataTransport);
 
     // Load the data from the server, assynchronously
@@ -151,7 +182,7 @@ window.onload = async function() {
     const myDoughnut2 = this.makeDonutTransportBehavior('chart-area2', dataTransportBehavior);
 
     // Load the data from the server, assynchronously
-    const dataEnergi = await d3.json("/data/energi.json");    
+    const dataEnergi = await d3.json("/data/energi.json");
     const myDoughnut3 = this.makeDonutEnergi('energy-chart-area', dataEnergi);
 
     // Create controls
@@ -237,7 +268,7 @@ window.onload = async function() {
             antalElBilar == 0 ? 0 : current - saved;
         dataKlimatutslappClone.children[4].value =
             antalElBilar == 0 ? 0 : saved;
-        icicleChart.data(dataKlimatutslappClone);
+        icicleChart.data(getIcicleData(model));
 
         // Recalculate total
         total = 173476 - dataKlimatutslappClone.children[4].value;
@@ -258,7 +289,7 @@ window.onload = async function() {
         // Update icicle
         dataKlimatutslappClone.children[0].children[3].value =
             antalBusresor == 0 ? 0 : dataKlimatutslapp.children[0].children[3].value / antalBusresor;
-        icicleChart.data(dataKlimatutslappClone);
+        icicleChart.data(getIcicleData(model));
     };
 
 };
