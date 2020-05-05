@@ -1,7 +1,10 @@
 
-// TODO Put the Icicle in a class, too.
+// TODO Put the Icicle in a class, too. Include the methods for generating the data and updating the graph. Keep a saved reference of the model after the constructor.
+// TODO Separate the colors into an easier-to-change colormap: name -> color
 
 function getIcicleData(model) {
+
+    console.log(model);
 
     return {
         "name": "totalc02",
@@ -16,16 +19,53 @@ function getIcicleData(model) {
                         "color": "3d7c6e", 
                         "value": model.personal_car_co2
                     },
-                    { "name": "lastbilar", "value": model.trucks_co2 },
-                    { "name": "flygg", "value": model.airplanes },
-                    { "name": "bussar", "value": model.bus_co2 },
-                    { "name": "annat transport", "value": model.other_vehicles },
-                    { "name": "arbetsmaskiner", "value": model.industrial_vehicles }]
+                    { 
+                        "name": "lastbilar",
+                        "color": "458d7e",
+                        "value": model.trucks_co2
+                    },
+                    { 
+                        "name": "flygg",
+                        "color": "58ad9b", 
+                        "value": model.airplanes 
+                    },
+                    { 
+                        "name": "bussar",
+                        "color": "69b5a5", 
+                        "value": model.bus_co2 
+                    },
+                    { 
+                        "name": "annat transport",
+                        "color": "7abeaf", 
+                        "value": model.other_vehicles 
+                    },
+                    { 
+                        "name": "arbetsmaskiner",
+                        "color": "8bc6ba", 
+                        "value": model.industrial_vehicles 
+                    }
+                ]
             },
-            { "name": "bostad", "value": model.housing },
-            { "name": "industri", "value": model.industry },
-            { "name": "offentlig", "value": model.publicservices },
-            { "name": "sparat", "value": model.saved }
+            { 
+                "name": "bostad", 
+                "color": "D25D44",
+                "value": model.housing 
+            },
+            { 
+                "name": "industri",
+                "color": "F9BD47", 
+                "value": model.industry 
+            },
+            { 
+                "name": "offentlig", 
+                "color": "F7972B",
+                "value": model.publicservices 
+            },
+            { 
+                "name": "sparat", 
+                "color": "eeeeee",
+                "value": model.saved 
+            }
         ]
     }
 
