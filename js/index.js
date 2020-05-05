@@ -4,8 +4,6 @@
 
 function getIcicleData(model) {
 
-    console.log(model);
-
     return {
         "name": "total c02",
         "color": "333333",
@@ -82,7 +80,14 @@ function makeIcicleChart(data) {
         (document.getElementById('chart'));
 }
 
-function makeDonutTransport(id, data) {
+function makeDonutTransport(id, model) {
+    const data = [
+        model.transp_fossil,
+        model.airplanes,
+        model.transp_electricity,
+        model.transp_bio
+    ];
+    console.log(data);
     const ctx = document.getElementById(id).getContext('2d');
     const config = {
         type: 'doughnut',
@@ -209,29 +214,23 @@ window.onload = async function () {
     const icicleChart = this.makeIcicleChart(this.getIcicleData(model));
 
     // I left this here (instead of moving to server) because there are math operations in it
-    const dataTransport = [
-        223.391 + 282.607,
-        32.817,
-        4.635,
-        13.670 + 122.020 + 22.110 + 22.027 + 2.222
-    ];
-    const myDoughnut = makeDonutTransport('chart-area', dataTransport);
+    const myDoughnut = makeDonutTransport('transport_energy_canvas', model);
 
     // Load the data from the server, assynchronously
     const dataTransportBehavior = await d3.json("/data/transport_behavior.json");
-    const myDoughnut2 = this.makeDonutTransportBehavior('chart-area2', dataTransportBehavior);
+    const myDoughnut2 = this.makeDonutTransportBehavior('transport_behavior_canvas', dataTransportBehavior);
 
     // Load the data from the server, assynchronously
-    const dataEnergi = await d3.json("/data/energi.json");
-    const myDoughnut3 = this.makeDonutEnergi('energy-chart-area', dataEnergi);
+    const myDoughnut3 = this.makeDonutEnergi('energy-chart-area', model.dataEnergi);
 
     // Create controls
 
     $("#slider_el").slider({
         orientation: "horizontal",
-        min: 1,
-        max: 100,
-        value: 2,
+        min: 0,
+        max: 1,
+        step: 0.05,
+        value: model.personal_electric,
         slide: refreshElBilar,
         change: refreshElBilar
     });
@@ -295,27 +294,34 @@ window.onload = async function () {
         var antalElBilar = $("#slider_el").slider("value");
 
         // Update donuts
-        dataTransport[2] = (4.635) * antalElBilar;
-        dataTransport[0] = (((223.391 + 282.607) / 70) * 100) - antalElBilar;
+        // dataTransport[2] = (4.635) * antalElBilar;
+        // dataTransport[0] = (((223.391 + 282.607) / 70) * 100) - antalElBilar;
+        model.update_personal_el(antalElBilar);
+        model.update();
+        
+        myDoughnut.data.datasets[0].data[0] = model.transp_fossil;
+        myDoughnut.data.datasets[0].data[2] = model.transp_electricity;
         myDoughnut.update();
 
-        // Update icicle
-        current = dataKlimatutslapp.children[0].children[0].value;
-        //provisional calculation!
-        saved = (dataKlimatutslapp.children[0].children[0].value / 100) * antalElBilar;
+        console.log(myDoughnut.data.datasets[0].data);
 
-        dataKlimatutslappClone.children[0].children[0].value =
-            antalElBilar == 0 ? 0 : current - saved;
-        dataKlimatutslappClone.children[4].value =
-            antalElBilar == 0 ? 0 : saved;
-        icicleChart.data(getIcicleData(model));
+        // // Update icicle
+        // current = dataKlimatutslapp.children[0].children[0].value;
+        // //provisional calculation!
+        // saved = (dataKlimatutslapp.children[0].children[0].value / 100) * antalElBilar;
 
-        // Recalculate total
-        total = 173476 - dataKlimatutslappClone.children[4].value;
-        percentage_change = (saved * 100) / 173476;
-        //update
-        $("total2030").text(Math.round(total));
-        $("change").text(Math.round(percentage_change));
+        // dataKlimatutslappClone.children[0].children[0].value =
+        //     antalElBilar == 0 ? 0 : current - saved;
+        // dataKlimatutslappClone.children[4].value =
+        //     antalElBilar == 0 ? 0 : saved;
+        // icicleChart.data(getIcicleData(model));
+
+        // // Recalculate total
+        // total = 173476 - dataKlimatutslappClone.children[4].value;
+        // percentage_change = (saved * 100) / 173476;
+        // //update
+        // $("total2030").text(Math.round(total));
+        // $("change").text(Math.round(percentage_change));
 
     };
 
