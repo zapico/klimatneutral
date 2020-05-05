@@ -7,7 +7,7 @@ function getIcicleData(model) {
     console.log(model);
 
     return {
-        "name": "totalc02",
+        "name": "total c02",
         "color": "333333",
         "children": [
             {
