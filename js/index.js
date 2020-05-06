@@ -203,8 +203,6 @@ window.onload = async function () {
 
     // Create controls
 
-    
-
     $("#slider_bus").slider({
         orientation: "horizontal",
         min: 1,
@@ -259,8 +257,6 @@ window.onload = async function () {
     });
 
     // Setup events
-
-    
 
     function refreshBussar() {
         var antalBusresor = $("#slider_bus").slider("value");
