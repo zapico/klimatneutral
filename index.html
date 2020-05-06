@@ -52,8 +52,13 @@
 			<h4><year>2030:</year><br/> 2288 GWh</h4>
 			<h2>+0%</h2>
 		</div>
-		<div id="general_energi">
-			<canvas id="energy-chart-area"></canvas>
+		<div id="general_energi">	
+			<div id="e_bio" class="dot"></div>
+			<div id="e_forest" class="dot"></div>
+			<div id="e_renewable" class="dot"></div>
+			<div id="e_nonrenewable" class="dot"></div>
+			<div id="e_fossil" class="dot"></div>
+			<!-- <canvas id="energy-chart-area"></canvas> -->
 		</div>
 		<div id="general_sdg">
 				<h3>HÅLLBARHETSMÅL</h3>
@@ -64,14 +69,14 @@
 		</div>
 	</div>
 
-	<div id="transport_energy">
+	<div id="transport_energy" class="control_widget">
 			<canvas id="transport_energy_canvas"></canvas>
 			<h3>BRÄNSLEMIX</h3>
 			<p>Andel privata elbilar</p>
 			<div id="slider_el"></div>
 	</div>
 
-	<div id="transport_behavior">
+	<div id="transport_behavior" class="control_widget">
 			<canvas id="transport_behavior_canvas"></canvas>
 			<h3>BETEENDE</h3>
 			<p>Befolkning i Kronoberg</p>
@@ -86,7 +91,7 @@
 			<div id="slider_kollektiv3"></div>
 		</div>
 
-		<div id="transport_heavy">
+		<div id="transport_heavy" class="control_widget">
 			<canvas id="transport_heavy_canvas"></canvas>
 			<h3>LASTBILAR</h3>
 			<p>Andel biodiesel tunga fordon</p>
@@ -95,7 +100,7 @@
 			<div id="slider_hydrogen"></div>
 		</div>
 
-	<div id="electricity">
+	<div id="electricity" class="control_widget">
 			<canvas id="electricity_canvas"></canvas>
 			<h3>ELECTRICITET</h3>
 			<p>Andel privata elbilar</p>
