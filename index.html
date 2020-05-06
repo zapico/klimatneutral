@@ -17,6 +17,7 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<script src="js/model.js"></script>
+	<script src="js/icicle-wrapper.js"></script>
 
 	<!-- Always the last one to be imported: -->
 	<script src="js/index.js"></script>
@@ -41,7 +42,7 @@
 			<h3>KLIMATUTSLÄPP</h3>
 			<h2>2020: <total2020>173 476</total2020> ton CO2</h2>
 			<h2>2030: <total2030>173 476</total2030> ton CO2 -<change>0</change>%</h2>
-			<div id="chart"></div>
+			<div id="general-chart"></div>
 		</div>
 		<div id="general_energi">
 			<h3>ENERGIBEHOV</h3>
@@ -55,7 +56,9 @@
 			<canvas id="transport_energy_canvas"></canvas>
 			<h3>BRÄNSLEMIX</h3>
 			<p>Andel privata elbilar</p>
-			<div id="slider_el"></div>
+			<div id="slider_pers_el"></div>
+			<p>Andel privata bio</p>
+			<div id="slider_pers_bio"></div>
 	</div>
 
 	<div id="transport_behavior">
