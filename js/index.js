@@ -5,11 +5,11 @@
 
 function makeDonutTransport(id, model) {
     const data = [
-        model.personal_fossil,        
+        model.personal_fossil,
         model.personal_electric,
         model.personal_bio
     ];
-    
+
     const ctx = document.getElementById(id).getContext('2d');
     const config = {
         type: 'doughnut',
@@ -25,7 +25,7 @@ function makeDonutTransport(id, model) {
                 label: 'Dataset 1'
             }],
             labels: [
-                'Fossil',                
+                'Fossil',
                 'El',
                 'Bio'
             ]
@@ -69,12 +69,12 @@ function makeDonutTransport(id, model) {
     });
 
     function refreshElBilar(e) {
-        // Since one slider is updating the others, we need to make sure to only treat original events here. Non-original events are those triggered by updating *other* sliders, and they should not be treated or else we get an infinite loop. 
-        if (e.originalEvent) {            
+        // Since one slider is updating the others, we need to make sure to only treat original events here. Non-original events are those triggered by updating *other* sliders, and they should not be treated or else we get an infinite loop.
+        if (e.originalEvent) {
             var antalElBilar = $("#slider_pers_el").slider("value");
-            
+
             model.update_personal_el(antalElBilar);
-            
+
             myDoughnut.data.datasets[0].data[0] = model.personal_fossil;
             myDoughnut.data.datasets[0].data[1] = model.personal_electric;
             myDoughnut.data.datasets[0].data[2] = model.personal_bio;
@@ -85,12 +85,12 @@ function makeDonutTransport(id, model) {
     };
 
     function refreshBioBilar(e) {
-        // Since one slider is updating the others, we need to make sure to only treat original events here. Non-original events are those triggered by updating *other* sliders, and they should not be treated or else we get an infinite loop. 
-        if (e.originalEvent) {            
+        // Since one slider is updating the others, we need to make sure to only treat original events here. Non-original events are those triggered by updating *other* sliders, and they should not be treated or else we get an infinite loop.
+        if (e.originalEvent) {
             var antalBioBilar = $("#slider_pers_bio").slider("value");
-            
+
             model.update_personal_bio(antalBioBilar);
-            
+
             myDoughnut.data.datasets[0].data[0] = model.personal_fossil;
             myDoughnut.data.datasets[0].data[1] = model.personal_electric;
             myDoughnut.data.datasets[0].data[2] = model.personal_bio;
@@ -99,7 +99,7 @@ function makeDonutTransport(id, model) {
             $("#slider_pers_el").slider("value", model.personal_electric);
         }
     };
-    
+
 }
 
 function makeDonutTransportBehavior(id, data) {
@@ -138,59 +138,45 @@ function makeDonutTransportBehavior(id, data) {
     return new Chart(ctx, config);
 }
 
-function makeDonutEnergi(id, data) {
-    var ctx = document.getElementById(id).getContext('2d');
-    var config = {
-        type: 'doughnut',
-        data: {
-            datasets: [{
-                data: data,
-                backgroundColor: [
-                    "#4C4744",
-                    "#595945",
-                    "#007730",
-                    "#CEEA6A",
-                    "#91BB11"
-                ],
-                label: 'Energi'
-            }],
-            labels: [
-                'Fossil',
-                'Ej förnybar el',
-                'Trädbränslen',
-                'Förnybar el',
-                'Biobränsle'
-            ]
-        },
-        options: {
-            responsive: true,
-            legend: {
-                position: 'top',
-            },
-            // title: {
-            //     display: false,
-            //     text: 'Chart.js Doughnut Chart'
-            // },
-            animation: {
-                animateScale: true,
-                animateRotate: true
-            }
-        }
-    };
-    return new Chart(ctx, config);
-}
+// Funtion to create circles representing energy use
+function makeCircles(model){
+  max_size = 200000;
 
+  // Calculate radium
+  circle_bio = Math.round(Math.sqrt(max_size * (model.biofuels / 3600) / 3.1416));
+  margin_bio = (100 - circle_bio) / 2;
+
+  circle_forest = Math.round(Math.sqrt(max_size * (model.forestfuel / 3600) / 3.1416));
+  margin_forest = (100 - circle_forest) / 2;
+
+  circle_renewable = Math.round(Math.sqrt(max_size * (model.electricity / 3600) / 3.1416));
+  margin_renewable = (100 - circle_renewable) / 2;
+
+  circle_non = Math.round(Math.sqrt(max_size * (model.electricity_nonren / 3600) / 3.1416));
+  margin_non = (100 - circle_non) / 2;
+
+  circle_fossil = Math.round(Math.sqrt(max_size * (model.fossil_fuels / 3600) / 3.1416));
+  margin_fossil = (100 - circle_fossil) / 2;
+
+  // Update
+  document.getElementById("e_bio").innerHTML = '<div style="width:' + circle_bio + 'px; height:' + circle_bio + 'px;margin-left:' + margin_bio + 'px;margin-top:' + margin_bio + 'px; background:#4DA167; border-radius:400px; -moz-border-radius:400px;"></div><div class="energylabel">Bioenergi</div>';
+  document.getElementById("e_forest").innerHTML = '<div style="width:' + circle_forest + 'px; height:' + circle_forest + 'px;margin-left:' + margin_forest + 'px;margin-top:' + margin_forest + 'px; background:#12664F; border-radius:400px; -moz-border-radius:400px;"></div><div class="energylabel">Trädbränsle</div>';
+  document.getElementById("e_renewable").innerHTML = '<div style="width:' + circle_renewable + 'px; height:' + circle_renewable + 'px;margin-left:' + margin_renewable + 'px;margin-top:' + margin_renewable + 'px; background:#BAB700; border-radius:400px; -moz-border-radius:400px;"></div></div><div class="energylabel">Förnybar el</div>';
+  document.getElementById("e_nonrenewable").innerHTML = '<div style="width:' + circle_non + 'px; height:' + circle_non + 'px;margin-left:' + margin_non + 'px;margin-top:' + margin_non + 'px; background:#77878B; border-radius:400px; -moz-border-radius:400px;"></div></div><div class="energylabel">Annat el</div>';
+  document.getElementById("e_fossil").innerHTML = '<div style="width:' + circle_fossil + 'px; height:' + circle_fossil + 'px;margin-left:' + margin_fossil + 'px;margin-top:' + margin_fossil + 'px; background:#4D5057; border-radius:400px; -moz-border-radius:400px;"></div></div><div class="energylabel">Fossil</div>';
+}
 
 window.onload = async function () {
     // var colorNames = Object.keys(window.chartColors);
 
     const model = new Model();
-    
+
     // Simply instantiating the wrapper will take care of everything
     new IcicleWrapper(model, 'general-chart');
 
     // Load the data from the server, assynchronously
-    const myDoughnut3 = this.makeDonutEnergi('energy-chart-area', model.dataEnergi);
+    //const myDoughnut3 = this.makeDonutEnergi('energy-chart-area', model.dataEnergi);
+    makeCircles(model);
 
     // Simply calling the closure will take care of everything
     makeDonutTransport('transport_energy_canvas', model);
@@ -199,7 +185,7 @@ window.onload = async function () {
     const dataTransportBehavior = await d3.json("/data/transport_behavior.json");
     const myDoughnut2 = this.makeDonutTransportBehavior('transport_behavior_canvas', dataTransportBehavior);
 
-    
+
 
     // Create controls
 
@@ -268,7 +254,7 @@ window.onload = async function () {
         // Update icicle
         // dataKlimatutslappClone.children[0].children[3].value =
         //     antalBusresor == 0 ? 0 : dataKlimatutslapp.children[0].children[3].value / antalBusresor;
-        
+
     };
 
 };

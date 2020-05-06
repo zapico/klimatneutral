@@ -16,9 +16,9 @@ class Model {
 
         // 1. Energy mix (This connects to sliders)
 
-        this.personal_fossil = 0.4;
-        this.personal_electric = 0.1;
-        this.personal_bio = 0.5;
+        this.personal_fossil = 0.9;
+        this.personal_electric = 0.05;
+        this.personal_bio = 0.05;
 
         this.trucks_fossil = 0.9;
         this.trucks_bio = 0.1;
@@ -72,7 +72,7 @@ class Model {
         this.co2_electricity = 0;
 
 
-        // 4. Fixed emissions (at the moment) ton CO2 and energy GWh
+        // 4. Start emissions (at the moment) ton CO2 and energy GWh
         this.airplanes =  8527;
         this.industrial_vehicles = 18358;
         this.other_vehicles = 1328;
@@ -81,11 +81,11 @@ class Model {
         this.publicservices = 10227;
 
         // Add numbers afterwards
-        this.electricity = 0;
-        this.fossil_fuels = 0;
-        this.biofuels = 0;
-        this.forestfuel = 0;
-        this.electricity_nonren = 0.1;
+        this.electricity = 263.66;
+        this.fossil_fuels = 616.52;
+        this.biofuels = 204.093;
+        this.forestfuel = 1036.93;
+        this.electricity_nonren = 184.61;
 
         this.listeners = [];
 
@@ -99,14 +99,14 @@ class Model {
     update() {
         // Calculate amount of kilometers
         this.total_km_personal = (this.total_short_trips * (1-this.percentage_bike_s - this.percentage_bus_s) + this.total_medium_trips * (1 - this.percentage_bus_m - this.percentage_bike_m) + this.total_long_trips * (1-this.percentage_bus_l))*52;
-        this.total_km_bus = (this.total_short_trips * this.percentage_bus_s + this.total_medium_trips * this.percentage_bus_m + this.total_long_trips * this.percentage_bus_l) * 52;        
+        this.total_km_bus = (this.total_short_trips * this.percentage_bus_s + this.total_medium_trips * this.percentage_bus_m + this.total_long_trips * this.percentage_bus_l) * 52;
 
         // Calculate energy use
         this.transp_electricity = this.total_km_personal * this.personal_electric * this.electric_car_consumption + this.total_km_bus * this.bus_el * this.electric_bus_consumption;
-        
+
         this.transp_fossil = this.total_km_personal * this.personal_fossil * this.average_car_consumption * this.energy_carmix + this.km_truck * this.trucks_fossil * this.average_truck_consumption * this.energy_diesel + this.total_km_bus * this.bus_fossil * this.average_bus_consumption * this.energy_diesel;
         this.transp_fossil /= 1000;
-        
+
         this.transp_bio = this.total_km_bus * this.bus_bio * this.average_bus_consumption * this.energy_biogas + this.km_truck * this.trucks_bio * this.average_truck_consumption * this.energy_hvo;
         this.transp_bio /= 1000;
 
@@ -122,9 +122,9 @@ class Model {
         this.personal_fossil_co2 = this.total_km_personal * this.personal_fossil * this.average_car_consumption * this.co2_gasoline;
         this.personal_el_co2 = this.total_km_personal * this.personal_electric * this.electric_car_consumption * this.co2_electricity;
         this.personal_car_co2 = this.personal_fossil_co2 + this.personal_el_co2;
-        
-        this.bus_co2 = this.total_km_bus * this.bus_bio * this.co2_biodiesel + this.total_km_bus * this.bus_el * this.co2_electricity + this.total_km_bus;        
-        
+
+        this.bus_co2 = this.total_km_bus * this.bus_bio * this.co2_biodiesel + this.total_km_bus * this.bus_el * this.co2_electricity + this.total_km_bus;
+
         this.trucks_co2 = this.km_truck * this.co2_diesel / 1000;
 
         this.total = this.personal_car_co2 + this.trucks_co2 + this.airplanes + this.bus_co2 + this.other_vehicles + this.industrial_vehicles + this.housing + this.industry + this.publicservices;
@@ -141,7 +141,7 @@ class Model {
         const den = this.personal_bio + this.personal_fossil;
         const fossil_perc = this.personal_fossil / den;
         const bio_perc = this.personal_bio / den;
-        
+
         this.personal_electric = new_perc;
         this.personal_fossil = fossil_perc * (1 - new_perc);
         this.personal_bio = bio_perc * (1 - new_perc);
@@ -154,7 +154,7 @@ class Model {
         const den = this.personal_electric + this.personal_fossil;
         const fossil_perc = this.personal_fossil / den;
         const el_perc = this.personal_electric / den;
-        
+
         this.personal_electric = el_perc * (1 - new_perc);
         this.personal_fossil = fossil_perc * (1 - new_perc);
         this.personal_bio = new_perc;

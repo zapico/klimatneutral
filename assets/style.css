@@ -6,7 +6,7 @@ body{
 #general{
   float:left;
   width:97.5%;
-  height:auto;
+  height:500px;
   background-color: #fff;
   padding:10px;
   margin-bottom:15px;
@@ -22,11 +22,22 @@ body{
 
 #general_klimat_data{width:8%;}
 #general_klimat{ width:35%;}
-#general_energi_data{width:8%;}
-#general_energi{ width:20%;text-align:center;}
-#general_sdg{width:12%;text-align:right;}
+
+#general_energi_data{
+  width:8%;
+  height:40%;}
+#general_energi{
+  width:36%;
+  height: 40%;
+  vertical-align: middle;
+}
+#general_sdg{
+  width:46%;
+  height: 40%;
+}
 .SDG {
-  float:left;
+  display: inline-block;
+  height:75%;
 }
 
 .control_widget{
@@ -40,17 +51,18 @@ body{
 }
 
 .dot {
-  height: 25px;
-  width: 25px;
-
-  border-radius: 50%;
+  margin-top:10%;
+  height: 80%;
   display: inline-block;
+   opacity: 0.9;
+   vertical-align: middle;
 }
-#e_fossil{background-color: black;}
-#e_bio{background-color: green;}
-#e_forest{background-color: green;}
-#e_renewable{background-color: yellow;}
-#e_nonrenewable{background-color: brown;}
+.energylabel{
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Alata', sans-serif;
+  font-size:0.8em;
+}
 
 #title{
   float:left;
