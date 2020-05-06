@@ -2,6 +2,7 @@
 // TODO Break the model into sub-objects. E.g. this.personal.fossil, this.personal.electricty, ...
 // TODO Standardize the nomenclature: electricity/el/electric, ...
 // TODO Check the input of update_percentage() to avoid errors
+// TODO We could hide the properties behind a closure and only make some of them available for external modification. Something like a React component's state.
 
 
 class Model {
@@ -15,9 +16,9 @@ class Model {
 
         // 1. Energy mix (This connects to sliders)
 
-        this.personal_fossil = 0.9;
-        this.personal_electric = 0.05;
-        this.personal_bio = 0.05;
+        this.personal_fossil = 0.4;
+        this.personal_electric = 0.1;
+        this.personal_bio = 0.5;
 
         this.trucks_fossil = 0.9;
         this.trucks_bio = 0.1;
@@ -86,7 +87,13 @@ class Model {
         this.forestfuel = 0;
         this.electricity_nonren = 0.1;
 
+        this.listeners = [];
+
         this.update();
+    }
+
+    addListener(func) {
+        this.listeners.push(func);
     }
 
     update() {
@@ -123,9 +130,14 @@ class Model {
         this.total = this.personal_car_co2 + this.trucks_co2 + this.airplanes + this.bus_co2 + this.other_vehicles + this.industrial_vehicles + this.housing + this.industry + this.publicservices;
         this.saved = this.start - this.total;
 
+        for (let func of this.listeners) {
+            func();
+        }
+
     }
 
     update_personal_el(new_perc) {
+        // Jorge: discuss with the people in Växjö about how to do this exactly
         const den = this.personal_bio + this.personal_fossil;
         const fossil_perc = this.personal_fossil / den;
         const bio_perc = this.personal_bio / den;
@@ -134,7 +146,20 @@ class Model {
         this.personal_fossil = fossil_perc * (1 - new_perc);
         this.personal_bio = bio_perc * (1 - new_perc);
 
-        console.log(this.personal_fossil, this.personal_electric, this.personal_bio);
+        this.update();
+    }
+
+    update_personal_bio(new_perc) {
+        // Jorge: discuss with the people in Växjö about how to do this exactly
+        const den = this.personal_electric + this.personal_fossil;
+        const fossil_perc = this.personal_fossil / den;
+        const el_perc = this.personal_electric / den;
+        
+        this.personal_electric = el_perc * (1 - new_perc);
+        this.personal_fossil = fossil_perc * (1 - new_perc);
+        this.personal_bio = new_perc;
+
+        this.update();
     }
 
 }
