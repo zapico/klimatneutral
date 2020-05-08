@@ -6,38 +6,38 @@ body{
 #general{
   float:left;
   width:97.5%;
-  height:500px;
+  height:420px;
   background-color: #fff;
   padding:10px;
-  margin-bottom:15px;
+  margin-bottom:10px;
 }
 #general_klimat_data, #general_klimat,#general_energi_data,#general_energi,#general_sdg{
   float:left;
   height:auto;
   background-color: #fff;
-  padding:15px;
+  padding:10px;
   margin-bottom:10px;
   margin-right: 10px;
 }
 
-#general_klimat_data{width:8%;}
-#general_klimat{ width:35%;}
+#general_klimat_data{width:9%;}
+#general_klimat{ width:25%;}
 
 #general_energi_data{
   width:8%;
-  height:40%;}
+  height:42%;}
 #general_energi{
-  width:36%;
-  height: 40%;
+  width:44%;
+  height: 42%;
   vertical-align: middle;
 }
 #general_sdg{
-  width:46%;
+  width:55%;
   height: 40%;
 }
 .SDG {
   display: inline-block;
-  height:75%;
+  height:60%;
 }
 
 .control_widget{
@@ -78,10 +78,10 @@ h1,h2,h3,h4 {
 }
 
 h3 {
- font-size: 1.1em;
+ font-size: 1em;
 }
 h4 {
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 p {
   color: black;

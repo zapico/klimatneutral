@@ -11,8 +11,8 @@ class IcicleWrapper {
         this.chart = Icicle()
                 .orientation('lr')
                 .data(data)
-                .width(450)
-                .height(450)
+                .width(300)
+                .height(400)
                 .color('color')
                 (document.getElementById(id));
 
