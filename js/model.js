@@ -20,7 +20,6 @@ class Model {
         this.personal_electric = 0.044; // Inklusive hybrider, hur ska de hanteras?
         this.personal_bio = 0.08; // Gas + Etanol
 
-
         this.trucks_fossil = 0.9;
         this.trucks_bio = 0.1;
         this.trucks_hydro = 0;
@@ -38,10 +37,12 @@ class Model {
         this.total_short_trips = 525.3681011
         this.percentage_bike_s = 0.2;
         this.percentage_bus_s = 0.2;
+        this.kollektiv_s = this.percentage_bike_s + this.percentage_bus_s;
         // 5-20km
         this.total_medium_trips = 2229.860162
         this.percentage_bike_m = 0.05;
         this.percentage_bus_m = 0.1;
+        this.kollektiv_m = this.percentage_bike_m + this.percentage_bus_m;
         // >20km
         this.total_long_trips = 3980.655641;
         this.percentage_bus_l = 0.1;
@@ -172,16 +173,36 @@ class Model {
         this.update();
     }
 
+    update_behavior(antal_km_s,antal_km_m,antal_km_l,percentage_s,percentage_m,percentage_l) {
+        //Check how to update between bus and bike
+        console.log(antal_km_s);
+        console.log(percentage_s);
+        this.total_short_trips = antal_km_s;
+        this.percentage_bus_s = percentage_s;
+        this.kollektiv_s = this.percentage_bike_s + this.percentage_bus_s;
+        // 5-20km
+        this.total_medium_trips = antal_km_m;
+        this.percentage_bus_m = percentage_m;
+        this.kollektiv_m = this.percentage_bike_m + this.percentage_bus_m;
+        // >20km
+        this.total_long_trips = antal_km_l;
+        this.percentage_bus_l = percentage_l;
+
+        this.update();
+    }
+    update_population(new_pop){
+      this.population = new_pop;
+      this.update();
+    }
 }
+
+
 
 // Misc. notes:
 // ---
 // total_km -> total_km_personal
 // bus_consumption -> average_bus_consumption
-// co2_fossil -> co2_gasoline
-// trucks_co2 / 1000 (it was too large, nothing else is visible in the icicle)
+//
 // the values for dataEnergi don't look right
 // I am a bit confused about bränslemix, not sure what to show.
-// transp_fossil and transp_bio divided by 1000 to be able to see anything, but not sure if correct.
-// The slider for bränslemix defines percentage, not raw numbers. Is that right?
 // I noticed that transp_bio does not use personal_bio percentage... is that right?

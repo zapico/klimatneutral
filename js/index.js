@@ -189,13 +189,29 @@ window.onload = async function () {
 
     // Create controls
 
-    $("#slider_bus").slider({
+    $("#slider_korta").slider({
         orientation: "horizontal",
         min: 1,
-        max: 100,
-        value: 50,
-        slide: refreshBussar,
-        change: refreshBussar
+        max: 5000,
+        value: model.total_short_trips,
+        slide: refreshBehavior,
+        change: refreshBehavior
+    });
+    $("#slider_mellan").slider({
+        orientation: "horizontal",
+        min: 1,
+        max:5000,
+        value: model.total_medium_trips,
+        slide: refreshBehavior,
+        change: refreshBehavior
+    });
+    $("#slider_langa").slider({
+        orientation: "horizontal",
+        min: 1,
+        max: 5000,
+        value: model.total_long_trips,
+        slide: refreshBehavior,
+        change: refreshBehavior
     });
 
     $("#slider_bio").slider({
@@ -203,58 +219,64 @@ window.onload = async function () {
         range: "min",
         max: 100,
         value: 2,
-        slide: refreshBussar,
-        change: refreshBussar
+        slide: refreshBehavior,
+        change: refreshBehavior
     });
 
     $("#slider_kollektiv1").slider({
         orientation: "horizontal",
         range: "min",
         max: 100,
-        value: 42,
-        slide: refreshBussar,
-        change: refreshBussar
+        value: model.kollektiv_s*100,
+        slide: refreshBehavior,
+        change: refreshBehavior
     });
     $("#slider_kollektiv2").slider({
         orientation: "horizontal",
         range: "min",
         max: 100,
-        value: 26,
-        slide: refreshBussar,
-        change: refreshBussar
+        value: model.kollektiv_m*100,
+        slide: refreshBehavior,
+        change: refreshBehavior
     });
     $("#slider_kollektiv3").slider({
         orientation: "horizontal",
         range: "min",
         max: 100,
-        value: 5,
-        slide: refreshBussar,
-        change: refreshBussar
+        value: model.percentage_bus_l*100,
+        slide: refreshBehavior,
+        change: refreshBehavior
     });
 
 
     $("#slider_befolkning").slider({
         orientation: "horizontal",
         range: "min",
-        max: 1500004,
+        max: 150004,
         value: 91060,
-        slide: refreshBussar,
-        change: refreshBussar
+        slide: refreshBefolkning,
+        change: refreshBefolkning
     });
 
     // Setup events
 
-    function refreshBussar() {
-        var antalBusresor = $("#slider_bus").slider("value");
+    function refreshBehavior() {
+          // Update values
+          var antal_km_s = $("#slider_korta").slider("value");
+          var antal_km_m = $("#slider_mellan").slider("value");
+          var antal_km_l = $("#slider_langa").slider("value");
 
-        // Update donuts
-        dataTransport[0] = (223.391 + 282.607) / 70 * 100 - antalBusresor;
-        myDoughnut.update();
+          var percentage_s =  $("#slider_kollektiv1").slider("value")/100;
+          var percentage_m =  $("#slider_kollektiv2").slider("value")/100;
+          var percentage_l =  $("#slider_kollektiv3").slider("value")/100;
 
-        // Update icicle
-        // dataKlimatutslappClone.children[0].children[3].value =
-        //     antalBusresor == 0 ? 0 : dataKlimatutslapp.children[0].children[3].value / antalBusresor;
+          model.update_behavior(antal_km_s,antal_km_m,antal_km_l,percentage_s,percentage_m,percentage_l);
+
+          // Update donut
 
     };
-
+    function refreshBefolkning() {
+          var new_pop = $("#slider_befolkning").slider("value");
+          model.update_population(new_pop);
+    }
 };
