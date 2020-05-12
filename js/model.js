@@ -13,6 +13,7 @@ class Model {
         // Population at the moment does not affect things but it should.
         this.population = 92567;
         this.start = 173476;
+        this.saved = 0;
 
         // 1. Energy mix (This connects to sliders)
         // Taken from 2020 prognos
@@ -80,12 +81,14 @@ class Model {
 
 
         // 4. Start emissions (at the moment) ton CO2 and energy GWh
-        this.airplanes =  8527;
-        this.industrial_vehicles = 18358;
-        this.other_vehicles = 1328;
-        this.housing = 13956;
-        this.industry = 5809;
-        this.publicservices = 10227;
+        this.airplanes = 8527.0;
+        this.industrial_vehicles = 18358.0;
+        this.other_vehicles = 1328.0;
+        this.housing = 13956.0;
+        this.industry = 5809.0;
+        this.publicservices = 10227.0;
+        // Total fixed emissions at the moment
+        this.fixed = this.airplanes + this.industrial_vehicles + this.other_vehicles + this.housing + this.industry + this.publicservices;
 
         // Add numbers afterwards
         this.electricity = 263.66;
@@ -132,14 +135,16 @@ class Model {
         this.personal_car_co2 += this.total_km_personal * this.personal_bio * this.average_car_consumption_bio * this.co2_biodiesel;
         this.personal_car_co2 += this.total_km_personal * this.personal_electric * this.electric_car_consumption * this.co2_electricity;
 
-        this.bus_co2 = this.total_km_bus * this.bus_consumption * this.bus_bio * this.co2_biodiesel;
+        this.bus_co2 = this.total_km_bus * this.average_bus_consumption * this.bus_bio * this.co2_biodiesel;
         this.bus_co2 += this.total_km_bus * this.electric_bus_consumption * this.bus_el * this.co2_electricity;
-        this.bus_co2 += this.total_km_bus * this.bus_consumption * this.bus_fossil * this.co2_diesel;
+        this.bus_co2 += this.total_km_bus * this.average_bus_consumption * this.bus_fossil * this.co2_diesel;
 
         this.trucks_co2 = this.km_truck * this.average_truck_consumption * this.co2_diesel;
 
-        this.total = this.personal_car_co2 + this.trucks_co2 + this.airplanes + this.bus_co2 + this.other_vehicles + this.industrial_vehicles + this.housing + this.industry + this.publicservices;
-        this.saved = this.start - this.total;
+        this.total = this.personal_car_co2 + this.trucks_co2+ this.bus_co2;
+        this.saved =  this.start - this.total - this.fixed;
+
+
 
         for (let func of this.listeners) {
             func();
@@ -192,6 +197,11 @@ class Model {
     }
     update_population(new_pop){
       this.population = new_pop;
+      this.update();
+    }
+    update_trucks(new_bio,new_hydro){
+      this.trucks_bio = new_bio;
+      this.trucks_hydro = new_hydro;
       this.update();
     }
 }

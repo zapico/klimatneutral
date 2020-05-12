@@ -32,9 +32,6 @@ function makeDonutTransport(id, model) {
         },
         options: {
             responsive: true,
-            legend: {
-                position: 'bottom',
-            },
             title: {
                 display: false,
                 text: 'Chart.js Doughnut Chart'
@@ -45,9 +42,7 @@ function makeDonutTransport(id, model) {
             }
         }
     };
-
     const myDoughnut = new Chart(ctx, config);
-
     $("#slider_pers_el").slider({
         orientation: "horizontal",
         min: 0.05,
@@ -99,8 +94,78 @@ function makeDonutTransport(id, model) {
             $("#slider_pers_el").slider("value", model.personal_electric);
         }
     };
-
 }
+
+function makeDonutTrucks(id, model) {
+        const data = [
+            model.trucks_fossil,
+            model.trucks_hydro,
+            model.trucks_bio
+        ];
+
+        const ctx = document.getElementById(id).getContext('2d');
+        const config = {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: data,
+                    backgroundColor: [
+                        "#4C4744",
+                        window.chartColors.orange,
+                        window.chartColors.yellow,
+                        "#91BB11"
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: [
+                    'Fossil',
+                    'Väte',
+                    'Bio'
+                ]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: false,
+                    text: 'Chart.js Doughnut Chart'
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        };
+
+        const myDoughnut_trucks = new Chart(ctx, config);
+        $("#slider_truck_bio").slider({
+            orientation: "horizontal",
+            range: 1,
+            max: 100,
+            value: model.trucks_bio*100,
+            slide: refreshTrucks,
+            change: refreshTrucks
+        });
+
+        $("#slider_hydrogen").slider({
+            orientation: "horizontal",
+            range: 1,
+            max: 100,
+            value: model.trucks_hydro*100,
+            slide: refreshTrucks,
+            change: refreshTrucks
+        });
+
+        function refreshTrucks(){
+          var new_bio = $("#slider_truck_bio").slider("value")/100;
+          var new_hydro = $("#slider_hydrogen").slider("value")/100;
+          model.update_trucks(new_bio,new_hydro);
+        }
+}
+
+
 
 function makeDonutTransportBehavior(id, data) {
     var ctx = document.getElementById(id).getContext('2d');
@@ -180,7 +245,7 @@ window.onload = async function () {
 
     // Simply calling the closure will take care of everything
     makeDonutTransport('transport_energy_canvas', model);
-
+    makeDonutTrucks('heavytransport_energy_canvas',model);
     // Load the data from the server, assynchronously
     const dataTransportBehavior = await d3.json("/data/transport_behavior.json");
     const myDoughnut2 = this.makeDonutTransportBehavior('transport_behavior_canvas', dataTransportBehavior);
@@ -214,15 +279,6 @@ window.onload = async function () {
         change: refreshBehavior
     });
 
-    $("#slider_bio").slider({
-        orientation: "horizontal",
-        range: "min",
-        max: 100,
-        value: 2,
-        slide: refreshBehavior,
-        change: refreshBehavior
-    });
-
     $("#slider_kollektiv1").slider({
         orientation: "horizontal",
         range: "min",
@@ -248,7 +304,6 @@ window.onload = async function () {
         change: refreshBehavior
     });
 
-
     $("#slider_befolkning").slider({
         orientation: "horizontal",
         range: "min",
@@ -271,12 +326,16 @@ window.onload = async function () {
           var percentage_l =  $("#slider_kollektiv3").slider("value")/100;
 
           model.update_behavior(antal_km_s,antal_km_m,antal_km_l,percentage_s,percentage_m,percentage_l);
-
-          // Update donut
+          makeCircles(model);
 
     };
     function refreshBefolkning() {
           var new_pop = $("#slider_befolkning").slider("value");
           model.update_population(new_pop);
-    }
+    };
+
+
+
+
+
 };
