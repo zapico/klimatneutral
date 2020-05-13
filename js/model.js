@@ -78,7 +78,7 @@ class Model {
 
         // ton CO2 / GWh update from 0 to energy mix including imported
         this.co2_electricity = 0;
-
+        this.co2_electricity_imported = 6.25:
 
         // 4. Start emissions (at the moment) ton CO2 and energy GWh
         this.airplanes = 8527.0;
@@ -91,11 +91,16 @@ class Model {
         this.fixed = this.airplanes + this.industrial_vehicles + this.other_vehicles + this.housing + this.industry + this.publicservices;
 
         // Add numbers afterwards
-        this.electricity = 263.66;
+        this.electricity_veab = 223.722; //GWh
+        this.electricity_solar = 3.398; //GWh
+        this.electricity_other_renewables = 9.146; //Wind, water, biogas?
+        this.electricity_imported = 435.093; //GWh
+        this.electricit_imported_percentage = 0.5; //Percentage of el renewable, doublecheck
+        this.electricity = this.electricity_veab+this.electricity_solar+this.electricity_other_renewables+this.electricity_imported;
         this.fossil_fuels = 616.52;
         this.biofuels = 204.093;
         this.forestfuel = 1036.93;
-        this.electricity_nonren = 184.61;
+        this.electricity_nonren = this.electricity_imported * this.electricit_imported_percentage;
 
         this.listeners = [];
 
