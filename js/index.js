@@ -165,6 +165,67 @@ function makeDonutTrucks(id, model) {
         }
 }
 
+function makeDonutEl(id, model) {
+        const data = [
+            model.electricity_veab,
+            model.electricity_solar,
+            model.electricity_other_renewables,
+            model.electricity_imported
+        ];
+
+        const ctx = document.getElementById(id).getContext('2d');
+        const config = {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: data,
+                    backgroundColor: [
+                        "#4C4744",
+                        window.chartColors.orange,
+                        window.chartColors.yellow,
+                        "#91BB11"
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: [
+                    'VEAB',
+                    'Solar',
+                    'Renewables',
+                    'Imported'
+                ]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: false,
+                    text: 'Chart.js Doughnut Chart'
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        };
+
+        const myDoughnut_el = new Chart(ctx, config);
+        $("#slider_el").slider({
+            orientation: "horizontal",
+            range: 1,
+            max: 100,
+            value: model.electricity_imported_percentage*100,
+            slide: refreshEl,
+            change: refreshEl
+        });
+
+
+        function refreshEl(){
+          var new_perc = $("#slider_el").slider("value")/100;
+          model.update_trucks(new_perc);
+        }
+}
 
 
 function makeDonutTransportBehavior(id, data) {
@@ -246,6 +307,7 @@ window.onload = async function () {
     // Simply calling the closure will take care of everything
     makeDonutTransport('transport_energy_canvas', model);
     makeDonutTrucks('heavytransport_energy_canvas',model);
+    makeDonutEl('electricity_canvas',model);
     // Load the data from the server, assynchronously
     const dataTransportBehavior = await d3.json("/data/transport_behavior.json");
     const myDoughnut2 = this.makeDonutTransportBehavior('transport_behavior_canvas', dataTransportBehavior);
