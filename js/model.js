@@ -63,11 +63,11 @@ class Model {
         this.electric_bus_consumption = 0.050; //check
 
         // GWh per m3 from https://www.miljofordon.se/bilar/miljoepaaverkan/
-        this.energy_carmix = (0.471*9.800) + (0.529*9.100); //Mix 47.1% Diesel 52.9%Bensin
-        this.energy_diesel = 9.800;
-        this.energy_hvo = 9.440;
-        this.energy_hydrogen = 2.3; //check
-        this.energy_biogas = 9.4; //check
+        this.energy_carmix = ((0.471*9.800) + (0.529*9.100))/1000; //Mix 47.1% Diesel 52.9%Bensin
+        this.energy_diesel = 0.009800;
+        this.energy_hvo = 0.009440;
+        this.energy_hydrogen = 0.0023; //check
+        this.energy_biogas = 0.0094; //check
 
         // ton CO2 per 1000 liter (1m3)
         // Not LCA emissions -> How to deal with this? https://www.miljofordon.se/bilar/miljoepaaverkan/
@@ -114,30 +114,30 @@ class Model {
     }
 
     update() {
-        // Calculate amount of kilometers
+        //A. Calculate amount of kilometers
+
         this.total_km_personal = (this.total_short_trips * (1-this.percentage_bike_s - this.percentage_bus_s) + this.total_medium_trips * (1 - this.percentage_bus_m - this.percentage_bike_m) + this.total_long_trips * (1-this.percentage_bus_l))*this.population;
         this.total_km_bus = (this.total_short_trips * this.percentage_bus_s + this.total_medium_trips * this.percentage_bus_m + this.total_long_trips * this.percentage_bus_l)
         this.total_km_bus *= this.population;
 
-        // Calculate energy use
+        //B. Calculate energy use
+        // Electricity
         this.transp_electricity = this.total_km_personal * this.personal_electric * this.electric_car_consumption + this.total_km_bus * this.bus_el * this.electric_bus_consumption;
-        this.transp_electricity *= this.population;
 
-        this.transp_fossil = this.total_km_personal * this.personal_fossil * this.average_car_consumption * this.energy_carmix + this.km_truck * this.trucks_fossil * this.average_truck_consumption * this.energy_diesel + this.total_km_bus * this.bus_fossil * this.average_bus_consumption * this.energy_diesel;
-        this.transp_fossil *= this.population;
+        // Fossil fuels:
+        this.transp_fossil = this.total_km_personal * this.personal_fossil * this.average_car_consumption * this.energy_carmix + this.total_km_bus * this.bus_fossil * this.average_bus_consumption * this.energy_diesel;
+        this.transp_fossil += this.km_truck * this.trucks_fossil * this.average_truck_consumption * this.energy_diesel;
+        this.fossil_transportation = this.transp_fossil;
+        this.fossil_fuels = this.fossil_transportation + this.fossil_other;
 
-        this.transp_bio = this.total_km_bus * this.bus_bio * this.average_bus_consumption * this.energy_biogas + this.km_truck * this.trucks_bio * this.average_truck_consumption * this.energy_hvo;
-        this.transp_bio *= this.population;
+        // Bioenergy
+        this.transp_bio = this.total_km_personal * this.personal_bio * this.average_car_consumption * this.energy_hvo;
+        this.transp_bio += this.total_km_bus * this.bus_bio * this.average_bus_consumption * this.energy_biogas + this.km_truck * this.trucks_bio * this.average_truck_consumption * this.energy_hvo;
+        this.transp_bio += this.km_truck * this.trucks_bio* this.average_truck_consumption * this.energy_hvo;
+        console.log(this.transp_bio);
+        this.biofuels = this.transp_bio;
 
-        this.dataEnergi = [
-            this.fossil_fuels + this.transp_fossil,
-            (this.electricity + this.transp_electricity)*this.electricity_nonren,
-            this.forestfuel,
-            (this.electricity + this.transp_electricity)*(1-this.electricity_nonren),
-            this.biofuels + this.transp_bio
-        ];
-
-        // Calculate CO2 emissions
+        //C. Calculate CO2 emissions
         this.personal_car_co2 = this.total_km_personal * this.personal_fossil * this.average_car_consumption * this.co2_carmix;
         this.personal_car_co2 += this.total_km_personal * this.personal_bio * this.average_car_consumption_bio * this.co2_biodiesel;
         this.personal_car_co2 += this.total_km_personal * this.personal_electric * this.electric_car_consumption * this.co2_electricity;
@@ -150,7 +150,6 @@ class Model {
 
         this.total = this.personal_car_co2 + this.trucks_co2+ this.bus_co2;
         this.saved =  this.start - this.total - this.fixed;
-
 
 
         for (let func of this.listeners) {

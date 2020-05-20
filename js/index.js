@@ -223,10 +223,9 @@ function makeDonutEl(id, model) {
 
         function refreshEl(){
           var new_perc = $("#slider_el").slider("value")/100;
-          model.update_trucks(new_perc);
+          model.update_el(new_perc);
         }
 }
-
 
 function makeDonutTransportBehavior(id, data) {
     var ctx = document.getElementById(id).getContext('2d');
