@@ -90,14 +90,16 @@ class Model {
         // Total fixed emissions at the moment
         this.fixed = this.airplanes + this.industrial_vehicles + this.other_vehicles + this.housing + this.industry + this.publicservices;
 
-        // Add numbers afterwards
+        // Start energy in GWh
         this.electricity_veab = 223.722; //GWh
         this.electricity_solar = 3.398; //GWh
         this.electricity_other_renewables = 9.146; //Wind, water, biogas?
         this.electricity_imported = 435.093; //GWh
-        this.electricit_imported_percentage = 0.5; //Percentage of el renewable, doublecheck
+        this.electricity_imported_percentage = 0.5; //Percentage of el renewable, doublecheck
         this.electricity = this.electricity_veab+this.electricity_solar+this.electricity_other_renewables+this.electricity_imported;
-        this.fossil_fuels = 616.52;
+        this.fossil_transportation = 610.0;
+        this.fossil_other = 6.52;
+        this.fossil_fuels = this.fossil_transportation + this.fossil_other;
         this.biofuels = 204.093;
         this.forestfuel = 1036.93;
         this.electricity_nonren = this.electricity_imported * this.electricit_imported_percentage;
@@ -208,6 +210,10 @@ class Model {
     update_trucks(new_bio,new_hydro){
       this.trucks_bio = new_bio;
       this.trucks_hydro = new_hydro;
+      this.update();
+    }
+    update_el(new_perc){
+      this.electricity_imported_percentage = new_perc;
       this.update();
     }
 }
