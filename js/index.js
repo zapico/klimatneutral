@@ -1,5 +1,3 @@
-
-// TODO Put the Icicle in a class, too. Include the methods for generating the data and updating the graph. Keep a saved reference of the model after the constructor.
 // TODO Separate the colors into an easier-to-change colormap: name -> color
 
 
