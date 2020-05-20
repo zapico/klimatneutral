@@ -78,7 +78,7 @@ class Model {
 
         // ton CO2 / GWh update from 0 to energy mix including imported
         this.co2_electricity = 0;
-        this.co2_electricity_imported = 6.25:
+        this.co2_electricity_imported = 6.25;
 
         // 4. Start emissions (at the moment) ton CO2 and energy GWh
         this.airplanes = 8527.0;
@@ -134,6 +134,7 @@ class Model {
             (this.electricity + this.transp_electricity)*(1-this.electricity_nonren),
             this.biofuels + this.transp_bio
         ];
+        this.fossil_fuels += 100;
 
         // Calculate CO2 emissions
         this.personal_car_co2 = this.total_km_personal * this.personal_fossil * this.average_car_consumption * this.co2_carmix;
