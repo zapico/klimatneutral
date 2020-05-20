@@ -14,6 +14,7 @@ class Model {
         this.population = 92567;
         this.start = 173476;
         this.saved = 0;
+        this.percentage_co2 = 0;
 
         // 1. Energy mix (This connects to sliders)
         // Taken from 2020 prognos
@@ -148,8 +149,13 @@ class Model {
 
         this.trucks_co2 = this.km_truck * this.average_truck_consumption * this.co2_diesel;
 
-        this.total = this.personal_car_co2 + this.trucks_co2+ this.bus_co2;
-        this.saved =  this.start - this.total - this.fixed;
+        this.total = this.personal_car_co2 + this.trucks_co2+ this.bus_co2 +this.fixed;
+        this.saved =  this.start - this.total;
+        this.percentage_co2 = (this.saved*100)/this.start;
+
+        if (this.saved < 0){
+          this.saved = 0;
+        }
 
         for (let func of this.listeners) {
             func();

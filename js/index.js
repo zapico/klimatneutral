@@ -441,6 +441,11 @@ window.onload = async function () {
     };
 
 
+    function updatePercentages(){
+      document.getElementById("percentage_co2").innerHTML = model.percentage_co2;
+    }
+    model.addListener(update);
+
 
 
 
