@@ -143,7 +143,7 @@ function makeDonutTrucks(id, model) {
         $("#slider_truck_bio").slider({
             orientation: "horizontal",
             range: 1,
-            max: 100,
+            max: 90,
             value: model.trucks_bio*100,
             slide: refreshTrucks,
             change: refreshTrucks
@@ -152,16 +152,16 @@ function makeDonutTrucks(id, model) {
         $("#slider_hydrogen").slider({
             orientation: "horizontal",
             range: 1,
-            max: 100,
+            max: 90,
             value: model.trucks_hydro*100,
             slide: refreshTrucks,
             change: refreshTrucks
         });
 
-        function refreshTrucks(){
-          var new_bio = $("#slider_truck_bio").slider("value")/100;
-          var new_hydro = $("#slider_hydrogen").slider("value")/100;
-          model.update_trucks(new_bio,new_hydro);
+        function refreshTrucks(e) {
+              var new_bio = $("#slider_truck_bio").slider("value")/100;
+              var new_hydro = $("#slider_hydrogen").slider("value")/100;
+              model.update_trucks(new_bio,new_hydro);
         }
 
         model.addListener(function() {
@@ -235,8 +235,21 @@ function makeDonutEl(id, model) {
 
         function refreshEl(){
           var new_perc = $("#slider_el").slider("value")/100;
-          model.update_trucks(new_perc);
+          model.update_el(new_perc);
         }
+        
+        model.addListener(function() {
+            const data = [
+                model.electricity_veab,
+                model.electricity_solar,
+                model.electricity_other_renewables,
+                model.electricity_imported
+            ];
+            for (let i = 0; i < data.length; ++i) {
+                myDoughnut_el.data.datasets[0].data[i] = data[i];
+            }            
+            myDoughnut_el.update();
+        })
 }
 
 
