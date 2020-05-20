@@ -102,7 +102,7 @@ class Model {
         this.fossil_fuels = this.fossil_transportation + this.fossil_other;
         this.biofuels = 204.093;
         this.forestfuel = 1036.93;
-        this.electricity_nonren = this.electricity_imported * this.electricit_imported_percentage;
+        this.electricity_nonren = this.electricity_imported * this.electricity_imported_percentage;
 
         this.listeners = [];
 
@@ -150,7 +150,6 @@ class Model {
 
         this.total = this.personal_car_co2 + this.trucks_co2+ this.bus_co2;
         this.saved =  this.start - this.total - this.fixed;
-
 
         for (let func of this.listeners) {
             func();
