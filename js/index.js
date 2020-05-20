@@ -277,35 +277,49 @@ function makeDonutTransportBehavior(id, data) {
 }
 
 // Funtion to create circles representing energy use
-function makeCircles(model){
-
+function makeCircles(model) {
+    
+    const data = [
+        {
+            id: "e_bio",
+            label: "Bioenergi",
+            modelAttr: "biofuels",
+            color: "#4DA167"
+        },
+        {
+            id: "e_forest",
+            label: "Trädbränsle",
+            modelAttr: "forestfuel",
+            color: "#12664F"
+        },
+        {
+            id: "e_renewable",
+            label: "Förnybar el",
+            modelAttr: "electricity",
+            color: "#BAB700"
+        },
+        {
+            id: "e_nonrenewable",
+            label: "Annat el",
+            modelAttr: "electricity_nonren",
+            color: "#77878B"
+        },
+        {
+            id: "e_fossil",
+            label: "Fossil",
+            modelAttr: "fossil_fuels",
+            color: "#4D5057"
+        },
+    ];
+    
+    const max_size = 200000;
+    
     function update() {
-        max_size = 200000;
-
-        // Calculate radium
-        circle_bio = Math.round(Math.sqrt(max_size * (model.biofuels / 3600) / 3.1416));
-        margin_bio = (100 - circle_bio) / 2;
-
-        circle_forest = Math.round(Math.sqrt(max_size * (model.forestfuel / 3600) / 3.1416));
-        margin_forest = (100 - circle_forest) / 2;
-
-        circle_renewable = Math.round(Math.sqrt(max_size * (model.electricity / 3600) / 3.1416));
-        margin_renewable = (100 - circle_renewable) / 2;
-
-        circle_non = Math.round(Math.sqrt(max_size * (model.electricity_nonren / 3600) / 3.1416));
-        margin_non = (100 - circle_non) / 2;
-
-        circle_fossil = Math.round(Math.sqrt(max_size * (model.fossil_fuels / 3600) / 3.1416));
-        margin_fossil = (100 - circle_fossil) / 2;
-
-        // Update
-        
-        document.getElementById("e_bio").innerHTML = '<div style="width:' + circle_bio + 'px; height:' + circle_bio + 'px;margin-left:' + margin_bio + 'px;margin-top:' + margin_bio + 'px; background:#4DA167; border-radius:400px; -moz-border-radius:400px;"></div><div class="energylabel">Bioenergi</div>';
-        document.getElementById("e_forest").innerHTML = '<div style="width:' + circle_forest + 'px; height:' + circle_forest + 'px;margin-left:' + margin_forest + 'px;margin-top:' + margin_forest + 'px; background:#12664F; border-radius:400px; -moz-border-radius:400px;"></div><div class="energylabel">Trädbränsle</div>';
-        document.getElementById("e_renewable").innerHTML = '<div style="width:' + circle_renewable + 'px; height:' + circle_renewable + 'px;margin-left:' + margin_renewable + 'px;margin-top:' + margin_renewable + 'px; background:#BAB700; border-radius:400px; -moz-border-radius:400px;"></div></div><div class="energylabel">Förnybar el</div>';
-        document.getElementById("e_nonrenewable").innerHTML = '<div style="width:' + circle_non + 'px; height:' + circle_non + 'px;margin-left:' + margin_non + 'px;margin-top:' + margin_non + 'px; background:#77878B; border-radius:400px; -moz-border-radius:400px;"></div></div><div class="energylabel">Annat el</div>';
-        document.getElementById("e_fossil").innerHTML = '<div style="width:' + circle_fossil + 'px; height:' + circle_fossil + 'px;margin-left:' + margin_fossil + 'px;margin-top:' + margin_fossil + 'px; background:#4D5057; border-radius:400px; -moz-border-radius:400px;"></div></div><div class="energylabel">Fossil</div>';
-
+        data.forEach(d => {
+            const circle = Math.round(Math.sqrt(max_size * (model[d.modelAttr] / 3600) / 3.1416));
+            const margin = (100 - circle) / 2;
+            document.getElementById(d.id).innerHTML = '<div style="width:' + circle + 'px; height:' + circle + 'px;margin-left:' + margin + 'px;margin-top:' + margin + 'px; background:' + d.color + '; border-radius:400px; -moz-border-radius:400px;"></div><div class="energylabel">' + d.label + '</div>';            
+        });
     }
 
     model.addListener(update);
