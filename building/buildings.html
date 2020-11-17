@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/assets/style_building.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata&display=swap">
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="//unpkg.com/icicle-chart"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	  <script src="	https://www.chartjs.org/samples/latest/utils.js"></script>
+
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+	<!-- Always the last one to be imported: -->
+	<script src="js/index.js"></script>
+	<title>Klimatkollen</title>
+
+</head>
+
+<body>
+
+	<header>
+    <div id="logo">
+      <img src="/assets/logo.svg" alt="VXJ" width='100px'/>
+			<h1>Klimatkollen</h1>
+    </logo>
+		<nav>
+			</nav>
+	</header>
+  <div id="left">
+	<div id="accordion">
+
+	<h2>STORLEK</h2>
+	<div id="storlek">
+		<p>Höjd</p>
+		<div id="slider_hj"></div>
+		<p>Planta</p>
+		<div id="slider_m2"></div>
+		<p>Våningar</p>
+		<div id="slider_vng"></div>
+	</div>
+
+	<h2>GRUND OCH STOMME</h2>
+	<div id="grund">
+		<p>GRUND</p>
+		<p>STOMME</p>
+	</div>
+
+	<h2>VÄGGAR OCH INREDNING</h2>
+	<div id="insidan">
+
+	</div>
+
+	<h2>FASAD</h2>
+	<div id="fasad">
+
+			<fieldset>
+				<p>MATERIAL</p>
+    		<label for="radio-1">Trä</label>
+    		<input type="radio" name="radio-" id="radio-1">
+	    	<label for="radio-2">Puts</label>
+	    	<input type="radio" name="radio-1" id="radio-2">
+    		<label for="radio-3">Kompositpanel</label>
+    		<input type="radio" name="radio-1" id="radio-3">
+  		</fieldset>
+
+	</div>
+
+	<h2>TAK</h2>
+	<div id="tak">
+
+		<p>AREA: xxxx m2</p>
+		<p>VINKEL</p>
+		<div id="slider_takvinkel"></div>
+		<fieldset>
+			<p>MATERIAL</p>
+			<label for="radio-plat">PLÅT</label>
+			<input type="radio" name="radio-tak" id="radio-plat">
+			<label for="radio-tegel">TEGEL</label>
+			<input type="radio" name="radio-tak" id="radio-tegel">
+			<label for="radio-betong">BETONGPANNOR</label>
+			<input type="radio" name="radio-tak" id="radio-betong">
+		</fieldset>
+	</div>
+
+	<h2>ENERGY</h2>
+	<div id="energi">
+		<p>Solceller<p/>
+	</div>
+
+	<h2>LANDSKAP</h2>
+	<div id="landskap">
+
+	</div>
+</div>
+</div>
+
+<div id="right">
+			<canvas id="chart-area"></canvas>
+</div>
+
+
+	<footer>
+		<p></p>
+	</footer>
+
+</body>
+
+</html>

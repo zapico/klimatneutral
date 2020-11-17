@@ -1,56 +1,26 @@
 /* Structure */
 body{
   padding:25px;
-  background-color: #eee;
+  background-color: #f8f8f8;
 }
-#config{
+#left{
   float:left;
   width:40%;
   height:auto;
-  background-color: #fff;
+}
+#right{
+  float:right;
+  width:55%;
+  background-color: #fefefe;
+  height:auto;
+}
+.column_left{
+  height:auto;
+  background-color: #fefefe;
   padding:25px;
   margin-bottom:25px;
 }
-#energi{
-  float:left;
-  width:40%;
-  height:auto;
-  background-color: #fff;
-  padding:25px;
-  margin-bottom:25px;
-}
-#calculation{
-  float:right;
-  width:50%;
-  height:auto;
-  background-color: #fff;
-    padding:25px;
-  margin-bottom:25px;
-}
-#transport_energy{
-  float:left;
-  width:45%;
-  height:auto;
-  background-color: #fff;
-    padding:15px;
-    margin-bottom:25px;
-}
-#transport_behavior{
-  float:left;
-  width:45%;
-  height:auto;
-  background-color: #fff;
-    padding:15px;
-    margin-bottom:25px;
-}
-#jordbruk, #konsumtion, #el, #offentlig {
-  float:right;
-  width:50%;
-  height:auto;
-  background-color: #fff;
-    padding:25px;
-  margin-bottom:25px;
-}
+
 
 /* Type */
 h1,h2,h3 {
