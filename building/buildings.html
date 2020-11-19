@@ -37,23 +37,69 @@
 
 	<h2>STORLEK</h2>
 	<div id="storlek">
-		<p>Höjd</p>
-		<div id="slider_hj"></div>
-		<p>Planta</p>
+		<p>Planyta</p>
 		<div id="slider_m2"></div>
-		<p>Våningar</p>
+		<p>Antal våningar</p>
 		<div id="slider_vng"></div>
+		<p>Höjd per våning</p>
+		<div id="slider_hj"></div>
 	</div>
 
-	<h2>GRUND OCH STOMME</h2>
+	<h2>GRUND</h2>
 	<div id="grund">
-		<p>GRUND</p>
-		<p>STOMME</p>
+		<p>SCHACK <p/>
+		<p>SPRÄNGNING <p/>
+		<p>TEKNIK</p>
+		<fieldset>
+	<label for="grund-kallare">KÄLLARE</label>
+		<input type="radio" name="radio-grund" id="grund-kallare">
+		<label for="grund-plint">PLINTAR</label>
+		<input type="radio" name="radio-grund" id="grund-plint">
+		<label for="grund-betong">BETONGPLATTA</label>
+		<input type="radio" name="radio-grund" id="grund-betong">
+	</fieldset>
+	</div>
+
+	<h2>STOMME</h2>
+	<div id="stomme" >
+		<p>MATERIAL</p>
+		<fieldset>
+		<label for="stomme-stal">STÅL</label>
+		<input type="radio" name="radio_stomme" id="stomme-stal">
+		<label for="stomme-limtra">LIMTRÄ</label>
+		<input type="radio" name="radio_stomme" id="stomme-limtra">
+		<label for="stomme-betong">ARMERAD BETONG</label>
+		<input type="radio" name="radio_stomme" id="stomme-betong">
+	</fieldset>
+	</div>
+
+	<h2>ISOLERING</h2>
+	<div id="isolering">
+		<p>TJOKLECK</p>
+		<div id="slider_isolering"></div>
+		<p>MATERIAL</p>
+		<fieldset>
+		<label for="isolering-mineral">MINERALFIBER</label>
+		<input type="radio" name="radio_isolering" id="isolering-mineral">
+		<label for="isolering-trafiber">TRAFIBER</label>
+		<input type="radio" name="radio_isolering" id="isolering-trafiber">
+		<label for="isolering-skum">SKUM</label>
+		<input type="radio" name="radio_isolering" id="isolering-skum">
+		</fieldset>
+
 	</div>
 
 	<h2>VÄGGAR OCH INREDNING</h2>
 	<div id="insidan">
-
+		<fieldset>
+			<p>MATERIAL</p>
+			<label for="isolering-mineral">GIPS</label>
+			<input type="radio" name="radio_isolering" id="isolering-mineral">
+			<label for="isolering-trafiber">TRÄPANEL</label>
+			<input type="radio" name="radio_isolering" id="isolering-trafiber">
+			<label for="isolering-skum">SKUM</label>
+			<input type="radio" name="radio_isolering" id="isolering-skum">
+		</fieldset>
 	</div>
 
 	<h2>FASAD</h2>
@@ -73,8 +119,6 @@
 
 	<h2>TAK</h2>
 	<div id="tak">
-
-		<p>AREA: xxxx m2</p>
 		<p>VINKEL</p>
 		<div id="slider_takvinkel"></div>
 		<fieldset>
@@ -85,23 +129,45 @@
 			<input type="radio" name="radio-tak" id="radio-tegel">
 			<label for="radio-betong">BETONGPANNOR</label>
 			<input type="radio" name="radio-tak" id="radio-betong">
+			<label for="radio-sedum">SEDUM / GRÖNTAK</label>
+			<input type="radio" name="radio-tak" id="radio-sedum">
 		</fieldset>
 	</div>
 
 	<h2>ENERGY</h2>
 	<div id="energi">
 		<p>Solceller<p/>
+		<fieldset>
+				<p>UPPVÄRMNING</p>
+				<label for="radio-district">FJÄRVÄRME</label>
+				<input type="radio" name="radio-heat" id="radio-district">
+				<label for="radio-pump">VÄRMEPUMP</label>
+				<input type="radio" name="radio-heat" id="radio-pump">
+				<label for="radio-flis">FLISPANNA</label>
+				<input type="radio" name="radio-heat" id="radio-flis">
+			</fieldset>
 	</div>
 
 	<h2>LANDSKAP</h2>
 	<div id="landskap">
+		<p>GRÖN YTA</p>
+		<p>ANDEL GRÖN YTA MED PLANTERINGAR (INTE GRÄS)</p>
+		<div id="slider_plant"></div>
+		<p>TRÄD</p>
+
 
 	</div>
 </div>
 </div>
 
 <div id="right">
-			<canvas id="chart-area"></canvas>
+	<div id ="info">
+	</div>
+
+	<div id ="co2">
+		<canvas id="chart-area"></canvas>
+	</div>
+
 </div>
 
 

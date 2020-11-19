@@ -2,10 +2,27 @@ $( function() {
   $( "#accordion" ).accordion({
     collapsible: true,
     heightStyle: "content"
+
+
   });
+
+
+    $( "#spinner_green" ).spinner();
+
+    $( "#spinner_trees" ).spinner();
+
     $( "input" ).checkboxradio({
       icon: false
     });
+
+    $( "#slider_plant" ).slider({
+      orientation: "horizontal",
+      range: "min",
+      max: 100,
+      value: 0
+    } );
+
+
     $( "#slider_hj" ).slider({
       orientation: "horizontal",
       range: "min",
@@ -25,6 +42,13 @@ $( function() {
     range: "min",
     max: 10000,
     value: 2
+  } );
+
+  $( "#slider_isolering" ).slider({
+  orientation: "horizontal",
+  range: "min",
+  max: 1000,
+  value: 200
   } );
 
   $( "#slider_takvinkel" ).slider({
