@@ -1,0 +1,16 @@
+{
+  "total": {
+    "transport":{
+      "personbilar": 81003,
+      "lastbilar": 11259,
+      "flygg": 8527,
+      "bussar": 29833,
+      "annat_transport": 1328,
+      "arbetsmaskiner": 19411
+    },
+    "hus_total": 13879,
+    "industri_total": 5796,
+    "offentlig": 10185,
+    "sparat": 0
+  }
+}
