@@ -1,7 +1,7 @@
 /* Structure */
 body{
   padding:25px;
-  background-color: #f8f8f8;
+  background-color: #fff;
 }
 #left{
   float:left;
@@ -14,6 +14,53 @@ body{
   background-color: #fefefe;
   height:auto;
 }
+#co2_bar{
+  float:left;
+  width:45%;
+  height:280px;
+  text-align: center;
+}
+#Energy{
+  float:right;
+  width:45%;
+  height:280px;
+  text-align: center;
+}
+#Materials{
+  float:left;
+  width:45%;
+  height:350px;
+  text-align: center;
+}
+#Circular{
+  float:right;
+  width:45%;
+  height:350px;
+  text-align: center;
+}
+#EkoT{
+  text-align: center;
+}
+.et{
+  float:left;
+  padding:15px;
+}
+#et_energi{
+  opacity: 0.08;
+}
+.byggval_left{
+  float: left;
+  width: 45%;
+  height: 300px;
+
+}
+.byggval_right{
+  float: right;
+  width: 45%;
+  height: 300px;
+
+}
+
 .column_left{
   height:auto;
   background-color: #fefefe;
@@ -22,6 +69,9 @@ body{
 }
 fieldset {
   border: none;
+}
+.ui-selectmenu {
+  padding: 0.5em 0 0.5em 3em;
 }
 
 /* Type */
@@ -34,9 +84,10 @@ h1,h2,h3 {
 h1 {
 
 }
-p {
+p,ui-selectmenu-text {
   color: black;
   font-family: 'Alata', sans-serif;
+  font-size: 0.9em;
 
 }
 nr{
