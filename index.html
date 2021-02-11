@@ -4,132 +4,199 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
+  <link rel="stylesheet" href="/assets/style_building.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata&display=swap">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="assets/style.css">
-
 	<script src="https://d3js.org/d3.v5.min.js"></script>
-	<script src="js/icicle-chart.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-	<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="//unpkg.com/icicle-chart"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	  <script src="	https://www.chartjs.org/samples/latest/utils.js"></script>
+
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 
 	<script src="js/model.js"></script>
-	<script src="js/icicle-wrapper.js"></script>
-
-	<!-- Always the last one to be imported: -->
+		<!-- Always the last one to be imported: -->
 	<script src="js/index.js"></script>
+	<title>BYGGKOLLEN</title>
 
-	<title>Klimatneutral Växjö 2030</title>
 </head>
 
 <body>
+
 	<header>
-		<div id="title">
-			<h2>KLIMATNEUTRAL VÄXJÖ 2030</h2>
-		</div>
-		<logo>
-				<img src="assets/logo.svg" alt="VXJ" width='100px' />
-		</logo>
-			<nav>
-			</nav>
+    <div id="logo">
+			<h1>BYGGKOLLEN <sup>(beta)</sup></h1>
+    </div>
+
 	</header>
+  <div id="left">
+	<div id="accordion">
 
-	<div id="general">
-		<div id="general_klimat_data">
-			<h3>KLIMATUTSLÄPP</h3>
-			<h4><year>2020:</year><br/><total2020>173 476</total2020> ton CO2</h4>
-			<h4><year>2030:</year><br/><total2030>173 476</total2030> ton CO2</h4>
-			<h2><change>0</change>%</h2>
-		</div>
-		<div id="general_klimat">
-			<div id="general-chart"></div>
-		</div>
-		<div id="general_energi_data">
-			<h3>ENERGIBEHOV</h3>
-			<h4><year>2020:</year><br/> 2288 GWh</h4>
-			<h4><year>2030:</year><br/> 2288 GWh</h4>
-			<h2>+0%</h2>
-		</div>
-		<div id="general_energi">
-			<div id="e_bio" class="dot"></div>
-			<div id="e_forest" class="dot"></div>
-			<div id="e_renewable" class="dot"></div>
-			<div id="e_nonrenewable" class="dot"></div>
-			<div id="e_fossil" class="dot"></div>
-			<!-- <canvas id="energy-chart-area"></canvas> -->
-		</div>
-		<div id="general_sdg">
-				<h3>HÅLLBARHETSMÅL</h3>
-				<div id="SDG13" class="SDG"><img src="/assets/sdgs/13.jpg" alt="Minska Klimatpåverkan" height="100%"/></div>
-				<div id="SDG3" class="SDG"><img src="/assets/sdgs/3.jpg" alt="Minska Klimatpåverkan" height="100%"/></div>
-				<div id="SDG7" class="SDG"><img src="/assets/sdgs/7.jpg" alt="Minska Klimatpåverkan" height="100%"/></div>
-				<div id="SDG11" class="SDG"><img src="/assets/sdgs/11.png" alt="Minska Klimatpåverkan" height="100%"/></div>
-		</div>
+	<div id="storlek" class="byggval_left">
+		<fieldset>
+			<div id="kvm_value"><p>PLANYTA: 100 kvm</p></div>
+			<div id="slider_m2"></div>
+		</fieldset>
+
+		<fieldset>
+		<p>GRUND</p>
+		<select name="grund" id="grund">
+			<option disabled selected>Välj material</option>
+		</select>
+		<select name="grund_armering" id="grund_armering">
+			<option disabled selected>Välj armering</option>
+		</select>
+
+		 <p><input id="grund_thick" name="value_grund_thick"></input> m</p>
+		</fieldset>
 	</div>
 
-	<div id="transport_energy" class="control_widget">
-			<canvas id="transport_energy_canvas"></canvas>
-			<h3>BRÄNSLEMIX</h3>
-			<p>Andel privata elbilar</p>
-			<div id="slider_pers_el"></div>
-			<p>Andel privata bio</p>
-			<div id="slider_pers_bio"></div>
+
+	<div id="stommediv" class="byggval_right">
+		<fieldset>
+		<p>STOMME</p>
+				<select name="stomme" id="stomme">
+					<option disabled selected>Välj material</option>
+				</select>
+				<p>ISOLERING UT: 40cm</p>
+				<div id="slider_isolering"></div>
+				<br/>
+				<select name="isolering" id="isolering">
+					<option disabled selected>Välj material</option>
+				</select>
+		</fieldset>
 	</div>
 
-	<div id="transport_behavior" class="control_widget">
-			<canvas id="transport_behavior_canvas"></canvas>
-			<h3>BETEENDE</h3>
-			<p>Befolkning i Kronoberg</p>
-			<div id="slider_befolkning"></div>
-			<p>Antal km korta resor</p>
-			<div id="slider_korta"></div>
-			<p>Andel kollektivtrafik/cykel/gå korta resor</p>
-			<div id="slider_kollektiv1"></div>
-			<p>Antal km mellan resor</p>
-			<div id="slider_mellan"></div>
-			<p>Andel kollektivtrafik/cykel mellanresor</p>
-			<div id="slider_kollektiv2"></div>
-			<p>Antal km långa resor</p>
-			<div id="slider_langa"></div>
-			<p>Andel kollektivtrafik långa resor</p>
-			<div id="slider_kollektiv3"></div>
-		</div>
+	<div id="isoleringdiv" class="byggval_left">
+		<fieldset>
+			<p>FASAD</p>
+			<select name="FASAD" id="fasad">
+				<option disabled selected>Välj material</option>
+			</select>
 
-		<div id="transport_heavy" class="control_widget">
-			<canvas id="heavytransport_energy_canvas"></canvas>
-			<h3>LASTBILAR</h3>
-			<p>Andel biodiesel tunga fordon</p>
-			<div id="slider_truck_bio"></div>
-			<p>Andel vätegas tunga fordon</p>
-			<div id="slider_hydrogen"></div>
-		</div>
+			<p>FÖNSTER</p>
+			<select name="windows" id="windows">
+				<option disabled selected>Välj material</option>
+				<option value="">Trä</option>
+				<option value="">PVC</option>
+				<option value="">Aluminum</option>
+			</select>
+			<p><input id="window_u" name="value_window_u"></input> U-värde</p>
 
-	<div id="electricity" class="control_widget">
-			<canvas id="electricity_canvas"></canvas>
-			<h3>ELEKTRICITET</h3>
-			<p>Produktion VEAB</p>
-			<div id="slider_veab"></div>
-			<p>Antal solceller installerade</p>
+		</fieldset>
+
+	</div>
+
+	<div id="insidan" class="byggval_right">
+		<fieldset>
+			<p>INNERVÄGGAR</p>
+			<select name="innerv" id="innerv">
+				<option value="">Gips</option>
+				<option value="">Träpanel</option>
+				<option value="">...</option>
+			</select>
+
+		<p>GOLV</p>
+		<select name="golv" id="golv">
+			<option value="">Massivt trä</option>
+			<option value="">Laminat</option>
+			<option value="">Plastmatta</option>
+		</select>
+
+		<p>ISOLERING INNE</p>
+		<select name="iso_in" id="iso_in">
+			<option disabled selected>Välj material</option>
+		</select>
+
+	</fieldset>
+
+
+	</div>
+
+
+
+	<div id="tak" class="byggval_left">
+
+		<fieldset>
+			<p>TAK</p>
+			<select name="roof_material" id="roof_material">
+				<option disabled selected>Välj material</option>
+				<option value="">Plåt</option>
+				<option value="">Tegel</option>
+				<option value="">Betongpannor</option>
+				<option value="">Sedum</option>
+			</select>
+			<p>VINKEL: 30°</p>
+			<div id="slider_takvinkel"></div>
+			<p>SOLPANELLER: 0st<p/>
 			<div id="slider_solceller"></div>
-			<p>Ton CO2/GWh Importerad elektricitet</p>
-			<div id="slider_el"></div>
+		</fieldset>
 	</div>
-	<div id="flyg" class="control_widget">
-			<h3>FLYG</h3>
+
+	<div id="energi" class="byggval_right">
+
+		<fieldset>
+
+				<p>UPPVÄRMNING</p>
+				<select name="heating" id="heating">
+					<option disabled selected>Välj teknik</option>
+					<option value="">Fjärrvärme</option>
+					<option value="">Värmepump</option>
+					<option value="">Flispanna</option>
+				</select>
+			</fieldset>
+
+
+		<fieldset>
+				<p>GRÖNYTEFAKTOR</p>
+				<div id="slider_plant"></div>
+			</fieldset>
+
+
 	</div>
-	<div id="offentlig" class="control_widget">
-			<h3>OFFENTLIG SEKTOR</h3>
+</div>
+</div>
+
+<div id="right">
+	<div id ="co2_bar">
+		<p>KLIMATPÅVERKAN<p>
+		<div id="total_co2"><p>Total: 3400 Ton CO<sub>2</sub> // 2340 kg CO<sub>2</sub>/m2</p></div>
+		<canvas id="chartbar-area"></canvas>
 	</div>
-	<div id="bostad" class="control_widget">
-			<h3>BOSTAD</h3>
+	<div id ="Energy">
+		<p>ENERGIEFFEKTIVITET</p>
+		<p>32 KWH/m2 År</p>
+		<canvas id="chartbar-area-energy"></canvas>
 	</div>
+	<div id ="Materials">
+		<p> </p>
+		<canvas id="chart-area"></canvas>
+	</div>
+
+	<div id ="Circular">
+		<p>ÅTERBRUKSINDEX</p>
+		<canvas id="chart-area-circular"></canvas>
+	</div>
+	<div id="EkoT">
+		<p>EKOSYSTEMTJÄNSTER</p>
+		<div class="et"><img src="/assets/et1.1.png" alt="Biologisk mångfald" height="100px"/></div>
+		<div class="et"><img src="/assets/et2.4.png" alt="Biologisk mångfald" height="100px"/></div>
+		<div class="et" id="et_energi"><img src="/assets/et3.4.png" alt="Biologisk mångfald" height="100px"/></div>
+	</div>
+
+
+</div>
+
 
 	<footer>
-		<p></p>
+		<img src="/assets/logo.svg" alt="VXJ" width='100px'/><img src="https://lnu.se/api/media/20236-w448h954cy283cw448ch80" alt="LNU" width="250px"/>
+		<p>Utvecklad av LNU, Växjö Kommun med finansiering av Viable Cities.</p>
+		<p>OM | MODEL & DATA | KONTAKT</p>
 	</footer>
+
 </body>
 
 </html>

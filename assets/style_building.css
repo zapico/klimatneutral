@@ -1,19 +1,40 @@
 /* Structure */
 body{
-  padding:25px;
   background-color: #fff;
 }
 #left{
   float:left;
   width:40%;
+  padding:10px;
   height:auto;
 }
 #right{
   float:right;
   width:55%;
-  background-color: #fefefe;
+  padding:10px;
   height:auto;
 }
+header{
+
+height:100px;
+    left:0px;
+    top:0px;
+    padding:25px;
+    background-color: #fff;
+}
+#logo{
+  float:left;
+}
+#nav{
+  margin-top:2%;
+  float:right;
+}
+footer{
+  float:left;
+  width:90%;
+  padding: 20px;
+}
+
 #co2_bar{
   float:left;
   width:45%;
@@ -46,7 +67,7 @@ body{
   padding:15px;
 }
 #et_energi{
-  opacity: 0.08;
+  opacity: 0.05;
 }
 .byggval_left{
   float: left;
