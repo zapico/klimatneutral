@@ -39,8 +39,39 @@
 		<fieldset>
 			<div id="kvm_value"><p>PLANYTA: 100 kvm</p></div>
 			<div id="slider_m2"></div>
+			<p><input id="nr_floors" name="value_nr_floors"></input> våningar</p>
+			<p><input id="floor_height" name="value_floor_height"></input> m takhöjd</p>
+			<p><input id="nr_basement" name="value_nr_basement"></input> källarplan</p>
 		</fieldset>
 
+
+	</div>
+
+
+	<div id="stommediv" class="byggval_right">
+		<fieldset>
+		<p>STOMME</p>
+				<select name="stomme" id="stomme">
+					<option disabled selected>Välj material väggar</option>
+				</select>
+				<select name="stomme2" id="stomme_floor">
+					<option disabled selected>Välj material våningar</option>
+				</select>
+				<select name="stomme3" id="stomme_stairs">
+					<option disabled selected>Välj material trappa</option>
+				</select>
+				<select name="stomme4" id="stomme_roof">
+					<option disabled selected>Välj material takstolar</option>
+				</select>
+				<div id="iso_thick"><p>ISOLERING UT: 40cm</p></div>
+				<div id="slider_isolering"></div>
+				<br/>
+				<select name="isolering" id="isolering">
+					<option disabled selected>Välj material</option>
+				</select>
+		</fieldset>
+	</div>
+	<div id="grund_param" class="byggval_right">
 		<fieldset>
 		<p>GRUND</p>
 		<select name="grund" id="grund">
@@ -53,38 +84,18 @@
 		 <p><input id="grund_thick" name="value_grund_thick"></input> m</p>
 		</fieldset>
 	</div>
-
-
-	<div id="stommediv" class="byggval_right">
-		<fieldset>
-		<p>STOMME</p>
-				<select name="stomme" id="stomme">
-					<option disabled selected>Välj material</option>
-				</select>
-				<p>ISOLERING UT: 40cm</p>
-				<div id="slider_isolering"></div>
-				<br/>
-				<select name="isolering" id="isolering">
-					<option disabled selected>Välj material</option>
-				</select>
-		</fieldset>
-	</div>
-
 	<div id="isoleringdiv" class="byggval_left">
 		<fieldset>
 			<p>FASAD</p>
-			<select name="FASAD" id="fasad">
-				<option disabled selected>Välj material</option>
-			</select>
+			<p><select name="FASAD" id="fasad">
+			<option disabled selected>Välj material</option>
+			</select></p>
 
-			<p>FÖNSTER</p>
-			<select name="windows" id="windows">
+			<div id="window_text"><p>FÖNSTER: 10% av yta</p></div>
+			<div id="slider_windows"></div>
+			<p><select name="windows" id="windows">
 				<option disabled selected>Välj material</option>
-				<option value="">Trä</option>
-				<option value="">PVC</option>
-				<option value="">Aluminum</option>
-			</select>
-			<p><input id="window_u" name="value_window_u"></input> U-värde</p>
+			</select></p>
 
 		</fieldset>
 
@@ -92,23 +103,21 @@
 
 	<div id="insidan" class="byggval_right">
 		<fieldset>
-			<p>INNERVÄGGAR</p>
+			<p>INSIDAN</p>
 			<select name="innerv" id="innerv">
+				<option disabled selected>Välj material innerväggar</option>
 				<option value="">Gips</option>
 				<option value="">Träpanel</option>
 				<option value="">...</option>
 			</select>
-
-		<p>GOLV</p>
 		<select name="golv" id="golv">
+			<option disabled selected>Välj material golv</option>
 			<option value="">Massivt trä</option>
 			<option value="">Laminat</option>
 			<option value="">Plastmatta</option>
 		</select>
-
-		<p>ISOLERING INNE</p>
 		<select name="iso_in" id="iso_in">
-			<option disabled selected>Välj material</option>
+			<option disabled selected>Välj material isolering</option>
 		</select>
 
 	</fieldset>
@@ -136,7 +145,7 @@
 		</fieldset>
 	</div>
 
-	<div id="energi" class="byggval_right">
+	<div id="energi" class="byggval_left">
 
 		<fieldset>
 
@@ -148,14 +157,26 @@
 					<option value="">Flispanna</option>
 				</select>
 			</fieldset>
+	</div>
 
-
-		<fieldset>
-				<p>GRÖNYTEFAKTOR</p>
-				<div id="slider_plant"></div>
-			</fieldset>
-
-
+	<div id="ute" class="byggval_right">
+	<p>GRÖNYTEFAKTOR</p>
+	<fieldset>
+		<div id="slider_plant"></div>
+	</fieldset>
+	<p>GRÖNYT INSATSER</p>
+	<fieldset>
+		<label for="checkbox-damm">Dammar och vattendrag</label>
+		<input type="checkbox" name="checkbox-damm" id="checkbox-damm">
+		<label for="checkbox-frukt">Fruktträd och odlingar</label>
+		<input type="checkbox" name="checkbox-frukt" id="checkbox-frukt">
+		<label for="checkbox-bi">Bi-vänliga planteringar</label>
+		<input type="checkbox" name="checkbox-bi" id="checkbox-bi">
+		<label for="checkbox-motion">Motion och lek</label>
+		<input type="checkbox" name="checkbox-motion" id="checkbox-motion">
+		<label for="checkbox-keep">Behålla eller flytta träd</label>
+		<input type="checkbox" name="checkbox-keep" id="checkbox-keep">
+	</fieldset>
 	</div>
 </div>
 </div>
@@ -163,7 +184,7 @@
 <div id="right">
 	<div id ="co2_bar">
 		<p>KLIMATPÅVERKAN<p>
-		<div id="total_co2"><p>Total: 3400 Ton CO<sub>2</sub> // 2340 kg CO<sub>2</sub>/m2</p></div>
+		<div id="total_co2"></br></div>
 		<canvas id="chartbar-area"></canvas>
 	</div>
 	<div id ="Energy">
@@ -182,9 +203,22 @@
 	</div>
 	<div id="EkoT">
 		<p>EKOSYSTEMTJÄNSTER</p>
-		<div class="et"><img src="/assets/et1.1.png" alt="Biologisk mångfald" height="100px"/></div>
-		<div class="et"><img src="/assets/et2.4.png" alt="Biologisk mångfald" height="100px"/></div>
-		<div class="et" id="et_energi"><img src="/assets/et3.4.png" alt="Biologisk mångfald" height="100px"/></div>
+		<div class="et" id="et_support">
+			<img src="/assets/et1.1.png" alt="Biologisk mångfald" height="100px"/>
+			<p>Stödjande tjänster</p>
+		</div>
+		<div class="et" id="et_regulate">
+			<img src="/assets/et2.4.png" alt="Biologisk mångfald" height="100px"/>
+			<p>Reglerande tjänster</p>
+		</div>
+		<div class="et" id="et_energy">
+			<img src="/assets/et3.4.png" alt="Biologisk mångfald" height="100px"/>
+			<p>Försörjande tjänster</p>
+		</div>
+		<div class="et" id="et_cultural">
+			<img src="/assets/et4.2.png" alt="Biologisk mångfald" height="100px"/>
+			<p>Kulturella tjänster</p>
+		</div>
 	</div>
 
 

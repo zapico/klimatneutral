@@ -23,13 +23,27 @@ class Model {
 
         this.wood_panels = 133.14	//m3
 
+        this.window_wood = 80; //Fake data
+        this.window_alu = 80; //Fake data
+        this.window_pvc = 80; //Fake data
+
         //Building parameters
         this.planyta = 500;
+        this.floors = 1;
+        this.floor_height = 2.4; //m
+        this.basement = 0;
+
+        this.window_percentage = 10;
+
         this.foundation_material = 0;
         this.foundation_armering = 0;
         this.foundation_armering_percent = 0.05;
         this.foundation_thickness = 0;
         this.roof_angle = 30;
+        this.isolation_material_ut = 0;
+        this.isolation_thickness_ut = 40; //cm
+        this.isolation_material_in = 0;
+        this.isolation_thickness_in = 0.3; // m
 
         //Total impact
         this.concrete_co2 = 100;
@@ -38,7 +52,7 @@ class Model {
         this.roof_co2 = 40;
 
         this.total_co2 = 0;
-        this.co2_m2 = 0;
+        this.co2_m2 = 20;
 
         //Circularity
         this.green = 0.2;
@@ -62,13 +76,17 @@ class Model {
       // Calculate foundation (Is this ok to calculate with planyta??)
       var f1 = this.foundation_material*this.foundation_thickness*this.planyta;
       var f2 = this.foundation_armering*this.foundation_armering_percent*this.planyta;
-      //this.concrete_co2 = f1+f2;
+      this.concrete_co2 = f1+f2;
 
+      this.isolation_co2 = this.isolation_material_ut*this.planyta*this.isolation_thickness_ut*0.01 + this.isolation_material_in*this.planyta*this.isolation_thickness_in;
 
+      this.wood_co2 = 0;
 
       this.total_co2 = this.concrete_co2 + this.isolation_co2 + this.wood_co2 + this.roof_co2;
-      this.co2_m2 = this.total_co2/this.planyta;
-      console.log(this.total_co2);
+      this.co2_m2 = Math.round(this.total_co2/this.planyta);
+      console.log(this.co2_m2);
+
+
       for (let func of this.listeners) {
           func();
       }

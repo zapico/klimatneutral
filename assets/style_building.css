@@ -66,9 +66,20 @@ footer{
   float:left;
   padding:15px;
 }
-#et_energi{
-  opacity: 0.05;
+#et_energy{
+  opacity: 0.1;
 }
+#et_cultural{
+  opacity: 0.1;
+}
+#et_support{
+  opacity: 0.1;
+}
+#et_regulate{
+  opacity: 0.1;
+}
+
+
 .byggval_left{
   float: left;
   width: 45%;
