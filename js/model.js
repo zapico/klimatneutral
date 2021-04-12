@@ -84,7 +84,7 @@ class Model {
 
       this.total_co2 = this.concrete_co2 + this.isolation_co2 + this.wood_co2 + this.roof_co2;
       this.co2_m2 = Math.round(this.total_co2/this.planyta);
-      console.log(this.co2_m2);
+      if(this.co2_m2 == 0){this.co2_m2 =1;}
 
 
       for (let func of this.listeners) {

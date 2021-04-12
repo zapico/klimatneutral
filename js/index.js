@@ -495,7 +495,7 @@ function refreshBehavior() {
 
 };
 function updateTotals(){
-  document.getElementById("total_co2").innerHTML = "<p>"+ model.co2_m2+" kg CO<sub>2</sub>/m2</p>";
+  $( "#total_co2" ).html("<p>"+ model.co2_m2+" kg CO<sub>2</sub>/m2</p>");
   makeBarChart('chartbar-area', model);
 };
 model.addListener(updateTotals);

@@ -39,55 +39,55 @@ footer{
 #co2_general{
   float:left;
   width:45%;
-  height:200px;
+  height:auto;
   text-align: center;
 }
 #co2_info{
   position: relative;
   width:90%;
-  height:60px;
   text-align: center;
 }
 #co2_bar{
   position: relative;
   width:90%;
-  height:120px;
   text-align: center;
 }
 
 #energy_general{
   float:right;
   width:45%;
-  height:200px;
+  height: auto;
   text-align: center;
 }
 #energy_info{
   position: relative;
   width:90%;
-  height:60px;
+
   text-align: center;
 }
 #energy_bar{
   position: relative;
   width:90%;
-  height:120px;
+
   text-align: center;
 }
 
 #Materials{
-  float:left;
-  width:45%;
-  height:200px;
+  position: relative;
+  width:90%;
+
   text-align: center;
 }
 #Circular{
-  float:right;
-  width:45%;
-  height:200px;
+  position: relative;
+  width:90%%;
+
   text-align: center;
 }
 #EkoT{
+  float:left;
   text-align: center;
+  width:90%;
   height:150px;
 }
 .et{
@@ -110,7 +110,7 @@ footer{
 
 #tabs{
   float: left;
-  height: 550px;
+  height: 600px;
   width: 100%;
 }
 
