@@ -30,6 +30,7 @@ function makeDonutMaterial(id, model) {
         options: {
           responsive: true,
           legend: {
+            display: false,
             position: 'top',
           },
           title: {
@@ -60,10 +61,10 @@ function makeDonutCircularity(id, model) {
             data: data,
             backgroundColor: [
               "#80b918",
-              window.chartColors.yellow,
-              window.chartColors.red,
+              "#FED000",
+              "#ED2939",
             ],
-            label: 'Dataset 1'
+            label: 'C'
           }],
           labels: [
             'Circulära material',
@@ -251,6 +252,8 @@ window.onload = async function () {
     makeDonutCircularity('chart-area-circular', model);
     makeBarChart('chartbar-area', model);
     makeBarChartEnergy('chartbar-area-energy', model);
+
+    $("#tabs").tabs();
 
     $( "#grund" ).selectmenu({change: refreshBehavior});
     $( '#grund' ).append($('<option>', { value: model.concrete_insitu, text: 'Betong in-situ' }));

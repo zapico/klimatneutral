@@ -2,6 +2,21 @@
 body{
   background-color: #fff;
 }
+header{
+    height:80px;
+    left:0px;
+    top:0px;
+    padding-left:25px;
+    background-color: #fff;
+}
+#logo{
+  float:left;
+}
+#nav{
+  margin-top:2%;
+  float:right;
+}
+
 #left{
   float:left;
   width:40%;
@@ -14,56 +29,70 @@ body{
   padding:10px;
   height:auto;
 }
-header{
 
-height:100px;
-    left:0px;
-    top:0px;
-    padding:25px;
-    background-color: #fff;
-}
-#logo{
-  float:left;
-}
-#nav{
-  margin-top:2%;
-  float:right;
-}
 footer{
   float:left;
   width:90%;
   padding: 20px;
 }
 
-#co2_bar{
+#co2_general{
   float:left;
   width:45%;
-  height:280px;
+  height:200px;
   text-align: center;
 }
-#Energy{
+#co2_info{
+  position: relative;
+  width:90%;
+  height:60px;
+  text-align: center;
+}
+#co2_bar{
+  position: relative;
+  width:90%;
+  height:120px;
+  text-align: center;
+}
+
+#energy_general{
   float:right;
   width:45%;
-  height:280px;
+  height:200px;
   text-align: center;
 }
+#energy_info{
+  position: relative;
+  width:90%;
+  height:60px;
+  text-align: center;
+}
+#energy_bar{
+  position: relative;
+  width:90%;
+  height:120px;
+  text-align: center;
+}
+
 #Materials{
   float:left;
   width:45%;
-  height:350px;
+  height:200px;
   text-align: center;
 }
 #Circular{
   float:right;
   width:45%;
-  height:350px;
+  height:200px;
   text-align: center;
 }
 #EkoT{
   text-align: center;
+  height:150px;
 }
 .et{
   float:left;
+  height:75px;
   padding:15px;
 }
 #et_energy{
@@ -79,18 +108,19 @@ footer{
   opacity: 0.1;
 }
 
+#tabs{
+  float: left;
+  height: 550px;
+  width: 100%;
+}
 
 .byggval_left{
   float: left;
   width: 45%;
-  height: 300px;
-
 }
 .byggval_right{
   float: right;
   width: 45%;
-  height: 300px;
-
 }
 
 .column_left{
@@ -133,4 +163,12 @@ nr{
 .label {
   font: 10px sans-serif;
   text-anchor: middle;
+}
+
+/* JQuery UI overwrites*/
+.ui-widget .ui-widget {
+    font-size: 0.8em;
+}
+.ui-selectmenu-button.ui-button {
+  width: 12em;
 }
