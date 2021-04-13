@@ -84,10 +84,22 @@ footer{
 
   text-align: center;
 }
-#EkoT{
+#EST{
   float:left;
   text-align: center;
-  width:90%;
+  width:100%;
+  height:150px;
+}
+#GYF{
+  float:left;
+  text-align: center;
+  width:20%;
+  height:150px;
+}
+#EkoT{
+  float:right;
+  text-align: center;
+  width:80%;
   height:150px;
 }
 .et{

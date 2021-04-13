@@ -49,6 +49,8 @@
 			<div id="tabs-1">
 				<div id="storlek" class="byggval_left">
 					<fieldset>
+						<div id="kvm_tomt_value"><p>TOMTYTA: 1000 kvm</p></div>
+						<div id="slider_tomtyta"></div>
 						<div id="kvm_value"><p>PLANYTA: 100 kvm</p></div>
 						<div id="slider_m2"></div>
 						<p><input id="nr_floors" name="value_nr_floors"></input> våningar</p>
@@ -163,9 +165,9 @@
 			</div>
 			<div id="tabs-4">
 				<div id="ute" class="byggval">
-					<p>GRÖNYTEFAKTOR</p>
-					<fieldset>
-						<div id="slider_plant"></div>
+					<p>GRÖNA YTOR</p>
+					<div id="info_grona_ytor"><p>I andel av den tilgängliga mark efter byggnationen.</p></div>
+					<div id="slider_plant"></div>
 					</fieldset>
 					<p>INSATSER GRÖNYTA</p>
 					<fieldset>
@@ -215,30 +217,19 @@
 			</div>
 		</div>
 
-
-
-
-
-
-	<div id="EkoT">
-		<p>EKOSYSTEMTJÄNSTER</p>
-		<div class="et" id="et_support">
-			<img src="/assets/et1.1.png" alt="Biologisk mångfald" height="100%"/>
-			<p>Stödjande tjänster</p>
+		<div id="EST">
+			<div id="GYF">
+				<p>GRÖNYTEFAKTOR</p><br/>
+				<div id="greenfactor"><h1>0</h1></div>
+			</div>
+			<div id="EkoT">
+				<p>EKOSYSTEMTJÄNSTER</p>
+				<div class="et" id="et_support"><img src="/assets/et1.1.png" alt="Biologisk mångfald" height="100%"/><p>Stödjande tjänster</p></div>
+				<div class="et" id="et_regulate"><img src="/assets/et2.4.png" alt="Biologisk mångfald" height="100%"/><p>Reglerande tjänster</p></div>
+				<div class="et" id="et_energy"><img src="/assets/et3.4.png" alt="Biologisk mångfald" height="100%"/><p>Försörjande tjänster</p></div>
+				<div class="et" id="et_cultural"><img src="/assets/et4.2.png" alt="Biologisk mångfald" height="100%"/><p>Kulturella tjänster</p></div>
+			</div>
 		</div>
-		<div class="et" id="et_regulate">
-			<img src="/assets/et2.4.png" alt="Biologisk mångfald" height="100%"/>
-			<p>Reglerande tjänster</p>
-		</div>
-		<div class="et" id="et_energy">
-			<img src="/assets/et3.4.png" alt="Biologisk mångfald" height="100%"/>
-			<p>Försörjande tjänster</p>
-		</div>
-		<div class="et" id="et_cultural">
-			<img src="/assets/et4.2.png" alt="Biologisk mångfald" height="100%"/>
-			<p>Kulturella tjänster</p>
-		</div>
-	</div>
 
 	</div>
 </div>

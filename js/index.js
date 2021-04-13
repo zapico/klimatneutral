@@ -398,6 +398,15 @@ window.onload = async function () {
     change: refreshBehavior
     } );
 
+    $( "#slider_tomtyta" ).slider({
+      orientation: "horizontal",
+      range: "min",
+      max: 50000,
+      step: 10,
+      value: model.tomtyta,
+      slide: refreshBehavior,
+      change: refreshBehavior
+    });
 
     $( "#slider_m2" ).slider({
       orientation: "horizontal",
@@ -425,8 +434,10 @@ window.onload = async function () {
     $( "#slider_plant" ).slider({
     orientation: "horizontal",
     range: "min",
-    max: 10000,
-    value: 2
+    max: 100,
+    value: model.gronyta,
+    slide: refreshBehavior,
+    change: refreshBehavior
   } );
 
     $( "#slider_isolering" ).slider({
@@ -469,7 +480,17 @@ function refreshEcosystem(){
     if ($( "#checkbox-bi" ).is(":checked")) { et_1 += 0.4; };
     if ($( "#checkbox-motion" ).is(":checked")) { et_4 += 0.4; };
     if ($( "#checkbox-keep" ).is(":checked")) { et_1 += 0.4; et_2 += 0.4;};
-    console.log(et_1);
+    if (model.gyfactor >= 0.2) {
+      et_1 += 0.3;
+      et_2 += 0.3;
+      et_4 += 0.3;
+    } else {
+      if (model.gyfactor > 0.1){
+        et_1 += 0.1;
+        et_2 += 0.1;
+        et_4 += 0.1;
+      }
+    };
     $( "#et_support" ).css('opacity', et_1);
     $( "#et_regulate" ).css('opacity', et_2);
     $( "#et_energy" ).css('opacity', et_3);
@@ -480,7 +501,8 @@ function refreshBehavior() {
       // Update values
 
       model.planyta = $("#slider_m2").slider("value");
-      model.foundation_material = $( "#grund" ).val();
+      model.tomtyta = $("#slider_tomtyta").slider("value");
+      model.gronyta = $("#slider_plant" ).slider("value");
       model.foundation_armering = $( "#grund_armering" ).val();
       model.foundation_thickness = $( "#grund_thick" ).val();
       model.isolation_material_ut =  $( "#isolering" ).val();
@@ -488,15 +510,18 @@ function refreshBehavior() {
       model.isolation_material_in = $( "#iso_in" ).val();
       model.window_percentage = $( "#slider_windows" ).slider("value");
       $( "#kvm_value" ).html("<p>PLANYTA: " + model.planyta + " kvm</p>" );
+      $( "#kvm_tomt_value" ).html("<p>TOMTYTA: " + model.tomtyta + " kvm</p>" );
       $( "#iso_thick" ).html("<p>ISOLERING UT: " + model.isolation_thickness_ut + " cm</p>" );
       $( "#window_text" ).html("<p>FÖNSTER: " + model.window_percentage + " % av yta</p>" );
-
+      $( "#info_grona_ytor" ).html("<p>"+ (model.tomtyta-model.planyta)*model.gronyta/100 +" kvm "+ model.gronyta + " % av tillgänglig yta.</p>");
       model.update();
 
 };
 function updateTotals(){
   $( "#total_co2" ).html("<p>"+ model.co2_m2+" kg CO<sub>2</sub>/m2</p>");
+  $( "#greenfactor" ).html("<h1>"+ model.gyfactor+"</h1>");
   makeBarChart('chartbar-area', model);
+  refreshEcosystem();
 };
 model.addListener(updateTotals);
 

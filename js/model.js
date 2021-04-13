@@ -28,7 +28,9 @@ class Model {
         this.window_pvc = 80; //Fake data
 
         //Building parameters
+        this.tomtyta = 1000;
         this.planyta = 500;
+        this.gronyta = 0; //Percentage
         this.floors = 1;
         this.floor_height = 2.4; //m
         this.basement = 0;
@@ -62,6 +64,9 @@ class Model {
         // energy
         this.energy_m2 = 29; //kwh m2 år
 
+        //Grön Yte factor
+        this.gyfactor = 0;
+
         this.listeners = [];
 
         this.update();
@@ -86,6 +91,8 @@ class Model {
       this.co2_m2 = Math.round(this.total_co2/this.planyta);
       if(this.co2_m2 == 0){this.co2_m2 =1;}
 
+      this.gyfactor = (((this.tomtyta-this.planyta)*this.gronyta/100)*0.4)/this.tomtyta;
+      this.gyfactor = Math.round(this.gyfactor * 100) / 100; //round to 2.
 
       for (let func of this.listeners) {
           func();
