@@ -3,6 +3,13 @@ class Model {
     constructor() {
         // Start variables
         // List of materials
+        this.frame_prefab_concrete =	50.00	//m2
+        this.frame_insitu_concrete =	40.00	//m2
+        this.frame_light_timber =	30.00	//m2
+        this.frame_CLT = 35.00 //	m2
+        this.frame_steel =	60.00	//m2
+
+
         this.concrete_insitu =	256.15	//m3
         this.concrete_prefab =	218.62	//t (How is this being able to compare??)
         this.light_blocks =	151.49	//m3
@@ -37,6 +44,10 @@ class Model {
 
         this.window_percentage = 10;
 
+        this.frame_material = 0;
+        this.frame_floor_material = 0;
+        this.frame_roof_material = 0;
+        this.frame_stairs_material = 0;
         this.foundation_material = 0;
         this.foundation_armering = 0;
         this.foundation_armering_percent = 0.05;
@@ -48,10 +59,10 @@ class Model {
         this.isolation_thickness_in = 0.3; // m
 
         //Total impact
-        this.concrete_co2 = 100;
-        this.isolation_co2 = 30;
-        this.wood_co2 = 25;
-        this.roof_co2 = 40;
+        this.concrete_co2 = 15;
+        this.isolation_co2 = 15;
+        this.wood_co2 = 15;
+        this.stomme_co2 = 15;
 
         this.total_co2 = 0;
         this.co2_m2 = 20;
@@ -82,13 +93,26 @@ class Model {
       var f1 = this.foundation_material*this.foundation_thickness*this.planyta;
       var f2 = this.foundation_armering*this.foundation_armering_percent*this.planyta;
       this.concrete_co2 = f1+f2;
+      this.concrete_co2 = Math.round(this.concrete_co2);
 
-      this.isolation_co2 = this.isolation_material_ut*this.planyta*this.isolation_thickness_ut*0.01 + this.isolation_material_in*this.planyta*this.isolation_thickness_in;
+      var total_h = this.floors * this.floor_height;
 
-      this.wood_co2 = 0;
+      // Calculate frame provisional
+      var s1 = this.frame_material*this.planyta*total_h*0.6;
+      var s2 = this.frame_floor_material*this.planyta*this.floors*0.6;
+      var s3 = this.frame_roof_material*this.planyta*1.2;
+      var s4 = this.frame_stairs_material*this.planyta*total_h*0.6;
+      this.stomme_co2 = s1 + s2 + s3 + s4;
+      this.stomme_co2 = Math.round(this.stomme_co2);
+      console.log(this.stomme_co2);
 
-      this.total_co2 = this.concrete_co2 + this.isolation_co2 + this.wood_co2 + this.roof_co2;
-      this.co2_m2 = Math.round(this.total_co2/this.planyta);
+      this.isolation_co2 = this.isolation_material_ut*this.planyta*this.isolation_thickness_ut*0.005 + this.isolation_material_in*this.planyta*this.isolation_thickness_in;
+      this.isolation_co2 = Math.round(this.isolation_co2);
+
+      this.wood_co2 = 15;
+
+      this.total_co2 = this.concrete_co2 + this.isolation_co2 + this.wood_co2 + this.stomme_co2;
+      this.co2_m2 = Math.round(this.total_co2/(this.planyta*this.floors));
       if(this.co2_m2 == 0){this.co2_m2 =1;}
 
       this.gyfactor = (((this.tomtyta-this.planyta)*this.gronyta/100)*0.4)/this.tomtyta;

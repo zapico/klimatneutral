@@ -1,9 +1,9 @@
 function makeDonutMaterial(id, model) {
     const data = [
+      model.stomme_co2,
       model.concrete_co2,
-      model.isolation_co2,
       model.wood_co2,
-      model.roof_co2
+      model.isolation_co2
     ];
 
     const ctx = document.getElementById(id).getContext('2d');
@@ -21,10 +21,10 @@ function makeDonutMaterial(id, model) {
             label: 'Dataset 1'
           }],
           labels: [
-            'Stomme, Fasad & Tak',
-            'Insidan',
+            'Stomme',
+            'Grund',
             'Installationer',
-            'Schackt'
+            'Isolering'
           ]
         },
         options: {
@@ -38,8 +38,8 @@ function makeDonutMaterial(id, model) {
             text: ''
           },
           animation: {
-            animateScale: true,
-            animateRotate: true
+            animateScale: false,
+            animateRotate: false
           }
         }
       };
@@ -268,32 +268,37 @@ window.onload = async function () {
     $( "#grund_armering" ).selectmenu({select: refreshBehavior });
 
     $( "#stomme" ).selectmenu();
-    $( "#stomme" ).append($('<option>', { value: model.orebased_steel, text: 'Betong in-situ' }));
-    $( "#stomme" ).append($('<option>', { value: model.orebased_steel, text: 'Betong prefab' }));
-    $( "#stomme" ).append($('<option>', { value: model.orebased_steel, text: 'Cross-laminated timber' }));
-    $( "#stomme" ).append($('<option>', { value: model.orebased_steel, text: 'Light timber frame' }));
-    $( "#stomme" ).append($('<option>', { value: model.orebased_steel, text: 'Stål' }));
+    $( "#stomme" ).append($('<option>', { value: model.frame_insitu_concrete, text: 'Betong in-situ' }));
+    $( "#stomme" ).append($('<option>', { value: model.frame_prefab_concrete, text: 'Betong prefab' }));
+    $( "#stomme" ).append($('<option>', { value: model.frame_CLT, text: 'Cross-laminated timber' }));
+    $( "#stomme" ).append($('<option>', { value: model.frame_light_timber, text: 'Light timber frame' }));
+    $( "#stomme" ).append($('<option>', { value: model.frame_steel, text: 'Stål' }));
+    $( "#stomme" ).selectmenu({select: refreshBehavior });
 
     $( "#stomme_floor" ).selectmenu();
-    $( "#stomme_floor" ).append($('<option>', { value: model.orebased_steel, text: 'Betong in-situ' }));
-    $( "#stomme_floor" ).append($('<option>', { value: model.orebased_steel, text: 'Betong prefab' }));
-    $( "#stomme_floor" ).append($('<option>', { value: model.orebased_steel, text: 'Cross-laminated timber' }));
-    $( "#stomme_floor" ).append($('<option>', { value: model.orebased_steel, text: 'Light timber frame' }));
-    $( "#stomme_floor" ).append($('<option>', { value: model.orebased_steel, text: 'Stål' }));
+    $( "#stomme_floor" ).append($('<option>', { value: model.frame_insitu_concrete, text: 'Betong in-situ' }));
+    $( "#stomme_floor" ).append($('<option>', { value: model.frame_prefab_concrete, text: 'Betong prefab' }));
+    $( "#stomme_floor" ).append($('<option>', { value: model.frame_CLT, text: 'Cross-laminated timber' }));
+    $( "#stomme_floor" ).append($('<option>', { value: model.frame_light_timber, text: 'Light timber frame' }));
+    $( "#stomme_floor" ).append($('<option>', { value: model.frame_steel, text: 'Stål' }));
+    $( "#stomme_floor" ).selectmenu({select: refreshBehavior });
 
     $( "#stomme_stairs" ).selectmenu();
-    $( "#stomme_stairs" ).append($('<option>', { value: model.orebased_steel, text: 'Betong in-situ' }));
-    $( "#stomme_stairs" ).append($('<option>', { value: model.orebased_steel, text: 'Betong prefab' }));
-    $( "#stomme_stairs" ).append($('<option>', { value: model.orebased_steel, text: 'Cross-laminated timber' }));
-    $( "#stomme_stairs" ).append($('<option>', { value: model.orebased_steel, text: 'Light timber frame' }));
-    $( "#stomme_stairs" ).append($('<option>', { value: model.orebased_steel, text: 'Stål' }));
+    $( "#stomme_stairs" ).append($('<option>', { value: model.frame_insitu_concrete, text: 'Betong in-situ' }));
+    $( "#stomme_stairs" ).append($('<option>', { value: model.frame_prefab_concrete, text: 'Betong prefab' }));
+    $( "#stomme_stairs" ).append($('<option>', { value: model.frame_CLT, text: 'Cross-laminated timber' }));
+    $( "#stomme_stairs" ).append($('<option>', { value: model.frame_light_timber, text: 'Light timber frame' }));
+    $( "#stomme_stairs" ).append($('<option>', { value: model.frame_steel, text: 'Stål' }));
+    $( "#stomme_stairs" ).selectmenu({select: refreshBehavior });
 
     $( "#stomme_roof" ).selectmenu();
-    $( "#stomme_roof" ).append($('<option>', { value: model.orebased_steel, text: 'Betong in-situ' }));
-    $( "#stomme_roof" ).append($('<option>', { value: model.orebased_steel, text: 'Betong prefab' }));
-    $( "#stomme_roof" ).append($('<option>', { value: model.orebased_steel, text: 'Cross-laminated timber' }));
-    $( "#stomme_roof" ).append($('<option>', { value: model.orebased_steel, text: 'Light timber frame' }));
-    $( "#stomme_roof" ).append($('<option>', { value: model.orebased_steel, text: 'Stål' }));
+    $( "#stomme_roof" ).append($('<option>', { value: model.frame_insitu_concrete, text: 'Betong in-situ' }));
+    $( "#stomme_roof" ).append($('<option>', { value: model.frame_prefab_concrete, text: 'Betong prefab' }));
+    $( "#stomme_roof" ).append($('<option>', { value: model.frame_CLT, text: 'Cross-laminated timber' }));
+    $( "#stomme_roof" ).append($('<option>', { value: model.frame_light_timber, text: 'Light timber frame' }));
+    $( "#stomme_roof" ).append($('<option>', { value: model.frame_steel, text: 'Stål' }));
+    $( "#stomme_roof" ).selectmenu({select: refreshBehavior });
+
 
     $( "#isolering" ).selectmenu();
     $( "#isolering" ).append($('<option>', { value: model.glasswool, text: 'Glasswool' }));
@@ -337,25 +342,33 @@ window.onload = async function () {
               spin: function( event, ui ) {
                 if ( ui.value > 10 ) {
                   $( this ).spinner( "value", 10 );
+                    refreshBehavior();
                   return false;
                 } else if ( ui.value < 0.3 ) {
                   $( this ).spinner( "value", 0.3 );
+                  refreshBehavior();
                   return false;
+                }else{
+                    refreshBehavior();
                 }
-                refreshBehavior();
+
               }
             });
       $( "#nr_floors" ).spinner({
             step: 1,
             spin: function( event, ui ) {
-                        if ( ui.value > 10 ) {
-                          $( this ).spinner( "value", 50 );
+                        if ( ui.value > 20 ) {
+                          $( this ).spinner( "value", 20 );
+                          refreshBehavior();
                           return false;
                         } else if ( ui.value < 1 ) {
                           $( this ).spinner( "value", 1 );
+                          refreshBehavior();
                           return false;
+                        } else {
+                          refreshBehavior();
                         }
-              refreshBehavior();
+
             }
           });
       $( "#nr_floors" ).val(model.floors);
@@ -364,12 +377,16 @@ window.onload = async function () {
             spin: function( event, ui ) {
                       if ( ui.value > 4 ) {
                         $( this ).spinner( "value", 4 );
+                        refreshBehavior();
                         return false;
                       } else if ( ui.value < 2.1 ) {
                             $( this ).spinner( "value", 2.1 );
+                            refreshBehavior();
                         return false;
-                        }
-          refreshBehavior();
+                      } else {
+                        refreshBehavior();
+                      }
+
           }
      });
      $( "#floor_height" ).val(model.floor_height);
@@ -377,10 +394,10 @@ window.onload = async function () {
      $( "#nr_basement" ).spinner({
            step: 1,
            spin: function( event, ui ) {
-                     if ( ui.value > 4 ) {
-                       $( this ).spinner( "value", 4 );
+                     if ( ui.value > 0 ) {
+                       $( this ).spinner( "value", 0 );
                        return false;
-                     } else if ( ui.value < 2.1 ) {
+                     } else if ( ui.value < 0 ) {
                            $( this ).spinner( "value", 0 );
                        return false;
                        }
@@ -503,24 +520,37 @@ function refreshBehavior() {
       model.planyta = $("#slider_m2").slider("value");
       model.tomtyta = $("#slider_tomtyta").slider("value");
       model.gronyta = $("#slider_plant" ).slider("value");
+
+      model.floors = $( "#nr_floors" ).val();
+      model.floor_height = $( "#floor_height" ).val();
+
+      model.foundation_material = $( "#grund" ).val();
       model.foundation_armering = $( "#grund_armering" ).val();
       model.foundation_thickness = $( "#grund_thick" ).val();
+
       model.isolation_material_ut =  $( "#isolering" ).val();
       model.isolation_thickness_ut =  $("#slider_isolering").slider("value");
       model.isolation_material_in = $( "#iso_in" ).val();
       model.window_percentage = $( "#slider_windows" ).slider("value");
+      model.frame_material = $( "#stomme" ).val();
+      model.frame_floor_material = $( "#stomme_floor" ).val();
+      model.frame_roof_material = $( "#stomme_roof" ).val();
+      model.frame_stairs_material = $( "#stomme_stairs" ).val();
+
       $( "#kvm_value" ).html("<p>PLANYTA: " + model.planyta + " kvm</p>" );
       $( "#kvm_tomt_value" ).html("<p>TOMTYTA: " + model.tomtyta + " kvm</p>" );
       $( "#iso_thick" ).html("<p>ISOLERING UT: " + model.isolation_thickness_ut + " cm</p>" );
       $( "#window_text" ).html("<p>FÖNSTER: " + model.window_percentage + " % av yta</p>" );
       $( "#info_grona_ytor" ).html("<p>"+ (model.tomtyta-model.planyta)*model.gronyta/100 +" kvm "+ model.gronyta + " % av tillgänglig yta.</p>");
+
       model.update();
 
 };
 function updateTotals(){
-  $( "#total_co2" ).html("<p>"+ model.co2_m2+" kg CO<sub>2</sub>/m2</p>");
+  $( "#total_co2" ).html("<p>"+ Math.round(model.total_co2/1000) + "ton CO<sub>2</sub> " +  model.co2_m2+" kg CO<sub>2</sub>/m2</p>");
   $( "#greenfactor" ).html("<h1>"+ model.gyfactor+"</h1>");
   makeBarChart('chartbar-area', model);
+  makeDonutMaterial('chart-area', model);
   refreshEcosystem();
 };
 model.addListener(updateTotals);
