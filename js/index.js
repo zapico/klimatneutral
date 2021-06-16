@@ -1,9 +1,9 @@
 function makeDonutMaterial(id, model) {
     const data = [
       model.stomme_co2,
-      model.concrete_co2,
-      model.wood_co2,
-      model.isolation_co2
+      model.foundation_co2,
+      model.shell_co2,
+      model.inside_co2
     ];
 
     const ctx = document.getElementById(id).getContext('2d');
@@ -23,8 +23,8 @@ function makeDonutMaterial(id, model) {
           labels: [
             'Stomme',
             'Grund',
-            'Installationer',
-            'Isolering'
+            'Klimatskärm',
+            'Insida'
           ]
         },
         options: {
@@ -249,16 +249,17 @@ window.onload = async function () {
     const model = new Model();
 
     makeDonutMaterial('chart-area', model);
-    makeDonutCircularity('chart-area-circular', model);
+    //makeDonutCircularity('chart-area-circular', model);
     makeBarChart('chartbar-area', model);
-    makeBarChartEnergy('chartbar-area-energy', model);
+    //makeBarChartEnergy('chartbar-area-energy', model);
 
     $("#tabs").tabs();
 
     $( "#grund" ).selectmenu({change: refreshBehavior});
-    $( '#grund' ).append($('<option>', { value: model.concrete_insitu, text: 'Betong in-situ' }));
+    $( '#grund' ).append($('<option>', { value: model.concrete_insitu, text: 'Betong platsgjuten' }));
+    $( '#grund' ).append($('<option>', { value: model.concrete_insitu, text: 'Grön betong platsgjuten' })); //Uppdatera datan
     $( '#grund' ).append($('<option>', { value: model.concrete_prefab, text: 'Betong prefab' }));
-    $( '#grund' ).append($('<option>', { value: model.light_blocks, text: 'Lätta block' }));
+    //$( '#grund' ).append($('<option>', { value: model.light_blocks, text: 'Lätta block' }));
     $( "#grund" ).selectmenu({select: refreshBehavior });
 
     $( "#grund_armering" ).selectmenu();
@@ -267,42 +268,47 @@ window.onload = async function () {
     $( "#grund_armering" ).append($('<option>', { value: model.mixed_steel, text: 'Stål (50/50)' }));
     $( "#grund_armering" ).selectmenu({select: refreshBehavior });
 
+    $( "#grund_iso" ).selectmenu();
+    $( "#grund_iso" ).append($('<option>', { value: model.glasswool, text: 'Glasull och makadam' }));
+    $( "#grund_iso" ).append($('<option>', { value: model.cellplast, text: 'Cellplast och makadam' }));
+    $( "#grund_iso" ).selectmenu({select: refreshBehavior });
+
     $( "#stomme" ).selectmenu();
-    $( "#stomme" ).append($('<option>', { value: model.frame_insitu_concrete, text: 'Betong in-situ' }));
+    $( "#stomme" ).append($('<option>', { value: model.frame_insitu_concrete, text: 'Betong platsgjuten' }));
     $( "#stomme" ).append($('<option>', { value: model.frame_prefab_concrete, text: 'Betong prefab' }));
-    $( "#stomme" ).append($('<option>', { value: model.frame_CLT, text: 'Cross-laminated timber' }));
-    $( "#stomme" ).append($('<option>', { value: model.frame_light_timber, text: 'Light timber frame' }));
+    $( "#stomme" ).append($('<option>', { value: model.frame_CLT, text: 'Korslimmat trä' }));
+    $( "#stomme" ).append($('<option>', { value: model.frame_light_timber, text: 'Trästomme' })); //Kolla namnet
     $( "#stomme" ).append($('<option>', { value: model.frame_steel, text: 'Stål' }));
     $( "#stomme" ).selectmenu({select: refreshBehavior });
 
     $( "#stomme_floor" ).selectmenu();
-    $( "#stomme_floor" ).append($('<option>', { value: model.frame_insitu_concrete, text: 'Betong in-situ' }));
+    $( "#stomme_floor" ).append($('<option>', { value: model.frame_insitu_concrete, text: 'Betong platsgjuten' }));
     $( "#stomme_floor" ).append($('<option>', { value: model.frame_prefab_concrete, text: 'Betong prefab' }));
-    $( "#stomme_floor" ).append($('<option>', { value: model.frame_CLT, text: 'Cross-laminated timber' }));
-    $( "#stomme_floor" ).append($('<option>', { value: model.frame_light_timber, text: 'Light timber frame' }));
+    $( "#stomme_floor" ).append($('<option>', { value: model.frame_CLT, text: 'Korslimmat trä' }));
+    $( "#stomme_floor" ).append($('<option>', { value: model.frame_light_timber, text: 'Trästomme' }));
     $( "#stomme_floor" ).append($('<option>', { value: model.frame_steel, text: 'Stål' }));
     $( "#stomme_floor" ).selectmenu({select: refreshBehavior });
 
     $( "#stomme_stairs" ).selectmenu();
-    $( "#stomme_stairs" ).append($('<option>', { value: model.frame_insitu_concrete, text: 'Betong in-situ' }));
+    $( "#stomme_stairs" ).append($('<option>', { value: model.frame_insitu_concrete, text: 'Betong platsgjuten' }));
     $( "#stomme_stairs" ).append($('<option>', { value: model.frame_prefab_concrete, text: 'Betong prefab' }));
-    $( "#stomme_stairs" ).append($('<option>', { value: model.frame_CLT, text: 'Cross-laminated timber' }));
-    $( "#stomme_stairs" ).append($('<option>', { value: model.frame_light_timber, text: 'Light timber frame' }));
+    $( "#stomme_stairs" ).append($('<option>', { value: model.frame_CLT, text: 'Korslimmat trä' }));
+    $( "#stomme_stairs" ).append($('<option>', { value: model.frame_light_timber, text: 'Trästomme' }));
     $( "#stomme_stairs" ).append($('<option>', { value: model.frame_steel, text: 'Stål' }));
     $( "#stomme_stairs" ).selectmenu({select: refreshBehavior });
 
     $( "#stomme_roof" ).selectmenu();
-    $( "#stomme_roof" ).append($('<option>', { value: model.frame_insitu_concrete, text: 'Betong in-situ' }));
+    $( "#stomme_roof" ).append($('<option>', { value: model.frame_insitu_concrete, text: 'Betong platsgjuten' }));
     $( "#stomme_roof" ).append($('<option>', { value: model.frame_prefab_concrete, text: 'Betong prefab' }));
-    $( "#stomme_roof" ).append($('<option>', { value: model.frame_CLT, text: 'Cross-laminated timber' }));
-    $( "#stomme_roof" ).append($('<option>', { value: model.frame_light_timber, text: 'Light timber frame' }));
+    $( "#stomme_roof" ).append($('<option>', { value: model.frame_CLT, text: 'Korslimmat trä' }));
+    $( "#stomme_roof" ).append($('<option>', { value: model.frame_light_timber, text: 'Trästomme' }));
     $( "#stomme_roof" ).append($('<option>', { value: model.frame_steel, text: 'Stål' }));
     $( "#stomme_roof" ).selectmenu({select: refreshBehavior });
 
 
     $( "#isolering" ).selectmenu();
-    $( "#isolering" ).append($('<option>', { value: model.glasswool, text: 'Glasswool' }));
-    $( "#isolering" ).append($('<option>', { value: model.rockwool, text: 'Rockwool' }));
+    $( "#isolering" ).append($('<option>', { value: model.glasswool, text: 'Glasull' }));
+    $( "#isolering" ).append($('<option>', { value: model.rockwool, text: 'Mineralull' }));
     $( "#isolering" ).append($('<option>', { value: model.cellulose, text: 'Cellulosa' }));
     $( "#isolering" ).append($('<option>', { value: model.cellplast, text: 'Cellplast' }));
     $( "#isolering" ).selectmenu({select: refreshBehavior });
@@ -311,49 +317,37 @@ window.onload = async function () {
     $( "#fasad" ).selectmenu();
     $( "#fasad" ).append($('<option>', { value: model.wood_panels, text: 'Träpanel' }));
     $( "#fasad" ).append($('<option>', { value: model.wood_panels, text: 'Puts' }));
-    $( "#fasad" ).append($('<option>', { value: model.wood_panels, text: 'Komposit' }));
+    $( "#fasad" ).append($('<option>', { value: model.wood_panels, text: 'Mineralskiva' })); //Kolla detta
+    $( "#fasad" ).append($('<option>', { value: model.wood_panels, text: 'Tegel' }));
+    $( "#fasad" ).append($('<option>', { value: model.wood_panels, text: 'Glas' })); //Ska vi ha detta?
     $( "#fasad" ).selectmenu({select: refreshBehavior });
 
     $( "#windows" ).selectmenu();
-    $( "#windows" ).append($('<option>', { value: model.window_wood, text: 'Triple glazed wood frame' }));
-    $( "#windows" ).append($('<option>', { value: model.window_pvc, text: 'Triple glazed PVC frame' }));
-    $( "#windows" ).append($('<option>', { value: model.window_alu, text: 'Triple glazed aluminium frame' }));
+    $( "#windows" ).append($('<option>', { value: model.window_wood, text: 'Treglas trä' }));
+    $( "#windows" ).append($('<option>', { value: model.window_pvc, text: 'Treglas PVC' }));
+    $( "#windows" ).append($('<option>', { value: model.window_alu, text: 'Treglas aluminium' }));
 
     $( "#innerv" ).selectmenu();
 
     $( "#iso_in" ).selectmenu();
-    $( "#iso_in" ).append($('<option>', { value: model.glasswool, text: 'Glasswool' }));
-    $( "#iso_in" ).append($('<option>', { value: model.rockwool, text: 'Rockwool' }));
+    $( "#iso_in" ).append($('<option>', { value: model.glasswool, text: 'Glasull' }));
+    $( "#iso_in" ).append($('<option>', { value: model.rockwool, text: 'Mineralull' }));
     $( "#iso_in" ).append($('<option>', { value: model.cellulose, text: 'Cellulosa' }));
     $( "#iso_in" ).append($('<option>', { value: model.cellplast, text: 'Cellplast' }));
     $( "#iso_in" ).selectmenu({select: refreshBehavior });
 
     $( "#golv" ).selectmenu();
     $( "#roof_material" ).selectmenu();
-    $( "#heating" ).selectmenu();
 
+    $( "#heating" ).selectmenu();
+    $( "#heating" ).append($('<option>', { value: model.glasswool, text: 'Fjärrvärme' }));
+    $( "#heating" ).append($('<option>', { value: model.glasswool, text: 'Värmepump' }));
+    $( "#heating" ).append($('<option>', { value: model.glasswool, text: 'Flispanna' }));
+    $( "#heating" ).append($('<option>', { value: model.glasswool, text: 'Direktverkande el' }));
 
     $("input[type='checkbox']" ).checkboxradio({icon: false});
     $( "input[type='checkbox']").on( "change", refreshEcosystem );
 
-
-    $( "#grund_thick" ).spinner({
-              step: 0.1,
-              spin: function( event, ui ) {
-                if ( ui.value > 10 ) {
-                  $( this ).spinner( "value", 10 );
-                    refreshBehavior();
-                  return false;
-                } else if ( ui.value < 0.3 ) {
-                  $( this ).spinner( "value", 0.3 );
-                  refreshBehavior();
-                  return false;
-                }else{
-                    refreshBehavior();
-                }
-
-              }
-            });
       $( "#nr_floors" ).spinner({
             step: 1,
             spin: function( event, ui ) {
@@ -526,7 +520,7 @@ function refreshBehavior() {
 
       model.foundation_material = $( "#grund" ).val();
       model.foundation_armering = $( "#grund_armering" ).val();
-      model.foundation_thickness = $( "#grund_thick" ).val();
+      model.foundation_iso = $( "#grund_iso" ).val();
 
       model.isolation_material_ut =  $( "#isolering" ).val();
       model.isolation_thickness_ut =  $("#slider_isolering").slider("value");
@@ -539,7 +533,6 @@ function refreshBehavior() {
 
       $( "#kvm_value" ).html("<p>PLANYTA: " + model.planyta + " kvm</p>" );
       $( "#kvm_tomt_value" ).html("<p>TOMTYTA: " + model.tomtyta + " kvm</p>" );
-      $( "#iso_thick" ).html("<p>ISOLERING UT: " + model.isolation_thickness_ut + " cm</p>" );
       $( "#window_text" ).html("<p>FÖNSTER: " + model.window_percentage + " % av yta</p>" );
       $( "#info_grona_ytor" ).html("<p>"+ (model.tomtyta-model.planyta)*model.gronyta/100 +" kvm "+ model.gronyta + " % av tillgänglig yta.</p>");
 
@@ -547,7 +540,7 @@ function refreshBehavior() {
 
 };
 function updateTotals(){
-  $( "#total_co2" ).html("<p>"+ Math.round(model.total_co2/1000) + "ton CO<sub>2</sub> " +  model.co2_m2+" kg CO<sub>2</sub>/m2</p>");
+  $( "#total_co2" ).html("<p>"+  model.co2_m2+" kg CO<sub>2</sub>/m2</p>");
   $( "#greenfactor" ).html("<h1>"+ model.gyfactor+"</h1>");
   makeBarChart('chartbar-area', model);
   makeDonutMaterial('chart-area', model);

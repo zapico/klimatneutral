@@ -29,7 +29,13 @@ header{
   padding:10px;
   height:auto;
 }
-
+#left_text{
+  float:left;
+  width:40%;
+  padding:10px;
+  margin-left:20px;
+  height:auto;
+}
 footer{
   float:left;
   width:90%;
@@ -73,9 +79,8 @@ footer{
 }
 
 #Materials{
-  position: relative;
-  width:90%;
-
+  float:right;
+  width:45%;
   text-align: center;
 }
 #Circular{
@@ -163,6 +168,9 @@ p,ui-selectmenu-text {
   font-family: 'Alata', sans-serif;
   font-size: 0.9em;
 
+}
+cerulean{
+  color:#9BC4E2;
 }
 nr{
   font-size: 2.4em;
