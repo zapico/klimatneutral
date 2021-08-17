@@ -44,19 +44,19 @@ footer{
 
 #co2_general{
   float:left;
-  width:45%;
+  width:95%;
   height:auto;
   text-align: center;
 }
 #co2_info{
-  position: relative;
-  width:90%;
-  text-align: center;
+  float:left;
+  width:40%;
+  text-align: left;
 }
 #co2_bar{
-  position: relative;
-  width:90%;
-  text-align: center;
+  float:right;
+  width:40%;
+  text-align: left;
 }
 
 #energy_general{
@@ -79,10 +79,25 @@ footer{
 }
 
 #Materials{
-  float:right;
-  width:45%;
+  margin-top:25px;
+  float:left;
+  width:100%;
   text-align: center;
 }
+#materials_text{
+  float:left;
+  width:20%;
+  text-align: right;
+  padding-top:20px;
+}
+#materials_graph{
+  float:right;
+  padding-top:0px;
+  width:80%;
+  text-align: center;
+}
+
+
 #Circular{
   position: relative;
   width:90%%;
@@ -125,19 +140,13 @@ footer{
   opacity: 0.1;
 }
 
-#tabs{
-  float: left;
-  height: 600px;
-  width: 100%;
-}
-
 .byggval_left{
   float: left;
-  width: 45%;
+  width: 40%;
 }
 .byggval_right{
   float: right;
-  width: 45%;
+  width: 40%;
 }
 
 .column_left{
@@ -169,11 +178,15 @@ p,ui-selectmenu-text {
   font-size: 0.9em;
 
 }
-cerulean{
-  color:#9BC4E2;
-}
+cerulean{color:#9BC4E2;}
+fasad{color:#119DA4;}
+inne{color:#19647E;}
+stomme{color:#7C6354;}
+grund{color:#FFC857;}
+
+
 nr{
-  font-size: 2.4em;
+  font-size: 4.4em;
 }
 .node {
   fill: #ddd;
