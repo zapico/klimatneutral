@@ -3,10 +3,10 @@ class Model {
     constructor() {
         // Start variables
         // List of materials
-        this.frame_prefab_concrete =	50.00	//m2
-        this.frame_insitu_concrete =	40.00	//m2
-        this.frame_light_timber =	30.00	//m2
-        this.frame_CLT = 35.00 //	m2
+        this.frame_prefab_concrete =	359.3	//m2
+        this.frame_insitu_concrete =	359.3	//m2
+        this.frame_light_timber =	69.80	//m2
+        this.frame_CLT = 90.30 //	m2
         this.frame_steel =	60.00	//m2
 
         this.concrete_insitu =	256.15	//m3
@@ -29,14 +29,14 @@ class Model {
 
         this.macadam = 2.4 // 1.6 g co2 per kg 1500 kg per m3 -> 2.4kg per m3 (this seems low?)
 
-        this.facad_wood_panels = 1.3314	// Check data, original in m3??
-        this.facad_puts = 1.50; //m2 FAKE
-        this.fasad_mineralskiva = 1.50; //m2 FAKE
-        this.fasad_tegel = 1.50; //m2 FAKE
+        this.facad_wood_panels = 2.5	// m2
+        this.facad_puts = 2.50; //m2 FAKE
+        this.fasad_mineralskiva = 2.50; //m2 FAKE
+        this.fasad_tegel = 2.50; //m2 FAKE
 
-        this.window_wood = 10; //Fake data
-        this.window_alu = 10; //Fake data
-        this.window_pvc = 10; //Fake data
+        this.window_wood = 75.9;
+        this.window_alu = 75.9; //Fake data
+        this.window_pvc = 75.9; //Fake data
 
         this.wood_panels_inne = 1.33; //m2 Check data!
         this.gips_inne = 1.50; //m2 Fake data!
@@ -46,11 +46,11 @@ class Model {
         this.flooring_laminat = 10; //m2 Fake data
         this.flooring_plast = 10; //m2 Fake data
 
-        this.roof_metal = 1.50; //m2 Fake data
-        this.roof_tiles = 1.50; //m2 Fake data
-        this.roof_concretetiles = 1.50; //m2 Fake data
-        this.roof_sedum = 1.50; //m2 Fake data
-        this.roof_takpapp = 1.50; //m2 Fake data
+        this.roof_metal = 4.7; //m2 Fake data
+        this.roof_tiles = 4.7; //m2 Fake data
+        this.roof_concretetiles = 4.7; //m2 Fake data
+        this.roof_sedum = 4.7; //m2 Fake data
+        this.roof_takpapp = 4.7; //m2 Fake data
 
         //Building parameters
         this.tomtyta = 1000;
@@ -131,10 +131,10 @@ class Model {
       var envelope_factor = 1;
       var floor_factor = 1;
       var roof_factor = 1;
-      var stairs_factor = 1;
+      var stairs_factor = 1.5; //1.5 m3 per floor
       var door_factor = 0.9; //How much of wall is not doors in percentage
-      var roof_area = 0;
-      var factor_walls = 0.05; // How much of area are walls in percentage
+      var roof_area = 1;
+      var factor_walls = 2.2; // Ratio of interior walls to envelope
       var isolation_thickness_ut = 0.150;
 
       // Calculate roof size
@@ -206,7 +206,7 @@ class Model {
       this.shell_co2 = Math.round(this.shell_co2);
 
       // 4. Calculate inside
-      var inside_walls_area = this.planyta*factor_walls*this.floor_height*this.floors*door_factor; //
+      var inside_walls_area = envelope*factor_walls; //
       // 4.1 Walls
       switch(this.frame_material){
         case "CLT":

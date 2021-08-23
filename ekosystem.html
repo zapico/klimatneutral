@@ -27,7 +27,7 @@
 
 	<header>
     <div id="logo">
-			<h2>BYGG<cerulean>CO<sub>2</sub></cerulean>LLEN</h2>
+			<h2>BYGG<cerulean>CO<sub>2</sub></cerulean>LLEN: EKOSYSTEMTJÄNSTER</h2>
     </div>
 
 	</header>
@@ -36,155 +36,20 @@
 
   <div id="left">
 
-		<div id="tabs">
-			<ul>
-				<li><a href="#tabs-1">Stomme</a></li>
-				<li><a href="#tabs-2">Skal och insida</a></li>
-				<!--<li><a href="#tabs-3">Teknik</a></li>-->
-				<!--<li><a href="#tabs-4">Mark</a></li>-->
-			</ul>
-
-			<div id="tabs-1">
-				<div id="storlek" class="byggval_left">
-					<fieldset>
 
 						<div id="kvm_value"><p>YTA PER VÅNING: 100 kvm</p></div>
 						<div id="slider_m2"></div>
-						<p><input id="nr_floors" name="value_nr_floors"></input> våningar</p>
-						<p><input id="floor_height" name="value_floor_height"></input> m takhöjd</p>
-						<p><input id="nr_basement" name="value_nr_basement"></input> källarplan</p>
-					</fieldset>
-				</div>
-				<div id="stommediv" class="byggval_right">
-					<fieldset>
-					<p>STOMME</p>
-					<p>VÄGGAR</p>
-							<select name="stomme" id="stomme">
-								<option disabled selected>Välj material väggar</option>
-							</select>
-					<p>VÅNINGAR</p>
-							<select name="stomme2" id="stomme_floor">
-								<option disabled selected>Välj material våningar</option>
-							</select>
-					<p>TRAPPOR</p>
-							<select name="stomme3" id="stomme_stairs">
-								<option disabled selected>Välj material trappor</option>
-							</select>
-					<p>TAKSTOLAR</p>
-							<select name="stomme4" id="stomme_roof">
-								<option disabled selected>Välj material takstolar</option>
-							</select>
+						<div id="kvm_tomt_value"><p>TOMTYTA: 1000 kvm</p></div>
+						<div id="slider_tomtyta"></div>
+						<div id="info_grona_ytor"><p>Andel grön yta av tilgänglig mark efter byggnationen.</p></div>
+						<div id="slider_plant"></div>
+						</fieldset>	
 
-					</fieldset>
-				</div>
-				<div id="grund_param" class="byggval_left">
-					<fieldset>
-					<p>GRUND</p>
-					<p>MATERIAL:&nbsp;&nbsp;
-					<select name="grund" id="grund">
-						<option disabled selected>Välj material</option>
-					</select></p>
-					<p>ARMERING:
-					<select name="grund_armering" id="grund_armering">
-						<option disabled selected>Välj armering</option>
-					</select></p>
-					<p>ISOLERING:
-					<select name="grund_iso" id="grund_iso">
-						<option disabled selected>Välj isolering</option>
-					</select></p>
-					</fieldset>
-				</div>
-			</div>
+					<p>SOLPANELLER: 0st<p/>
+					<div id="slider_solceller"></div>
 
-			<div id="tabs-2">
-				<div id="isoleringdiv" class="byggval_left">
-					<fieldset>
-						<p>FASAD</p>
-						<p><select name="FASAD" id="fasad">
-						<option disabled selected>Välj material</option>
-						</select></p>
-
-						<div id="window_text"><p>FÖNSTER: 10% av yta</p></div>
-						<div id="slider_windows"></div>
-						<p><select name="windows" id="windows">
-							<option disabled selected>Välj material</option>
-						</select></p>
-					</fieldset>
-					<fieldset>
-						<div id="iso_thick"><p>ISOLERING UT: 40cm</p></div>
-						<div id="slider_isolering"></div>
-						<br/>
-						<select name="isolering" id="isolering">
-							<option disabled selected>Välj material</option>
-						</select>
-					</fieldset>
-
-						<fieldset>
-							<p>TAK</p>
-							<select name="roof_material" id="roof_material">
-								<option disabled selected>Välj material</option>
-								<option value="">Plåt</option>
-								<option value="">Tegel</option>
-								<option value="">Betongpannor</option>
-								<option value="">Sedum</option>
-							</select>
-							<p>VINKEL: 30°</p>
-							<div id="slider_takvinkel"></div>
-
-						</fieldset>
-
-				</div>
-				<div id="insidan" class="byggval_right">
-					<fieldset>
-						<p>INNERVÄGGAR</p>
-						<select name="innerv" id="innerv">
-							<option disabled selected>Välj material innerväggar</option>
-							<option value="">Gips</option>
-							<option value="">Träpanel</option>
-							<option value="">...</option>
-						</select>
-					<p>GOLV</p>
-					<select name="golv" id="golv">
-						<option disabled selected>Välj material golv</option>
-						<option value="">Massivt trä</option>
-						<option value="">Laminat</option>
-						<option value="">Plastmatta</option>
-					</select>
-					<p>ISOLERING INNERVÄGGAR</p>
-					<select name="iso_in" id="iso_in">
-						<option disabled selected>Välj material isolering</option>
-					</select>
-				</fieldset>
-				</div>
-
-
-			</div>
-
-				<div id="tabs-3">
-
-			</div>
-			<!-- <div id="tabs-3">
-				<div id="energi" class="byggval_left">
-					<fieldset>
-							<p>UPPVÄRMNING</p>
-							<select name="heating" id="heating">
-								<option disabled selected>Välj teknik</option>
-							</select>
-							<p>FJÄRRKYLA</p>
-							<p></p>
-							<p>SOLPANELLER: 0st<p/>
-							<div id="slider_solceller"></div>
-						</fieldset>
-				</div>
-			</div>
-			<div id="tabs-4">
-				<div id="ute" class="byggval">
 					<p>GRÖNA YTOR</p>
-					<div id="kvm_tomt_value"><p>TOMTYTA: 1000 kvm</p></div>
-					<div id="slider_tomtyta"></div>
-					<div id="info_grona_ytor"><p>Andel grön yta av tilgänglig mark efter byggnationen.</p></div>
-					<div id="slider_plant"></div>
-					</fieldset>
+
 					<p>INSATSER GRÖNYTA</p>
 					<fieldset>
 					<label for="checkbox-damm">Dammar och vattendrag</label>
@@ -199,43 +64,11 @@
 					<input type="checkbox" name="checkbox-keep" id="checkbox-keep">
 					</fieldset>
 				</div>
-			</div>-->
+			</div>
 		</div>
 
 	</div>
 	<div id="right">
-
-		<div id="co2_general">
-			<div id="co2_info">
-				<p>KLIMATPÅVERKAN<p>
-				<div id="total_co2"><p>CO2/m2</p></div>
-			</div>
-			<div id ="co2_bar">
-				<canvas id="chartbar-area"></canvas>
-			</div>
-		</div>
-		<div id ="Materials">
-			<p>BYGGDEL</p>
-			<canvas id="chart-area"></canvas>
-			<p>Klimatskärm: 12 tco2 25%</p>
-			<p>Stomme: 12 tco2 25%</p>
-			<p>Grund: 12 tco2 25%</p>
-			<p>Innerväggar: 12 tco2 25%</p>
-		</div>
-
-<!--<div id ="energy_general">
-			<div id ="energy_info">
-				<p>ENERGIEFFEKTIVITET</p>
-				<p>32 KWH/m2 År</p>
-			</div>
-			<div id ="energy_bar">
-				<canvas id="chartbar-area-energy"></canvas>
-			</div>
-			<div id ="Circular">
-				<p>AVINDEX</p>
-				<canvas id="chart-area-circular"></canvas>
-			</div>
-		</div>
 
 		<div id="EST">
 			<div id="GYF">
@@ -249,7 +82,7 @@
 				<div class="et" id="et_energy"><img src="/assets/et3.4.png" alt="Biologisk mångfald" height="100%"/><p>Försörjande tjänster</p></div>
 				<div class="et" id="et_cultural"><img src="/assets/et4.2.png" alt="Biologisk mångfald" height="100%"/><p>Kulturella tjänster</p></div>
 			</div>
-		</div>-->
+		</div>
 
 	</div>
 </div>
