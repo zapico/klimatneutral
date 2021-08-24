@@ -215,8 +215,7 @@ window.onload = async function () {
     //$( "#heating" ).append($('<option>', { value: model.glasswool, text: 'Flispanna' }));
     //$( "#heating" ).append($('<option>', { value: model.glasswool, text: 'Direktverkande el' }));
 
-    //$("input[type='checkbox']" ).checkboxradio({icon: false});
-    //$( "input[type='checkbox']").on( "change", refreshEcosystem );
+
 
     $( "#nr_floors" ).spinner({
             step: 1,
@@ -296,39 +295,10 @@ window.onload = async function () {
       value: model.roof_angle
     } );
 
-function refreshEcosystem(){
-    var et_1 = 0.1;
-    var et_2 = 0.1;
-    var et_3 = 0.1;
-    var et_4 = 0.1;
-    if ($( "#checkbox-damm" ).is(":checked")) { et_2 += 0.4; };
-    if ($( "#checkbox-frukt" ).is(":checked")) { et_1 += 0.4; et_3 += 0.4; };
-    if ($( "#checkbox-bi" ).is(":checked")) { et_1 += 0.4; };
-    if ($( "#checkbox-motion" ).is(":checked")) { et_4 += 0.4; };
-    if ($( "#checkbox-keep" ).is(":checked")) { et_1 += 0.4; et_2 += 0.4;};
-    if (model.gyfactor >= 0.2) {
-      et_1 += 0.3;
-      et_2 += 0.3;
-      et_4 += 0.3;
-    } else {
-      if (model.gyfactor > 0.1){
-        et_1 += 0.1;
-        et_2 += 0.1;
-        et_4 += 0.1;
-      }
-    };
-    $( "#et_support" ).css('opacity', et_1);
-    $( "#et_regulate" ).css('opacity', et_2);
-    $( "#et_energy" ).css('opacity', et_3);
-    $( "#et_cultural" ).css('opacity', et_4);
-};
-
 function refreshBehavior() {
       // Update values
 
       model.planyta = $("#slider_m2").slider("value");
-      //model.tomtyta = $("#slider_tomtyta").slider("value");
-      //model.gronyta = $("#slider_plant" ).slider("value");
 
       model.floors = $( "#nr_floors" ).val();
       model.floor_height = $( "#floor_height" ).val();
@@ -348,7 +318,6 @@ function refreshBehavior() {
       model.window_material = $( "#windows" ).val();
 
       $( "#kvm_value" ).html("<p>PLANYTA: " + model.planyta + " kvm</p>" );
-      $( "#kvm_tomt_value" ).html("<p>TOMTYTA: " + model.tomtyta + " kvm</p>" );
       $( "#window_text" ).html("<p>FÖNSTER: " + model.window_percentage + " % av yta</p>" );
       //$( "#info_grona_ytor" ).html("<p>"+ (model.tomtyta-model.planyta)*model.gronyta/100 +" kvm "+ model.gronyta + " % av tillgänglig yta.</p>");
 
@@ -363,7 +332,7 @@ function updateTotals(){
   $( "#stomme_co2" ).html("<h3><stomme>STOMME</stomme><br>"+  Math.round(model.stomme_co2/1000)+ " ton CO<sub>2</sub></h3>");
   $( "#inne_co2" ).html("<h3><inne>INSIDA</inne><br>"+  Math.round(model.inside_co2/1000)+ " ton CO<sub>2</sub></h2>");
 
-  //$( "#greenfactor" ).html("<h1>"+ model.gyfactor+"</h1>");
+
   window.myDoughnut.data.datasets[0].data[0] = model.stomme_co2;
   window.myDoughnut.data.datasets[0].data[1] = model.foundation_co2;
   window.myDoughnut.data.datasets[0].data[2] = model.shell_co2;

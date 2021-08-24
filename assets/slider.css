@@ -1,0 +1,9 @@
+.ui-slider-range {
+  background: white;
+}
+.ui-slider-range:nth-child(1) {
+  background: black;
+}
+.highlight {
+  background: grey;
+}
