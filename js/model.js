@@ -3,10 +3,10 @@ class Model {
     constructor() {
         // Start variables
         // List of materials
-        this.frame_prefab_concrete =	359.3	//m2
-        this.frame_insitu_concrete =	359.3	//m2
-        this.frame_light_timber =	69.80	//m2
-        this.frame_CLT = 90.30 //	m2
+        this.frame_prefab_concrete =	359.3	//m3
+        this.frame_insitu_concrete =	359.3	//m3
+        this.frame_light_timber =	69.80	//m3
+        this.frame_CLT = 90.30 //	m3
         this.frame_steel =	60.00	//m2
 
         this.concrete_insitu =	256.15	//m3
@@ -29,13 +29,13 @@ class Model {
 
         this.macadam = 2.4 // 1.6 g co2 per kg 1500 kg per m3 -> 2.4kg per m3 (this seems low?)
 
-        this.facad_wood_panels = 2.5	// m2
-        this.facad_puts = 2.50; //m2 FAKE
-        this.fasad_mineralskiva = 2.50; //m2 FAKE
-        this.fasad_tegel = 2.50; //m2 FAKE
+        this.facad_wood_panels = 5.6// m2
+        this.facad_puts = 6.1; //m2
+        this.fasad_mineralskiva = 19.75; //m2
+        this.fasad_tegel = 18; //m2
 
-        this.window_wood = 75.9;
-        this.window_alu = 75.9; //Fake data
+        this.window_wood = 67.9; //Standard for all windows
+        this.window_alu = 75.9; // Fake data
         this.window_pvc = 75.9; //Fake data
 
         this.wood_panels_inne = 1.33; //m2 Check data!
@@ -46,11 +46,13 @@ class Model {
         this.flooring_laminat = 10; //m2 Fake data
         this.flooring_plast = 10; //m2 Fake data
 
-        this.roof_metal = 4.7; //m2 Fake data
-        this.roof_tiles = 4.7; //m2 Fake data
-        this.roof_concretetiles = 4.7; //m2 Fake data
+        this.roof_metal = 26.67; //m2
+        this.roof_tiles = 7.09; //m2 0,215kg co2 per kg, 33 kg per kvm
+        this.roof_concretetiles = 5.7; //m2 Fake data
         this.roof_sedum = 4.7; //m2 Fake data
-        this.roof_takpapp = 4.7; //m2 Fake data
+        this.roof_takpapp = 21.52; //m2 5.380 x 4kg per kvm
+
+        this.roof_membrane = 4.4 //m2
 
         //Building parameters
         this.tomtyta = 1000;
@@ -70,7 +72,7 @@ class Model {
         this.foundation_iso = 0;
         this.foundation_thickness = 0.3; //Standard
 
-        this.roof_angle = 0;
+        this.roof_angle = 30;
         this.roof_material = 0;
 
         this.isolation_material_ut = 25;
@@ -113,7 +115,7 @@ class Model {
       // 1. Calculate foundation
       // Basement?? Other types?
       var f1 = this.foundation_material*this.foundation_thickness*this.planyta; //Material
-      var f2 = this.foundation_armering*this.foundation_armering_percent*this.planyta; //armering
+      var f2 = this.foundation_armering*this.foundation_thickness*this.planyta*80; //armering 80kg per m3 betong
       var f3 = this.foundation_iso*this.planyta*0.3; //isolering 30cm standard
       var f4 = this.macadam*this.foundation_armering_percent*this.planyta*0.3; //makadam 30cm
       this.foundation_co2 = f1+f2+f3+f4;
@@ -137,23 +139,25 @@ class Model {
 
       // Calculate roof size
       if (this.roof_angle == 0){
-        this.roof_area = this.planyta;
+        var roof_area = this.planyta;
       }else{
-        this.roof_area = this.side_lenght * ((this.side_lenght/2)/cos(this.roof_angle)) * 2; //building lenght * rafter length calculated with angle * times two rafters
+
+        var angle_rad = this.roof_angle*(3.1416/180);
+        var roof_area = side_lenght * ((side_lenght/2)/Math.cos(angle_rad)) * 2; //building lenght * rafter length calculated with angle * times two rafters
       };
       // Calculate frame
       // Do switch for materials
       switch(this.frame_material){
         case "Timber":
-          var s1 = this.frame_light_timber*envelope*envelope_factor;
+          var s1 = this.frame_light_timber*envelope*0.3*0.3;
           var s2 = this.frame_light_timber*this.planyta*this.floors*0.3*0.3; //thickness 0.3m, a third of area is frame
         break;
         case "Betong":
-          var s1 = this.frame_insitu_concrete*envelope*envelope_factor;
+          var s1 = this.frame_insitu_concrete*envelope*0.3*0.3;
           var s2 = this.frame_insitu_concrete*this.planyta*this.floors*0.3*0.3; //thickness 0.3m, a third of area is frame
         break;
         case "CLT":
-          var s1 = this.frame_CLT*envelope*envelope_factor;
+          var s1 = this.frame_CLT*envelope*0.3*0.3;
           var s2 = this.frame_CLT*this.planyta*this.floors*0.3*0.3; //thickness 0.3m, a third of area is frame
         break;
     };
@@ -161,7 +165,9 @@ class Model {
       if (this.roof_angle == 0){
         var s3 = this.frame_light_timber*this.planyta*0.3*0.34; // thickness 17cm*2 , a third of area is frame
       }else{
-        var s3 = this.frame_light_timber*this.roof_area*10;//10m3 of truss material per sq meter area
+        var s3 = this.frame_light_timber*this.planyta*0.3*0.34; // under
+        s3 += this.frame_light_timber*roof_area*0.3*0.34 + this.frame_light_timber*this.planyta*0.3*0.34; //trusses
+
       };
       // Calculate stairs, always in concrete
       var s4 = this.concrete_insitu*(this.floors-1)*1; // FIX FACTOR
@@ -194,10 +200,11 @@ class Model {
       // 3.3 Roof
       //console.log("Roof: 1.Material impact: "+this.roof_material_impact+" 2.Area: "+roof_area)
       var w3 = this.roof_material_impact*roof_area;
+      w3 += this.roof_membrane*roof_area;
       //console.log("Total roof: "+w3);
       // 3.4 Windows
       //console.log("Windows: 1.Material impact"+ this.window_material + " 2.window area:"+ window_area);
-      var w4 = this.window_material*window_area;
+      var w4 = this.window_wood*window_area;
       //console.log("Total window: "+w4);
       //Sum up
       this.shell_co2 = w1 + w2 + w3 + w4;
@@ -231,6 +238,8 @@ class Model {
       this.total_co2 = this.foundation_co2 + this.shell_co2 + this.inside_co2 + this.stomme_co2;
       this.co2_m2 = Math.round(this.total_co2/(this.planyta*this.floors));
       if(this.co2_m2 == 0){this.co2_m2 =1;}
+
+      console.log(this.floors);
 
       for (let func of this.listeners) {
           func();

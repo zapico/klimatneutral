@@ -9,8 +9,6 @@ window.onload = async function () {
     min: 0,
     max: 99,
     values: [10, 20, 25],
-    classes: {
-    "ui-slider-range": "highlight"},
     slide: function(event, ui) {
       $range.css('left', ui.values[0] + '%');
       $range.css('width', (ui.values[1] - ui.values[0]) + '%');

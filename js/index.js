@@ -133,7 +133,7 @@ window.onload = async function () {
 
     $( "#grund" ).selectmenu({change: refreshBehavior});
     $( '#grund' ).append($('<option>', { value: model.concrete_insitu, text: 'Betong platsgjuten', selected: "selected"}));
-    $( '#grund' ).append($('<option>', { value: model.concrete_insitu, text: 'Grön betong platsgjuten' })); //Uppdatera datan
+    //$( '#grund' ).append($('<option>', { value: model.concrete_insitu, text: 'Grön betong platsgjuten' })); //Uppdatera datan
     $( '#grund' ).append($('<option>', { value: model.concrete_prefab, text: 'Betong prefab' }));
     //$( '#grund' ).append($('<option>', { value: model.light_blocks, text: 'Lätta block' }));
     $( '#grund' ).selectmenu("refresh");
@@ -189,22 +189,22 @@ window.onload = async function () {
     $( "#innerv" ).selectmenu();
     $( "#innerv" ).append($('<option>', { value: model.wood_panels_inne, text: 'Träpanel' }));
     $( "#innerv" ).append($('<option>', { value: model.gips_inne, text: 'Gips', selected: "selected" }));
-    $( "#innerv" ).append($('<option>', { value: model.betong_inne, text: 'Betong' }));
+  //$( "#innerv" ).append($('<option>', { value: model.betong_inne, text: 'Betong' }));
     $( '#innerv' ).selectmenu("refresh");
     $( "#innerv" ).selectmenu({select: refreshBehavior });
 
     $( "#golv" ).selectmenu();
     $( "#golv" ).append($('<option>', { value: model.flooring_wood, text: 'Massivt trä' }));
-    $( "#golv" ).append($('<option>', { value: model.flooring_plast, text: 'Plastmatta' }));
+//  $( "#golv" ).append($('<option>', { value: model.flooring_plast, text: 'Plastmatta' }));
     $( "#golv" ).append($('<option>', { value: model.flooring_laminat, text: 'Laminat', selected: "selected" }));
     $( '#golv' ).selectmenu("refresh");
     $( "#golv" ).selectmenu({select: refreshBehavior });
 
     $( "#roof_material" ).selectmenu();
     $( "#roof_material" ).append($('<option>', { value: model.roof_metal, text: 'Plåt' }));
-    $( "#roof_material" ).append($('<option>', { value: model.roof_tiles, text: 'Tegel' }));
-    $( "#roof_material" ).append($('<option>', { value: model.roof_concretetiles, text: 'Betongpannor',selected: "selected" }));
-    $( "#roof_material" ).append($('<option>', { value: model.roof_sedum, text: 'Sedum' }));
+    $( "#roof_material" ).append($('<option>', { value: model.roof_tiles, text: 'Takpannor', selected: "selected"}));
+  //  $( "#roof_material" ).append($('<option>', { value: model.roof_concretetiles, text: 'Betongpannor',selected: "selected" }));
+  //  $( "#roof_material" ).append($('<option>', { value: model.roof_sedum, text: 'Sedum' }));
     $( "#roof_material" ).append($('<option>', { value: model.roof_takpapp, text: 'Takpapp' }));
     $( '#roof_material' ).selectmenu("refresh");
     $( "#roof_material" ).selectmenu({select: refreshBehavior });
@@ -221,18 +221,16 @@ window.onload = async function () {
             step: 1,
             spin: function( event, ui ) {
                         if ( ui.value > 20 ) {
-                          $( this ).spinner( "value", 20 );
-                          refreshBehavior();
+                          $( this ).spinner( "value", 10 );
                           return false;
                         } else if ( ui.value < 1 ) {
                           $( this ).spinner( "value", 1 );
-                          refreshBehavior();
                           return false;
                         } else {
-                          refreshBehavior();
-                        }
-
-            }
+                        }},
+            stop: function(){
+                    refreshBehavior();
+                  }
           });
     $( "#nr_floors" ).val(model.floors);
 
@@ -241,17 +239,17 @@ window.onload = async function () {
             spin: function( event, ui ) {
                       if ( ui.value > 4 ) {
                         $( this ).spinner( "value", 4 );
-                        refreshBehavior();
                         return false;
                       } else if ( ui.value < 2.1 ) {
                             $( this ).spinner( "value", 2.1 );
-                            refreshBehavior();
                         return false;
                       } else {
-                        refreshBehavior();
                       }
 
-          }
+          },
+          stop: function(){
+                  refreshBehavior();
+                }
      });
     $( "#floor_height" ).val(model.floor_height);
 
@@ -292,7 +290,9 @@ window.onload = async function () {
       orientation: "horizontal",
       range: "min",
       max: 45,
-      value: model.roof_angle
+      value: model.roof_angle,
+      slide: refreshBehavior,
+      change: refreshBehavior
     } );
 
 function refreshBehavior() {
@@ -307,9 +307,11 @@ function refreshBehavior() {
       model.foundation_armering = $( "#grund_armering" ).val();
       model.foundation_iso = $( "#grund_iso" ).val();
 
-      model.isolation_material_in = $( "#iso_in" ).val();
+      model.isolation_material_in = $( "#isolering" ).val();
+      model.isolation_material_ut = $( "#isolering" ).val();
       model.window_percentage = $( "#slider_windows" ).slider("value");
       model.frame_material = $( "#stomme" ).val();
+      model.roof_angle = $( "#slider_takvinkel" ).slider("value");
 
       model.facad_material_impact = $( "#fasad" ).val();
       model.roof_material_impact = $( "#roof_material" ).val();
@@ -319,6 +321,7 @@ function refreshBehavior() {
 
       $( "#kvm_value" ).html("<p>PLANYTA: " + model.planyta + " kvm</p>" );
       $( "#window_text" ).html("<p>FÖNSTER: " + model.window_percentage + " % av yta</p>" );
+      $( "#takvinkel_text" ).html("<p>VINKEL: " + model.roof_angle + " °</p>" );
       //$( "#info_grona_ytor" ).html("<p>"+ (model.tomtyta-model.planyta)*model.gronyta/100 +" kvm "+ model.gronyta + " % av tillgänglig yta.</p>");
 
       model.update();

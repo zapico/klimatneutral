@@ -42,7 +42,7 @@
 						<div id="slider_m2"></div>
 						<p><input id="nr_floors" name="value_nr_floors"></input> våningar</p>
 						<p><input id="floor_height" name="value_floor_height"></input> m takhöjd</p>
-						<p><input id="nr_basement" name="value_nr_basement"></input> källarplan</p>
+						<!--<p><input id="nr_basement" name="value_nr_basement"></input> källarplan</p>!-->
 					</fieldset>
 
 					<fieldset>
@@ -76,9 +76,9 @@
 
 						<div id="window_text"><p>FÖNSTER: 10% av yta</p></div>
 						<div id="slider_windows"></div>
-						<p><select name="windows" id="windows">
+						<!--<p><select name="windows" id="windows">
 							<option disabled selected>Välj material</option>
-						</select></p>
+						</select></p !-->
 					</fieldset>
 					<fieldset>
 						<div id="iso_thick"><p>ISOLERING</p></div>
@@ -92,7 +92,7 @@
 							<select name="roof_material" id="roof_material">
 								<option disabled selected>Välj material</option>
 							</select>
-							<p>VINKEL: 30°</p>
+							<div id="takvinkel_text"><p>VINKEL: 0°</p></div>
 							<div id="slider_takvinkel"></div>
 
 						</fieldset>
@@ -206,8 +206,10 @@
 
 	<footer>
 		<img src="/assets/logo.svg" alt="VXJ" width='100px'/><img src="https://lnu.se/api/media/20236-w448h954cy283cw448ch80" alt="LNU" width="250px"/>
+		<p>ByggCO2llen är en prototyp för att utforska möjligheterna att få in LCA data tidigt i byggprocessen för att göra bättre materialval.</p>
+		<p>OBS. Data och modellen är fortfarande under utveckling.</p>
 		<p>Utvecklad av LNU, Växjö Kommun med finansiering av Viable Cities.</p>
-		<p>OM | MODEL & DATA | KONTAKT</p>
+		<p><a href="/om.html">LÄS MER</a>
 	</footer>
 
 </body>
