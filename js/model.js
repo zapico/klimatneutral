@@ -2,7 +2,7 @@ class Model {
 
     constructor() {
         // Start variables
-        // List of materials
+        // GET API Boverket
         this.frame_prefab_concrete =	359.3	//m3
         this.frame_insitu_concrete =	359.3	//m3
         this.frame_light_timber =	69.80	//m3
@@ -53,7 +53,76 @@ class Model {
         this.roof_takpapp = 21.52; //m2 5.380 x 4kg per kvm
 
         this.roof_membrane = 4.4 //m2
+        const userAction = async () => {
+          const response = await fetch('https://api.boverket.se/klimatdatabas/get-all-resources/senaste/sv/json');
+          const myJson = await response.json(); //extract JSON from the http response
+          console.log(myJson);
 
+          // List of materials
+          this.frame_prefab_concrete =	359.3	//m3
+          this.frame_insitu_concrete =	359.3	//m3
+          this.frame_light_timber =	69.80	//m3
+          this.frame_CLT = 90.30 //	m3
+          this.frame_steel =	60.00	//m2
+
+          this.concrete_insitu =	256.15	//m3
+          this.concrete_prefab =	218.62	//t (How is this being able to compare??)
+          this.light_blocks =	151.49	//m3
+
+          this.scrapbased_steel =	0.51	//kg
+          this.orebased_steel =	1.04	//kg
+          this.mixed_steel =	0.78	//kg
+
+          this.cellplast	= 70.97	//m3
+          this.cellulose	= 36.00	//m3
+          this.rockwool	= 38.31	//m3
+          //myJson.Resources[5] 6000000004
+          this.glasswool	= parseFloat(myJson.Resources[5].DataItems[0].DataValueItems[1].Value) * parseFloat(myJson.Resources[5].Conversions[0].Value)	//m3
+          console.log(this.glasswool)
+
+          this.light_timber	= 42.67	//m3
+          this.CLT	= 90.33	//m3
+          this.Glulam	= 69.80	//m3
+          this.LVL =	70.97
+
+          this.macadam = 2.4 // 1.6 g co2 per kg 1500 kg per m3 -> 2.4kg per m3 (this seems low?)
+
+          this.facad_wood_panels = 5.6// m2
+          this.facad_puts = 6.1; //m2
+          this.fasad_mineralskiva = 19.75; //m2
+          this.fasad_tegel = 18; //m2
+
+          this.window_wood = 67.9; //Standard for all windows
+          this.window_alu = 75.9; // Fake data
+          this.window_pvc = 75.9; //Fake data
+
+          this.wood_panels_inne = 1.33; //m2 Check data!
+          //6000000020
+          this.gipsdata = myJson.Resources.find(res => res.ResourceId === 6000000020);
+          this.gips_inne =  parseFloat(this.gipsdata.DataItems[0].DataValueItems[0].Value) * parseFloat(this.gipsdata.Conversions[0].Value);	//m3
+
+          this.betong_inne = 2.00; //m2 Fake data
+
+          this.flooring_wood = 9; //m2 Fake data
+          this.flooring_laminat = 10; //m2 Fake data
+          this.flooring_plast = 10; //m2 Fake data
+
+          //6000000153
+          this.roof_metal_data = myJson.Resources.find(res => res.ResourceId === 6000000153);
+          this.roof_metal = parseFloat(this.roof_metal_data.DataItems[0].DataValueItems[0].Value) * 5 //m2 5 kg per kvm
+          //6000000081
+          this.roof_tiles_data = myJson.Resources.find(res => res.ResourceId === 6000000081);
+          this.roof_tiles = parseFloat(this.roof_tiles_data.DataItems[0].DataValueItems[0].Value) * 33; //m2 0,215kg co2 per kg, 33 kg per kvm
+          //6000000079
+          this.roof_concretetiles_data = myJson.Resources.find(res => res.ResourceId === 6000000079);
+          this.roof_concretetiles =  parseFloat(this.roof_concretetiles_data.DataItems[0].DataValueItems[0].Value) * 45;	//m2 45 kg per kvm
+
+          this.roof_sedum = 4.7; //m2 Fake data
+          this.roof_takpapp = 21.52; //m2 5.380 x 4kg per kvm
+
+          this.roof_membrane = 4.4 //m2
+        }
+        userAction();
         //Building parameters
         this.tomtyta = 1000;
         this.planyta = 500;
