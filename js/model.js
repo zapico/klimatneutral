@@ -1,59 +1,7 @@
 class Model {
 
     constructor() {
-        // Start variables
-        // GET API Boverket
-        this.frame_prefab_concrete =	359.3	//m3
-        this.frame_insitu_concrete =	359.3	//m3
-        this.frame_light_timber =	69.80	//m3
-        this.frame_CLT = 90.30 //	m3
-        this.frame_steel =	60.00	//m2
-
-        this.concrete_insitu =	256.15	//m3
-        this.concrete_prefab =	218.62	//t (How is this being able to compare??)
-        this.light_blocks =	151.49	//m3
-
-        this.scrapbased_steel =	0.51	//kg
-        this.orebased_steel =	1.04	//kg
-        this.mixed_steel =	0.78	//kg
-
-        this.cellplast	= 70.97	//m3
-        this.cellulose	= 36.00	//m3
-        this.rockwool	= 38.31	//m3
-        this.glasswool	= 43.09	//m3
-
-        this.light_timber	= 42.67	//m3
-        this.CLT	= 90.33	//m3
-        this.Glulam	= 69.80	//m3
-        this.LVL =	70.97
-
-        this.macadam = 2.4 // 1.6 g co2 per kg 1500 kg per m3 -> 2.4kg per m3 (this seems low?)
-
-        this.facad_wood_panels = 5.6// m2
-        this.facad_puts = 6.1; //m2
-        this.fasad_mineralskiva = 19.75; //m2
-        this.fasad_tegel = 18; //m2
-
-        this.window_wood = 67.9; //Standard for all windows
-        this.window_alu = 75.9; // Fake data
-        this.window_pvc = 75.9; //Fake data
-
-        this.wood_panels_inne = 1.33; //m2 Check data!
-        this.gips_inne = 1.50; //m2 Fake data!
-        this.betong_inne = 2.00; //m2 Fake data
-
-        this.flooring_wood = 9; //m2 Fake data
-        this.flooring_laminat = 10; //m2 Fake data
-        this.flooring_plast = 10; //m2 Fake data
-
-        this.roof_metal = 26.67; //m2
-        this.roof_tiles = 7.09; //m2 0,215kg co2 per kg, 33 kg per kvm
-        this.roof_concretetiles = 5.7; //m2 Fake data
-        this.roof_sedum = 4.7; //m2 Fake data
-        this.roof_takpapp = 21.52; //m2 5.380 x 4kg per kvm
-
-        this.roof_membrane = 4.4 //m2
-        const userAction = async () => {
+      return (async () => {
           const response = await fetch('https://api.boverket.se/klimatdatabas/get-all-resources/senaste/sv/json');
           const myJson = await response.json(); //extract JSON from the http response
           console.log(myJson);
@@ -63,48 +11,90 @@ class Model {
           this.frame_insitu_concrete =	359.3	//m3
           this.frame_light_timber =	69.80	//m3
           this.frame_CLT = 90.30 //	m3
-          this.frame_steel =	60.00	//m2
+          //this.frame_steel =	60.00	//m3 Används inte
 
-          this.concrete_insitu =	256.15	//m3
-          this.concrete_prefab =	218.62	//t (How is this being able to compare??)
-          this.light_blocks =	151.49	//m3
+          //6000000026
+          this.concrete_insitu_data = myJson.Resources.find(res => res.ResourceId === 6000000026);
+          this.concrete_insitu = parseFloat(this.concrete_insitu_data.DataItems[0].DataValueItems[0].Value) * 2350; //kg to m3
 
-          this.scrapbased_steel =	0.51	//kg
-          this.orebased_steel =	1.04	//kg
-          this.mixed_steel =	0.78	//kg
+          //6000000027
+          this.concrete_klimat_data = myJson.Resources.find(res => res.ResourceId === 6000000027);
+          this.concrete_klimat = parseFloat(this.concrete_klimat_data.DataItems[0].DataValueItems[0].Value) * 2350; //kg to m3
 
-          this.cellplast	= 70.97	//m3
-          this.cellulose	= 36.00	//m3
-          this.rockwool	= 38.31	//m3
-          //myJson.Resources[5] 6000000004
-          this.glasswool	= parseFloat(myJson.Resources[5].DataItems[0].DataValueItems[1].Value) * parseFloat(myJson.Resources[5].Conversions[0].Value)	//m3
-          console.log(this.glasswool)
+          //6000000026
+          this.fasad_mineralskiva_data = myJson.Resources.find(res => res.ResourceId === 6000000182);
+          this.fasad_mineralskiva = parseFloat(this.fasad_mineralskiva_data.DataItems[0].DataValueItems[0].Value) * 19.50; //Räknad på 10mm
 
-          this.light_timber	= 42.67	//m3
-          this.CLT	= 90.33	//m3
+          //this.light_blocks =	151.49	används inte
+
+          this.scrapbased_steel =	0.51;	//kg
+          this.orebased_steel =	1.04;	//kg
+          this.mixed_steel =	0.78;	//kg
+
+          //6000000131
+          this.cellplast_data = myJson.Resources.find(res => res.ResourceId === 6000000131);
+          this.cellplast	= parseFloat(this.cellplast_data.DataItems[0].DataValueItems[1].Value) * 16.0;	//m3
+          //6000000136
+          this.cellulose_data = myJson.Resources.find(res => res.ResourceId === 6000000136);
+          this.cellulose	= parseFloat(this.cellulose_data.DataItems[0].DataValueItems[1].Value) * 50.0;	//m3
+          //6000000123
+          this.rockwool_data = myJson.Resources.find(res => res.ResourceId === 6000000123);
+          this.rockwool	= parseFloat(this.rockwool_data.DataItems[0].DataValueItems[1].Value) * 29.0;	//m3
+          //6000000004
+          this.glasswool_data = myJson.Resources.find(res => res.ResourceId === 6000000004);
+          this.glasswool	= parseFloat(this.glasswool_data.DataItems[0].DataValueItems[1].Value) * parseFloat(this.glasswool_data.Conversions[0].Value);	//m3
+
+          //6000000192
+          this.light_timber_data = myJson.Resources.find(res => res.ResourceId === 6000000192);
+          this.light_timber	= parseFloat(this.light_timber_data.DataItems[0].DataValueItems[1].Value) * 455;	//m3
+
+          //6000000167
+          this.CLT_data = myJson.Resources.find(res => res.ResourceId === 6000000167);
+          this.CLT	= parseFloat(this.CLT_data.DataItems[0].DataValueItems[1].Value) * parseFloat(this.CLT_data.Conversions[0].Value);	//m3
+
+          //Ref to data? Not in boverket
           this.Glulam	= 69.80	//m3
-          this.LVL =	70.97
 
+          //6000000185
+          this.LVL_data = myJson.Resources.find(res => res.ResourceId === 6000000185);
+          this.LVL = parseFloat(this.LVL_data.DataItems[0].DataValueItems[0].Value) * 510;
+
+          //Ref to data? Not in boverket
           this.macadam = 2.4 // 1.6 g co2 per kg 1500 kg per m3 -> 2.4kg per m3 (this seems low?)
 
-          this.facad_wood_panels = 5.6// m2
+          //6000000007
+          this.facad_wood_panels_data = myJson.Resources.find(res => res.ResourceId === 6000000007);
+          this.facad_wood_panels = parseFloat(this.facad_wood_panels_data.DataItems[0].DataValueItems[0].Value) * 455 * 0.22; //Räknad på 22mm
+
+
           this.facad_puts = 6.1; //m2
-          this.fasad_mineralskiva = 19.75; //m2
+
+          //6000000182
+          this.fasad_mineralskiva_data = myJson.Resources.find(res => res.ResourceId === 6000000182);
+          this.fasad_mineralskiva = parseFloat(this.fasad_mineralskiva_data.DataItems[0].DataValueItems[0].Value) * 19.50; //Räknad på 10mm
+
           this.fasad_tegel = 18; //m2
 
-          this.window_wood = 67.9; //Standard for all windows
-          this.window_alu = 75.9; // Fake data
-          this.window_pvc = 75.9; //Fake data
+          //6000000104
+          this.window_wood_data = myJson.Resources.find(res => res.ResourceId === 6000000104);
+          this.window_wood = parseFloat(this.window_wood_data.DataItems[0].DataValueItems[0].Value) * parseFloat(this.window_wood_data.Conversions[0].Value);
 
+          //
           this.wood_panels_inne = 1.33; //m2 Check data!
+
           //6000000020
           this.gipsdata = myJson.Resources.find(res => res.ResourceId === 6000000020);
           this.gips_inne =  parseFloat(this.gipsdata.DataItems[0].DataValueItems[0].Value) * parseFloat(this.gipsdata.Conversions[0].Value);	//m3
 
           this.betong_inne = 2.00; //m2 Fake data
 
-          this.flooring_wood = 9; //m2 Fake data
+          //6000000192
+          this.flooring_wood_data = myJson.Resources.find(res => res.ResourceId === 6000000192);
+          this.flooring_wood	= parseFloat(this.flooring_wood_data.DataItems[0].DataValueItems[1].Value) * 455* 0.22;	//m2 på 22mm
+
+          //No data
           this.flooring_laminat = 10; //m2 Fake data
+          //No data
           this.flooring_plast = 10; //m2 Fake data
 
           //6000000153
@@ -116,13 +106,18 @@ class Model {
           //6000000079
           this.roof_concretetiles_data = myJson.Resources.find(res => res.ResourceId === 6000000079);
           this.roof_concretetiles =  parseFloat(this.roof_concretetiles_data.DataItems[0].DataValueItems[0].Value) * 45;	//m2 45 kg per kvm
-
+          //No data
           this.roof_sedum = 4.7; //m2 Fake data
-          this.roof_takpapp = 21.52; //m2 5.380 x 4kg per kvm
+          //6000000142
+          this.roof_takpapp_data = myJson.Resources.find(res => res.ResourceId === 6000000142);
+          this.roof_takpapp =  parseFloat(this.roof_takpapp_data.DataItems[0].DataValueItems[0].Value) * 4;	//m2 4 kg per kvm
+          //6000000140
+          this.roof_membrane_data = myJson.Resources.find(res => res.ResourceId === 6000000140);
+          this.roof_membrane =  parseFloat(this.roof_membrane_data.DataItems[0].DataValueItems[0].Value) * 4;	//m2 4 kg per kvm
 
-          this.roof_membrane = 4.4 //m2
-        }
-        userAction();
+          this.update();
+
+
         //Building parameters
         this.tomtyta = 1000;
         this.planyta = 500;
@@ -171,8 +166,9 @@ class Model {
 
 
         this.listeners = [];
-
-        this.update();
+//        userAction();
+        return this;
+      })();
     }
 
     addListener(func) {
@@ -310,9 +306,7 @@ class Model {
 
       console.log(this.floors);
 
-      for (let func of this.listeners) {
-          func();
-      }
+//      for (let func of this.listeners) {func();}
 
     }
 }

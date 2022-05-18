@@ -1,140 +1,15 @@
-function makeDonutMaterial(id, model) {
-    const data = [
-      model.stomme_co2,
-      model.foundation_co2,
-      model.shell_co2,
-      model.inside_co2
-    ];
-    const ctx = document.getElementById(id).getContext('2d');
-    const config = {
-        type: 'doughnut',
-
-
-        data: {
-          datasets: [{
-            data: data,
-            backgroundColor: [
-              "#7C6354",
-              "#FFC857",
-              "#119DA4",
-              "#19647E"
-            ],
-            label: 'Klimatpåverkan'
-          }],
-          labels: [
-            'Stomme',
-            'Grund',
-            'Klimatskärm',
-            'Insida'
-          ]
-        },
-        options: {
-          responsive: true,
-          legend: {
-            display: false,
-            position: 'top',
-          },
-          title: {
-            display: false,
-            text: ''
-          },
-          animation: {
-            animateScale: false,
-            animateRotate: false
-          }
-        }
-      };
-    window.myDoughnut = new Chart(ctx, config);
-};
-
-function makeBarChart(id, model){
-  const ctx2 = document.getElementById(id).getContext('2d');
-  const config2 = {
-    tooltips: {
-        enabled: false
-    },
-    hover :{
-        animationDuration:0
-    },
-    scales: {
-        xAxes: [{
-          gridLines: {
-              display:false,
-              color: "#fff",
-              zeroLineWidth: 0},
-            ticks: {
-                display:false,
-                fontFamily: "'Open Sans Bold', sans-serif",
-                fontSize:11
-            },
-            scaleLabel:{
-                display:false
-            },
-            stacked: true
-        }],
-        yAxes: [{
-            gridLines: {
-                display:false,
-                color: "#fff",
-                zeroLineColor: "#fff",
-                zeroLineWidth: 0
-            },
-            ticks: {
-                display:false,
-                fontFamily: "'Open Sans Bold', sans-serif",
-                fontSize:11
-            },
-            stacked: true
-        }]
-    },
-
-    responsive: true,
-    legend:{
-        display:false
-    },
-
-    animation: false,
-    pointLabelFontFamily : "Quadon Extra Bold",
-    scaleFontFamily : "Quadon Extra Bold",
-  };
-  window.myChart2 = new Chart(ctx2, {
-        type: 'horizontalBar',
-        data: {
-       labels: ["CO2"],
-
-       datasets: [{
-           data: [model.co2_m2],
-           backgroundColor: "rgba(63,103,126,1)",
-           hoverBackgroundColor: "rgba(50,90,100,1)",
-           borderColor: "rgba(63,103,126,1)",
-           borderWidth: 1
-
-       },{
-           data: [500-model.co2_m2],
-           backgroundColor: "#fff",
-           hoverBackgroundColor: "#fff",
-           borderColor: "rgba(63,103,126,1)",
-           borderWidth: 1
-       }
-     ]
-   },
-        options: config2,
-    });
-};
-
-
-
 window.onload = async function () {
 
-    const model = new Model();
+    console.log('Constructing...');
+    const model = await new Model();
+    console.log('Done:',model);
 
-    makeDonutMaterial('chart-area', model);
-    //makeBarChart('chartbar-area', model);
+
 
     $( "#grund" ).selectmenu({change: refreshBehavior});
-    $( '#grund' ).append($('<option>', { value: model.concrete_insitu, text: 'Betong platsgjuten', selected: "selected"}));
+    $( '#grund' ).append($('<option>', { value: model.concrete_insitu, text: 'Betong C20/25', selected: "selected"}));
     //$( '#grund' ).append($('<option>', { value: model.concrete_insitu, text: 'Grön betong platsgjuten' })); //Uppdatera datan
-    $( '#grund' ).append($('<option>', { value: model.concrete_prefab, text: 'Betong prefab' }));
+    $( '#grund' ).append($('<option>', { value: model.concrete_klimat, text: 'Betong klimatförbättrad' }));
     //$( '#grund' ).append($('<option>', { value: model.light_blocks, text: 'Lätta block' }));
     $( '#grund' ).selectmenu("refresh");
     $( "#grund" ).selectmenu({select: refreshBehavior });
@@ -202,8 +77,8 @@ window.onload = async function () {
 
     $( "#roof_material" ).selectmenu();
     $( "#roof_material" ).append($('<option>', { value: model.roof_metal, text: 'Plåt' }));
-    $( "#roof_material" ).append($('<option>', { value: model.roof_tiles, text: 'Takpannor', selected: "selected"}));
-  //  $( "#roof_material" ).append($('<option>', { value: model.roof_concretetiles, text: 'Betongpannor',selected: "selected" }));
+    $( "#roof_material" ).append($('<option>', { value: model.roof_tiles, text: 'Takpannor'}));
+    $( "#roof_material" ).append($('<option>', { value: model.roof_concretetiles, text: 'Betongpannor',selected: "selected" }));
   //  $( "#roof_material" ).append($('<option>', { value: model.roof_sedum, text: 'Sedum' }));
     $( "#roof_material" ).append($('<option>', { value: model.roof_takpapp, text: 'Takpapp' }));
     $( '#roof_material' ).selectmenu("refresh");
@@ -348,6 +223,133 @@ function updateTotals(){
 
   //refreshEcosystem();
 };
-model.addListener(updateTotals);
+function makeDonutMaterial(id, model) {
+    const data = [
+      model.stomme_co2,
+      model.foundation_co2,
+      model.shell_co2,
+      model.inside_co2
+    ];
+    const ctx = document.getElementById(id).getContext('2d');
+    const config = {
+        type: 'doughnut',
+
+
+        data: {
+          datasets: [{
+            data: data,
+            backgroundColor: [
+              "#7C6354",
+              "#FFC857",
+              "#119DA4",
+              "#19647E"
+            ],
+            label: 'Klimatpåverkan'
+          }],
+          labels: [
+            'Stomme',
+            'Grund',
+            'Klimatskärm',
+            'Insida'
+          ]
+        },
+        options: {
+          responsive: true,
+          legend: {
+            display: false,
+            position: 'top',
+          },
+          title: {
+            display: false,
+            text: ''
+          },
+          animation: {
+            animateScale: false,
+            animateRotate: false
+          }
+        }
+      };
+    window.myDoughnut = new Chart(ctx, config);
+};
+
+function makeBarChart(id, model){
+  const ctx2 = document.getElementById(id).getContext('2d');
+  const config2 = {
+    tooltips: {
+        enabled: false
+    },
+    hover :{
+        animationDuration:0
+    },
+    scales: {
+        xAxes: [{
+          gridLines: {
+              display:false,
+              color: "#fff",
+              zeroLineWidth: 0},
+            ticks: {
+                display:false,
+                fontFamily: "'Open Sans Bold', sans-serif",
+                fontSize:11
+            },
+            scaleLabel:{
+                display:false
+            },
+            stacked: true
+        }],
+        yAxes: [{
+            gridLines: {
+                display:false,
+                color: "#fff",
+                zeroLineColor: "#fff",
+                zeroLineWidth: 0
+            },
+            ticks: {
+                display:false,
+                fontFamily: "'Open Sans Bold', sans-serif",
+                fontSize:11
+            },
+            stacked: true
+        }]
+    },
+
+    responsive: true,
+    legend:{
+        display:false
+    },
+
+    animation: false,
+    pointLabelFontFamily : "Quadon Extra Bold",
+    scaleFontFamily : "Quadon Extra Bold",
+  };
+  window.myChart2 = new Chart(ctx2, {
+        type: 'horizontalBar',
+        data: {
+       labels: ["CO2"],
+
+       datasets: [{
+           data: [model.co2_m2],
+           backgroundColor: "rgba(63,103,126,1)",
+           hoverBackgroundColor: "rgba(50,90,100,1)",
+           borderColor: "rgba(63,103,126,1)",
+           borderWidth: 1
+
+       },{
+           data: [500-model.co2_m2],
+           backgroundColor: "#fff",
+           hoverBackgroundColor: "#fff",
+           borderColor: "rgba(63,103,126,1)",
+           borderWidth: 1
+       }
+     ]
+   },
+        options: config2,
+    });
+};
+
+makeDonutMaterial('chart-area', model);
 refreshBehavior();
+updateTotals();
+
+//makeBarChart('chartbar-area', model);
 };
