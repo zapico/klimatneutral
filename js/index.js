@@ -348,8 +348,10 @@ function makeBarChart(id, model){
 };
 
 makeDonutMaterial('chart-area', model);
+model.addListener(updateTotals);
 refreshBehavior();
 updateTotals();
+
 
 //makeBarChart('chartbar-area', model);
 };

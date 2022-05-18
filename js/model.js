@@ -64,7 +64,7 @@ class Model {
 
           //6000000007
           this.facad_wood_panels_data = myJson.Resources.find(res => res.ResourceId === 6000000007);
-          this.facad_wood_panels = parseFloat(this.facad_wood_panels_data.DataItems[0].DataValueItems[0].Value) * 455 * 0.22; //Räknad på 22mm
+          this.facad_wood_panels = parseFloat(this.facad_wood_panels_data.DataItems[0].DataValueItems[0].Value) * 455 * 0.022; //Räknad på 22mm
 
 
           this.facad_puts = 6.1; //m2
@@ -84,13 +84,13 @@ class Model {
 
           //6000000020
           this.gipsdata = myJson.Resources.find(res => res.ResourceId === 6000000020);
-          this.gips_inne =  parseFloat(this.gipsdata.DataItems[0].DataValueItems[0].Value) * parseFloat(this.gipsdata.Conversions[0].Value);	//m3
+          this.gips_inne =  parseFloat(this.gipsdata.DataItems[0].DataValueItems[0].Value) * parseFloat(this.gipsdata.Conversions[0].Value) * 0.0125 ;	//m2 12.5mm
 
           this.betong_inne = 2.00; //m2 Fake data
 
           //6000000192
           this.flooring_wood_data = myJson.Resources.find(res => res.ResourceId === 6000000192);
-          this.flooring_wood	= parseFloat(this.flooring_wood_data.DataItems[0].DataValueItems[1].Value) * 455* 0.22;	//m2 på 22mm
+          this.flooring_wood	= parseFloat(this.flooring_wood_data.DataItems[0].DataValueItems[1].Value) * 455* 0.022;	//m2 på 22mm
 
           //No data
           this.flooring_laminat = 10; //m2 Fake data
@@ -114,9 +114,6 @@ class Model {
           //6000000140
           this.roof_membrane_data = myJson.Resources.find(res => res.ResourceId === 6000000140);
           this.roof_membrane =  parseFloat(this.roof_membrane_data.DataItems[0].DataValueItems[0].Value) * 4;	//m2 4 kg per kvm
-
-          this.update();
-
 
         //Building parameters
         this.tomtyta = 1000;
@@ -166,7 +163,6 @@ class Model {
 
 
         this.listeners = [];
-//        userAction();
         return this;
       })();
     }
@@ -306,7 +302,6 @@ class Model {
 
       console.log(this.floors);
 
-//      for (let func of this.listeners) {func();}
-
+     for (let func of this.listeners) {func();}
     }
 }
