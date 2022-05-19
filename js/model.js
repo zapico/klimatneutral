@@ -7,11 +7,21 @@ class Model {
           console.log(myJson);
 
           // List of materials
-          this.frame_prefab_concrete =	359.3	//m3
-          this.frame_insitu_concrete =	359.3	//m3
-          this.frame_light_timber =	69.80	//m3
-          this.frame_CLT = 90.30 //	m3
+          //this.frame_prefab_concrete =	359.3	//m3
+          //this.frame_insitu_concrete =	359.3	//m3
+          //this.frame_light_timber =	69.80	//m3
+          //this.frame_CLT = 90.30 //	m3
           //this.frame_steel =	60.00	//m3 Används inte
+
+          //6000000192
+          this.frame_light_timber_data = myJson.Resources.find(res => res.ResourceId === 6000000192);
+          this.frame_light_timber	= parseFloat(this.frame_light_timber_data.DataItems[0].DataValueItems[1].Value) * 455;	//m3
+          //6000000192
+          this.light_timber_data = myJson.Resources.find(res => res.ResourceId === 6000000192);
+          this.light_timber	= parseFloat(this.light_timber_data.DataItems[0].DataValueItems[1].Value) * 455;	//m3
+          //6000000167
+          this.frame_CLT_data = myJson.Resources.find(res => res.ResourceId === 6000000167);
+          this.frame_CLT	= parseFloat(this.frame_CLT_data.DataItems[0].DataValueItems[1].Value) * parseFloat(this.frame_CLT_data.Conversions[0].Value);	//m3
 
           //6000000026
           this.concrete_insitu_data = myJson.Resources.find(res => res.ResourceId === 6000000026);
@@ -21,15 +31,21 @@ class Model {
           this.concrete_klimat_data = myJson.Resources.find(res => res.ResourceId === 6000000027);
           this.concrete_klimat = parseFloat(this.concrete_klimat_data.DataItems[0].DataValueItems[0].Value) * 2350; //kg to m3
 
-          //6000000026
-          this.fasad_mineralskiva_data = myJson.Resources.find(res => res.ResourceId === 6000000182);
-          this.fasad_mineralskiva = parseFloat(this.fasad_mineralskiva_data.DataItems[0].DataValueItems[0].Value) * 19.50; //Räknad på 10mm
+          //6000000155
+          this.scrapbased_steel_data = myJson.Resources.find(res => res.ResourceId === 6000000155);
+          this.scrapbased_steel = parseFloat(this.scrapbased_steel_data.DataItems[0].DataValueItems[0].Value); //kg
 
-          //this.light_blocks =	151.49	används inte
+          //6000000156
+          this.mixed_steel_data = myJson.Resources.find(res => res.ResourceId === 6000000156);
+          this.mixed_steel = parseFloat(this.mixed_steel_data.DataItems[0].DataValueItems[0].Value); //kg
 
-          this.scrapbased_steel =	0.51;	//kg
-          this.orebased_steel =	1.04;	//kg
-          this.mixed_steel =	0.78;	//kg
+          //Quite a big difference with Boverket!
+          //this.scrapbased_steel =	0.51;	//kg
+          //this.orebased_steel =	1.04;	//kg
+          //this.mixed_steel =	0.78;	//kg
+
+          this.frame_insitu_concrete = this.concrete_insitu + this.mixed_steel*80;
+          this.frame_insitu_klimatconcrete = this.concrete_klimat + this.mixed_steel*80;
 
           //6000000131
           this.cellplast_data = myJson.Resources.find(res => res.ResourceId === 6000000131);
@@ -43,14 +59,6 @@ class Model {
           //6000000004
           this.glasswool_data = myJson.Resources.find(res => res.ResourceId === 6000000004);
           this.glasswool	= parseFloat(this.glasswool_data.DataItems[0].DataValueItems[1].Value) * parseFloat(this.glasswool_data.Conversions[0].Value);	//m3
-
-          //6000000192
-          this.light_timber_data = myJson.Resources.find(res => res.ResourceId === 6000000192);
-          this.light_timber	= parseFloat(this.light_timber_data.DataItems[0].DataValueItems[1].Value) * 455;	//m3
-
-          //6000000167
-          this.CLT_data = myJson.Resources.find(res => res.ResourceId === 6000000167);
-          this.CLT	= parseFloat(this.CLT_data.DataItems[0].DataValueItems[1].Value) * parseFloat(this.CLT_data.Conversions[0].Value);	//m3
 
           //Ref to data? Not in boverket
           this.Glulam	= 69.80	//m3
@@ -66,27 +74,38 @@ class Model {
           this.facad_wood_panels_data = myJson.Resources.find(res => res.ResourceId === 6000000007);
           this.facad_wood_panels = parseFloat(this.facad_wood_panels_data.DataItems[0].DataValueItems[0].Value) * 455 * 0.022; //Räknad på 22mm
 
+          //6000000091
+          this.facad_puts_data = myJson.Resources.find(res => res.ResourceId === 6000000091);
+          //6000000188
+          this.facad_puts_data2 = myJson.Resources.find(res => res.ResourceId === 6000000188);
+          this.facad_puts = parseFloat(this.facad_puts_data.DataItems[0].DataValueItems[0].Value) * 10; //Räknad på 10kg per m2
+          this.facad_puts += parseFloat(this.facad_puts_data2.DataItems[0].DataValueItems[0].Value) * 525 * 0.012; //putsbärarskiva Räknad på 12mm
 
-          this.facad_puts = 6.1; //m2
+          //6000000026
+          this.fasad_mineralskiva_data = myJson.Resources.find(res => res.ResourceId === 6000000182);
+          this.fasad_mineralskiva = parseFloat(this.fasad_mineralskiva_data.DataItems[0].DataValueItems[0].Value) * 19.50; //Räknad på 10mm
 
           //6000000182
           this.fasad_mineralskiva_data = myJson.Resources.find(res => res.ResourceId === 6000000182);
           this.fasad_mineralskiva = parseFloat(this.fasad_mineralskiva_data.DataItems[0].DataValueItems[0].Value) * 19.50; //Räknad på 10mm
 
-          this.fasad_tegel = 18; //m2
+          //6000000082
+          this.fasad_tegel_data = myJson.Resources.find(res => res.ResourceId === 6000000082);
+          this.fasad_tegel = parseFloat(this.fasad_tegel_data.DataItems[0].DataValueItems[0].Value) * 1800*0.120; //Räknad på 120mm Bara tegel utan bruk!
 
           //6000000104
           this.window_wood_data = myJson.Resources.find(res => res.ResourceId === 6000000104);
           this.window_wood = parseFloat(this.window_wood_data.DataItems[0].DataValueItems[0].Value) * parseFloat(this.window_wood_data.Conversions[0].Value);
 
-          //
-          this.wood_panels_inne = 1.33; //m2 Check data!
+          //6000000192
+          this.wood_panels_inne_data = myJson.Resources.find(res => res.ResourceId === 6000000192);
+          this.wood_panels_inne = parseFloat(this.wood_panels_inne_data.DataItems[0].DataValueItems[0].Value) * 455 * 0.012; //Räknad på 12mm pärslpånt
 
           //6000000020
           this.gipsdata = myJson.Resources.find(res => res.ResourceId === 6000000020);
           this.gips_inne =  parseFloat(this.gipsdata.DataItems[0].DataValueItems[0].Value) * parseFloat(this.gipsdata.Conversions[0].Value) * 0.0125 ;	//m2 12.5mm
 
-          this.betong_inne = 2.00; //m2 Fake data
+          // this.betong_inne = 2.00; //m2 Fake data
 
           //6000000192
           this.flooring_wood_data = myJson.Resources.find(res => res.ResourceId === 6000000192);
@@ -176,7 +195,7 @@ class Model {
       // 1. Calculate foundation
       // Basement?? Other types?
       var f1 = this.foundation_material*this.foundation_thickness*this.planyta; //Material
-      var f2 = this.foundation_armering*this.foundation_thickness*this.planyta*80; //armering 80kg per m3 betong
+      var f2 = this.scrapbased_steel*this.foundation_thickness*this.planyta*80; //armering 80kg per m3 betong
       var f3 = this.foundation_iso*this.planyta*0.3; //isolering 30cm standard
       var f4 = this.macadam*this.foundation_armering_percent*this.planyta*0.3; //makadam 30cm
       this.foundation_co2 = f1+f2+f3+f4;
@@ -217,6 +236,10 @@ class Model {
           var s1 = this.frame_insitu_concrete*envelope*0.3*0.3;
           var s2 = this.frame_insitu_concrete*this.planyta*this.floors*0.3*0.3; //thickness 0.3m, a third of area is frame
         break;
+        case "Klimatbetong":
+          var s1 = this.frame_insitu_klimatconcrete*envelope*0.3*0.3;
+          var s2 = this.frame_insitu_klimatconcrete*this.planyta*this.floors*0.3*0.3; //thickness 0.3m, a third of area is frame
+        break;
         case "CLT":
           var s1 = this.frame_CLT*envelope*0.3*0.3;
           var s2 = this.frame_CLT*this.planyta*this.floors*0.3*0.3; //thickness 0.3m, a third of area is frame
@@ -247,6 +270,7 @@ class Model {
         case "CLT":
           isolation_thickness_ut = 0.130; //frame_CLT, no cellplast
         case "Betong":
+        case "Klimatbetong":
           isolation_thickness_ut = 0.150; // frame Betong, only cellplast
         break;
         case "Timber":
@@ -278,6 +302,7 @@ class Model {
         case "CLT":
             var i1 = this.insidewalls_impact*inside_walls_area + this.insidewalls_impact*(envelope-window_area); //Fix
         case "Betong":
+        case "Klimatbetong":
           var i1 = this.insidewalls_impact*inside_walls_area; //Fix
         break;
         case "Timber":

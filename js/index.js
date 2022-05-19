@@ -1,10 +1,6 @@
 window.onload = async function () {
 
-    console.log('Constructing...');
     const model = await new Model();
-    console.log('Done:',model);
-
-
 
     $( "#grund" ).selectmenu({change: refreshBehavior});
     $( '#grund' ).append($('<option>', { value: model.concrete_insitu, text: 'Betong C20/25', selected: "selected"}));
@@ -14,12 +10,12 @@ window.onload = async function () {
     $( '#grund' ).selectmenu("refresh");
     $( "#grund" ).selectmenu({select: refreshBehavior });
 
-    $( "#grund_armering" ).selectmenu();
-    $( "#grund_armering" ).append($('<option>', { value: model.orebased_steel, text: 'Stål ny', selected: "selected" }));
-    $( "#grund_armering" ).append($('<option>', { value: model.scrapbased_steel, text: 'Stål (återvunnen)' }));
-    $( "#grund_armering" ).append($('<option>', { value: model.mixed_steel, text: 'Stål (50/50)' }));
-    $( '#grund_armering' ).selectmenu("refresh");
-    $( "#grund_armering" ).selectmenu({select: refreshBehavior });
+    //$( "#grund_armering" ).selectmenu();
+    //$( "#grund_armering" ).append($('<option>', { value: model.orebased_steel, text: 'Stål ny', selected: "selected" }));
+    //$( "#grund_armering" ).append($('<option>', { value: model.scrapbased_steel, text: 'Stål (återvunnen)' }));
+    //$( "#grund_armering" ).append($('<option>', { value: model.mixed_steel, text: 'Stål (50/50)' }));
+    //$( '#grund_armering' ).selectmenu("refresh");
+    //$( "#grund_armering" ).selectmenu({select: refreshBehavior });
 
     $( "#grund_iso" ).selectmenu();
     $( "#grund_iso" ).append($('<option>', { value: model.glasswool, text: 'Glasull och makadam' }));
@@ -29,7 +25,7 @@ window.onload = async function () {
 
     $( "#stomme" ).selectmenu();
     $( "#stomme" ).append($('<option>', { value: "Betong", text: 'Betong', selected: "selected" }));
-    //$( "#stomme" ).append($('<option>', { value: model.frame_prefab_concrete, text: 'Betong prefab' }));
+    $( "#stomme" ).append($('<option>', { value: "Klimatbetong", text: 'Betong klimatförbättrad' }));
     $( "#stomme" ).append($('<option>', { value:"CLT", text: 'Korslimmat trä' }));
     $( "#stomme" ).append($('<option>', { value: "Timber", text: 'Trästomme' })); //Kolla namnet
     //$( "#stomme" ).append($('<option>', { value: model.frame_steel, text: 'Stål' }));
