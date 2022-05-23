@@ -1,37 +1,9 @@
 window.onload = async function () {
   const model = new Model();
 
+
   $("input[type='checkbox']" ).checkboxradio({icon: false});
   $( "input[type='checkbox']").on( "change", refreshEcosystem );
-
-  var $range = $(".ui-slider-range");
-  $("#slider-children").slider({
-    min: 0,
-    max: 99,
-    values: [10, 20, 25],
-    slide: function(event, ui) {
-      $range.css('left', ui.values[0] + '%');
-      $range.css('width', (ui.values[1] - ui.values[0]) + '%');
-      if (!ui.handle.previousSibling) {
-        if (ui.values[0] > ui.values[1]) {
-          event.preventDefault();
-          return;
-        }
-
-      } else if (ui.handle.nextSibling) {
-        if (ui.values[1] < ui.values[0]) {
-          event.preventDefault();
-          return;
-        }
-      }
-      refreshEcosystem();
-    },
-    create: function(event, ui) {
-      var values = $(this).slider("values");
-      $range.css('left', values[0] + '%');
-      $range.css('width', (values[1] - values[0]) + '%');
-    }
-  });
 
   $( "#slider_tomtyta" ).slider({
     orientation: "horizontal",
@@ -42,26 +14,33 @@ window.onload = async function () {
     slide: refreshEcosystem,
     change: refreshEcosystem
   } );
-  $( "#slider_plant" ).slider({
+  $( "#slider_byggdyta" ).slider({
     orientation: "horizontal",
     range: "min",
     max: 100,
-    value: model.gronyta,
+    value: model.planyta,
     slide: refreshEcosystem,
     change: refreshEcosystem
   } );
+  $( "#slider_gronyta" ).slider({
+       range: true,
+       min: 0,
+       max: 100,
+       values: [ 10, 90 ],
+       slide: refreshEcosystem
+     });
 
 
 
-  function refreshEcosystem(){
-      valuesarr = $("#slider-children").slider("values");
+ function refreshEcosystem(){
+      valuesarr = $("#slider_gronyta").slider("values");
 
       model.tomtyta = $("#slider_tomtyta").slider("value");
-      model.planyta = valuesarr[0];
-      model.hardyta = valuesarr[1];
-      model.gronyta = valuesarr[2];
-      model.tradyta = valuesarr[3];
-      console.log(valuesarr);
+      model.planyta = $("#slider_byggdyta").slider("value");
+      model.hardyta = valuesarr[0];
+      model.gronyta = valuesarr[1]-valuesarr[0];
+      model.grusyta = 100-valuesarr[1]
+
       var et_1 = 0.1;
       var et_2 = 0.1;
       var et_3 = 0.1;
@@ -76,7 +55,7 @@ window.onload = async function () {
       if ($( "#checkbox-lekplats" ).is(":checked")) {et_4 += 0.4;};
       if (model.gyfactor >= 0.2) {
         et_1 += 0.3;
-        et_2 += 0.3;
+        et_2 += 0.5;
         et_4 += 0.3;
       } else {
         if (model.gyfactor > 0.1){
@@ -90,14 +69,19 @@ window.onload = async function () {
       $( "#et_energy" ).css('opacity', et_3);
       $( "#et_cultural" ).css('opacity', et_4);
 
-      $( "#kvm_value" ).html("<p>BYGGDYTA:<br/> " + Math.round(model.tomtyta*model.planyta/100) + " kvm. " +model.planyta+ " %.</p>" );
-      $( "#kvm_tomt_value" ).html("<p>TOMTYTA: " + model.tomtyta + " kvm</p>" );
+      built = Math.round(model.tomtyta*model.planyta/100)
+      unbuilt = model.tomtyta - built
+      unbuilt_per = 100-model.planyta
+
+      $( "#kvm_bygd_value" ).html("<p>BYGGDYTA:<br/> " + built + " kvm. " + model.planyta+ " %.</p>" );
+      $( "#kvm_tomt_value" ).html("<p>TOMTYTA:<br/> " + model.tomtyta + " kvm</p>" );
+      $( "#kvm_land_value" ).html("<p>LANDSKAPSYTA:<br/> " + unbuilt + " kvm" + unbuilt_per + "%.</p>" );
+      $( "#kvm_gron_value" ).html("<p> HÅRDYTA: " + model.hardyta+ " % | GRÖNYTA: " + model.gronyta+ " %. | GRUS: " + model.grusyta+ " %</p>" );
 
       model.update();
   };
 
   function updateTotals(){
-    $( "#info_grona_ytor" ).html("<p>GRÖNYTA:<br/> "+ Math.round((model.tomtyta-model.planyta)*model.gronyta/100) +" kvm "+ model.gronyta + " %</p>");
     $( "#greenfactor" ).html("<h2><fasad>GRÖNYTEFAKTOR</fasad></br><nr2>"+ model.gyfactor+" </nr2></h2>");
   }
 

@@ -1,0 +1,164 @@
+/* Structure */
+body{
+  background-color: #fff;
+}
+header{
+    height:120px;
+    left:0px;
+    top:0px;
+    padding-left:25px;
+    background-color: #fff;
+
+}
+#logo{
+  float:left;
+}
+#nav{
+  margin-top:2%;
+  float:right;
+}
+
+#left_eko{
+  float:left;
+  width:25%;
+  padding:10px;
+  height:auto;
+  margin-left:0px;
+}
+#right_eko{
+  float:right;
+  width:70%;
+  padding:10px;
+  height:auto;
+}
+#left_text{
+  float:left;
+  width:40%;
+  padding:10px;
+  margin-left:20px;
+  height:auto;
+}
+footer{
+  border-top: 1px dotted #9BC4E2;
+  float:left;
+  width:100%;
+  padding: 60px;
+}
+
+#EST{
+  float:left;
+  text-align: center;
+  width:100%;
+  height:150px;
+}
+#GYF{
+  float:left;
+  text-align: left;
+  width:15%;
+  height:auto;
+}
+.EkoT{
+  float:right;
+  text-align: left;
+  width:90%;
+  height:auto;
+  margin-bottom: 50px;
+}
+.et{
+  float:left;
+  height:150px;
+  padding:5px;
+}
+#et_energy{
+  opacity: 0.1;
+}
+#et_cultural{
+  opacity: 0.1;
+}
+#et_support{
+  opacity: 0.1;
+}
+#et_regulate{
+  opacity: 0.1;
+}
+
+.byggval_left{
+  float: left;
+  width: 40%;
+}
+.byggval_right{
+  float: right;
+  width: 40%;
+}
+
+.column_left{
+  height:auto;
+  background-color: #fefefe;
+  padding:25px;
+  margin-bottom:25px;
+}
+fieldset {
+  border: none;
+}
+.ui-selectmenu {
+  padding: 0.5em 0 0.5em 3em;
+}
+
+/* Type */
+h1,h2,h3 {
+    color: black;
+    font-family: 'Alata', sans-serif;
+
+}
+
+h1 {
+
+}
+p,ui-selectmenu-text {
+  color: black;
+  font-family: 'Alata', sans-serif;
+  font-size: 0.9em;
+
+}
+cerulean{color:#9BC4E2;}
+fasad{color:#119DA4;}
+inne{color:#19647E;}
+stomme{color:#7C6354;}
+grund{color:#FFC857;}
+
+
+nr{
+  font-size: 4.4em;
+}
+nr2{
+  font-size: 2.4em;
+}
+
+a {
+  text-decoration: underline;
+  color:#19647E;
+}
+
+
+.node {
+  fill: #ddd;
+  stroke: #fff;
+}
+
+.label {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+/* JQuery UI overwrites*/
+.ui-widget .ui-widget {
+    font-size: 0.8em;
+}
+.ui-selectmenu-button.ui-button {
+  width: 12em;
+}
+#slider_tomtyta .ui-slider-range { background: #7B3F00; }
+#slider_bygdyta .ui-slider-range { background: #5C4033; }
+#slider_gronyta .ui-slider-range:nth-child(1) { background: #228B22; }
+#slider_gronyta .ui-widget-content:nth-child(0) { background: #666666; }
+#slider_gronyta .ui-slider-range:nth-child(3) { background: #999999; }
