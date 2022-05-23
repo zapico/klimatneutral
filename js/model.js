@@ -277,7 +277,7 @@ class Model {
           isolation_thickness_ut = 0.162; // frame light_timber, no cellplast
         break;
         };
-      //console.log("Isolation: "+this.isolation_material_ut+" "+envelope+" "+window_area+" "+isolation_thickness_ut)
+      //console.log("Isolation: "+this.isolation_matedrial_ut+" "+envelope+" "+window_area+" "+isolation_thickness_ut)
       var w2 = this.isolation_material_ut*(envelope-window_area)*isolation_thickness_ut;
       w2 += this.isolation_material_ut*this.planyta*0.5;
       //console.log("Total isolation: "+w2);
@@ -312,8 +312,8 @@ class Model {
       i1 += this.isolation_material_ut*inside_walls_area*0.15;// isolation thickness = 150
 
       // 4.2 Golv
-      var i2 = this.insidefloor_impact*this.planyta*this.floors;
-      i2 += this.isolation_material_ut*this.planyta*this.floors*0.25; // isolation thickness= 250
+      //var i2 = this.insidefloor_impact*this.planyta*this.floors;
+      var i2 = this.isolation_material_ut*this.planyta*this.floors*0.25; // isolation thickness= 250
 
       // Sum up
       console.log("Inside: a.Walls: " + i1 +" b.Isolation: " +i2)

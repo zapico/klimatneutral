@@ -71,6 +71,9 @@ window.onload = async function () {
       if ($( "#checkbox-bi" ).is(":checked")) { et_1 += 0.4; };
       if ($( "#checkbox-motion" ).is(":checked")) { et_4 += 0.4; };
       if ($( "#checkbox-keep" ).is(":checked")) { et_1 += 0.4; et_2 += 0.4;};
+      if ($( "#checkbox-solpaneller" ).is(":checked")) { et_3 += 0.4;};
+      if ($( "#checkbox-sedum" ).is(":checked")) { et_2 += 0.3;};
+      if ($( "#checkbox-lekplats" ).is(":checked")) {et_4 += 0.4;};
       if (model.gyfactor >= 0.2) {
         et_1 += 0.3;
         et_2 += 0.3;

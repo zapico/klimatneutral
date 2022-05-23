@@ -190,7 +190,7 @@ function refreshBehavior() {
       model.insidefloor_impact = $( "#golv" ).val();
       model.window_material = $( "#windows" ).val();
 
-      $( "#kvm_value" ).html("<p>PLANYTA: " + model.planyta + " kvm</p>" );
+      $( "#kvm_value" ).html("<p>BOTTENPLATANS YTA: " + model.planyta + " kvm</p>" );
       $( "#window_text" ).html("<p>FÖNSTER: " + model.window_percentage + " % av yta</p>" );
       $( "#takvinkel_text" ).html("<p>VINKEL: " + model.roof_angle + " °</p>" );
       //$( "#info_grona_ytor" ).html("<p>"+ (model.tomtyta-model.planyta)*model.gronyta/100 +" kvm "+ model.gronyta + " % av tillgänglig yta.</p>");
@@ -199,12 +199,12 @@ function refreshBehavior() {
 
 };
 function updateTotals(){
-  $( "#m2_co2" ).html("<h1><nr>"+  model.co2_m2+"</nr><br/><cerulean> kg CO<sub>2</sub>/m2</cerulean></h1>");
-  $( "#total_co2" ).html("<h1><nr>"+  Math.round(model.total_co2/1000)+"</nr><br/><cerulean> ton CO<sub>2</sub></cerulean></h1>");
-  $( "#fasad_co2" ).html("<h3><fasad>KLIMATSKÄRM</fasad><br>"+  Math.round(model.shell_co2/1000)+ "ton CO<sub>2</sub></h3>");
-  $( "#grund_co2" ).html("<h3><grund>GRUND</grund><br>"+  Math.round(model.foundation_co2/1000)+ " ton CO<sub>2</sub></h3>");
-  $( "#stomme_co2" ).html("<h3><stomme>STOMME</stomme><br>"+  Math.round(model.stomme_co2/1000)+ " ton CO<sub>2</sub></h3>");
-  $( "#inne_co2" ).html("<h3><inne>INSIDA</inne><br>"+  Math.round(model.inside_co2/1000)+ " ton CO<sub>2</sub></h2>");
+  $( "#m2_co2" ).html("<h1><nr>"+  model.co2_m2+"</nr><br/><cerulean> kg CO<sub>2</sub>e/m2</cerulean></h1>");
+  $( "#total_co2" ).html("<h1><nr>"+  Math.round(model.total_co2/1000)+"</nr><br/><cerulean> ton CO<sub>2</sub>e</cerulean></h1>");
+  $( "#fasad_co2" ).html("<h3><fasad>KLIMATSKÄRM</fasad><br>"+  Math.round(model.shell_co2/1000)+ "ton CO<sub>2</sub>e</h3>");
+  $( "#grund_co2" ).html("<h3><grund>GRUND</grund><br>"+  Math.round(model.foundation_co2/1000)+ " ton CO<sub>2</sub>e</h3>");
+  $( "#stomme_co2" ).html("<h3><stomme>STOMME</stomme><br>"+  Math.round(model.stomme_co2/1000)+ " ton CO<sub>2</sub>e</h3>");
+  $( "#inne_co2" ).html("<h3><inne>INSIDA</inne><br>"+  Math.round(model.inside_co2/1000)+ " ton CO<sub>2</sub>e</h2>");
 
 
   window.myDoughnut.data.datasets[0].data[0] = model.stomme_co2;
